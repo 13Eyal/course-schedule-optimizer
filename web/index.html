@@ -40,13 +40,12 @@
     <link rel="stylesheet" href="styles/brand.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Hebrew:wght@400;500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700&family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet" />
   </head>
   <body>
     <section class="local-launch" aria-labelledby="local-launch-title">
       <img src="../assets/brand/carpedio-symbol.svg" width="64" height="64" alt="CarpedIO" />
-      <h1 id="local-launch-title">עוד רגע, מתחילים לתכנן.</h1>
+      <h2 id="local-launch-title">עוד רגע, מתחילים לתכנן.</h2>
       <p>כדי לטעון את הקורסים ולחשב מערכות שעות, צריך לפתוח את האתר דרך קובץ ההפעלה.</p>
       <ol>
         <li>חזור לתיקיית הפרויקט <b dir="ltr">course-schedule-optimizer</b>.</li>
@@ -62,11 +61,12 @@
       </a>
       <nav class="header-nav" aria-label="ניווט ראשי">
         <a href="#planner">מרחב התכנון</a>
-        <a href="grades.html">מחשבון ציונים</a>
-        <a href="#rhythms">הקצב שלך</a>
+        <a href="#rhythms">נקודות פתיחה</a>
         <a href="#approach">איך זה עובד</a>
+        <a href="grades.html">מחשבון ציונים</a>
       </nav>
       <div class="header-actions">
+        <a class="header-cta" href="#planner">לתכנון המערכת</a>
         <button class="motion-toggle text-button" id="motion-toggle" type="button" aria-pressed="false" aria-label="עצירת אפקטי תנועה"><span aria-hidden="true">Ⅱ</span><span class="motion-label">תנועה</span></button>
         <span class="header-divider" aria-hidden="true"></span>
         <button
@@ -93,42 +93,66 @@
 
     <main class="page-shell">
 <section class="hero" aria-labelledby="page-title">
-  <div class="hero-topline"><span class="eyebrow"><span class="status-dot"></span> מערכת שעות אישית</span><span class="edition" dir="ltr">CarpedIO</span></div>
   <div class="hero-copy">
-    <p class="hero-kicker">הקורסים שלך. בקצב שלך.</p>
-    <h1 id="page-title"><span class="title-line">כל האפשרויות.</span><span class="title-line title-accent">תמונה ברורה.</span></h1>
-    <p class="hero-description">הקורסים שלך. ההעדפות שלך.<br>מערכת שעות שמשאירה מקום לחיים.</p>
-    <a class="hero-secondary" href="grades.html">למחשבון ממוצע הציונים</a>
-    <div class="hero-actions"><a class="hero-cta" href="#planner"><span>לתכנן את השבוע שלי</span><span class="circle-arrow" aria-hidden="true">↙</span></a><a class="hero-secondary" href="#rhythms">למצוא את הקצב שלי <span aria-hidden="true">↓</span></a></div>
+    <h1 id="page-title"><span class="title-line">מערכת שעות</span> <span class="title-line">בלי התנגשויות.</span></h1>
+    <p class="hero-description">בוחרים קורסים ומגדירים מה חשוב לכם. CarpedIO בודק כל שילוב של קבוצות ומציג את השבוע שמתאים לכם, מראשון עד חמישי.</p>
+    <div class="hero-actions"><a class="hero-cta" href="#planner">לתכנון המערכת</a><a class="hero-secondary" href="grades.html">למחשבון הממוצע</a></div>
   </div>
-  <div class="hero-art has-artwork">
-    <div class="hero-artwork" aria-hidden="true">
-      <div class="material-plane"></div>
-      <div class="parallax-orb">
-        <div class="orb-sky"></div>
-        <div class="orb-paper carpedio-emblem"><span class="carpedio-symbol"></span></div>
+  <div class="hero-art">
+    <figure class="hero-artwork" data-ui aria-labelledby="hero-week-title">
+      <div class="paper-week">
+        <div class="paper-week-head">
+          <p id="hero-week-title">המערכת המובילה בקובץ הדוגמה</p>
+          <p class="paper-week-meta">4 קורסים · 14.5 נק״ז</p>
+        </div>
+        <div class="paper-grid" role="img" aria-label="לוח שבועי: יום חמישי פנוי, שאר המפגשים בין 08:00 ל־14:00 ללא חלונות">
+          <div class="paper-hours" aria-hidden="true"><span>08:00</span><span>09:00</span><span>10:00</span><span>11:00</span><span>12:00</span><span>13:00</span><span>14:00</span></div>
+          <div class="paper-day"><b>ראשון</b><div class="paper-slots">
+            <span class="paper-session c2" data-code="OS201" style="--from:3;--to:5;--i:2"><bdi>Operating Systems</bdi><small>הרצאה</small></span>
+            <span class="paper-session c3" data-code="SE220" style="--from:5;--to:6;--i:6"><bdi>Software Eng.</bdi><small>תרגול</small></span>
+          </div></div>
+          <div class="paper-day"><b>שני</b><div class="paper-slots">
+            <span class="paper-session c0" data-code="ALG101" style="--from:0;--to:2;--i:0"><bdi>Algorithms</bdi><small>הרצאה</small></span>
+          </div></div>
+          <div class="paper-day"><b>שלישי</b><div class="paper-slots">
+            <span class="paper-session c1" data-code="DB301" style="--from:0;--to:2;--i:1"><bdi>Databases</bdi><small>הרצאה</small></span>
+            <span class="paper-session c3" data-code="SE220" style="--from:2;--to:4;--i:4"><bdi>Software Eng.</bdi><small>הרצאה</small></span>
+            <span class="paper-session c1" data-code="DB301" style="--from:4;--to:6;--i:8"><bdi>Databases</bdi><small>מעבדה</small></span>
+          </div></div>
+          <div class="paper-day"><b>רביעי</b><div class="paper-slots">
+            <span class="paper-session c3" data-code="SE220" style="--from:1;--to:2;--i:3"><bdi>Software Eng.</bdi></span>
+            <span class="paper-session c2" data-code="OS201" style="--from:2;--to:3;--i:5"><bdi>Operating Sys.</bdi></span>
+            <span class="paper-session c1" data-code="DB301" style="--from:3;--to:4;--i:7"><bdi>Databases</bdi></span>
+            <span class="paper-session c0" data-code="ALG101" style="--from:4;--to:5;--i:9"><bdi>Algorithms</bdi></span>
+            <span class="paper-session c2" data-code="OS201" style="--from:5;--to:6;--i:10"><bdi>Operating Sys.</bdi></span>
+          </div></div>
+          <div class="paper-day is-free"><b>חמישי</b><div class="paper-slots"><span class="free-pin">יום פנוי</span></div></div>
+        </div>
       </div>
-      <div class="art-label">CarpedIO / זמן לתכנן</div>
-    </div>
+      <figcaption class="hero-facts">
+        <p><strong>468</strong><span>שילובים נבדקו</span></p>
+        <p><strong>0</strong><span>חלונות בין מפגשים</span></p>
+        <p><strong>4</strong><span>ימי לימוד בשבוע</span></p>
+      </figcaption>
+    </figure>
   </div>
-  <div class="hero-bottom"><span>נבנה סביב החיים שלך.</span><a href="#planner" class="scroll-cue"><span>מגלים את האפשרויות</span><span aria-hidden="true">↓</span></a><span dir="ltr">LESS FRICTION. MORE FLOW.</span></div>
 </section>
 
 <section class="rhythms-section" id="rhythms" aria-labelledby="rhythms-title">
-  <div class="editorial-heading reveal"><span class="eyebrow">01 / FIND YOUR RHYTHM</span><h2 id="rhythms-title">אין שבוע מושלם.<br><span>יש שבוע שמתאים לך.</span></h2><p>בוחרים נקודת פתיחה.<br>את הפרטים הקטנים מכוונים בהמשך.</p></div>
+  <div class="editorial-heading reveal"><h2 id="rhythms-title">שלושה קצבים לשבוע.</h2><p>אין שבוע מושלם, יש שבוע שמתאים לך. בחירה כאן מכוונת את ההעדפות במרחב התכנון, ואת הפרטים משנים אחר כך.</p></div>
   <div class="rhythm-grid">
-    <button class="rhythm-card rhythm-compact reveal" type="button" data-preset="compact" aria-pressed="false"><span class="rhythm-top"><span dir="ltr">01 / LESS COMMUTING</span><span class="card-arrow" aria-hidden="true">↙</span></span><span class="rhythm-art" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span class="rhythm-title">פחות נסיעות.</span><span class="rhythm-description">מרכזים את הלימודים. מפנים ימים שלמים.</span><span class="rhythm-action">בחירת הקצב שלי <span aria-hidden="true">←</span></span></button>
-    <button class="rhythm-card rhythm-morning reveal" type="button" data-preset="morning" aria-pressed="false"><span class="rhythm-top"><span dir="ltr">02 / SLOW MORNINGS</span><span class="card-arrow" aria-hidden="true">↙</span></span><span class="rhythm-art" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span class="rhythm-title">בוקר בקצב שלך.</span><span class="rhythm-description">עוד קפה אחד. מתחילים קצת יותר מאוחר.</span><span class="rhythm-action">בחירת הקצב שלי <span aria-hidden="true">←</span></span></button>
-    <button class="rhythm-card rhythm-flow reveal" type="button" data-preset="flow" aria-pressed="false"><span class="rhythm-top"><span dir="ltr">03 / IN THE FLOW</span><span class="card-arrow" aria-hidden="true">↙</span></span><span class="rhythm-art" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span class="rhythm-title">נכנסים לרצף.</span><span class="rhythm-description">פחות חלונות. יותר זמן שעובד בשבילך.</span><span class="rhythm-action">בחירת הקצב שלי <span aria-hidden="true">←</span></span></button>
+    <button class="rhythm-card rhythm-compact reveal" type="button" data-preset="compact" aria-pressed="false"><span class="rhythm-title">פחות נסיעות.</span><span class="rhythm-description">מרכזים את הלימודים בפחות ימים ומפנים ימים שלמים לעבודה או למנוחה.</span><span class="rhythm-art" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span class="rhythm-action">לבחור את הקצב הזה</span></button>
+    <button class="rhythm-card rhythm-morning reveal" type="button" data-preset="morning" aria-pressed="false"><span class="rhythm-title">בוקר בקצב שלך.</span><span class="rhythm-description">עוד קפה אחד. המערכת מעדיפה קבוצות שמתחילות מאוחר יותר.</span><span class="rhythm-art" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span class="rhythm-action">לבחור את הקצב הזה</span></button>
+    <button class="rhythm-card rhythm-flow reveal" type="button" data-preset="flow" aria-pressed="false"><span class="rhythm-title">נכנסים לרצף.</span><span class="rhythm-description">מפגשים צמודים, כמעט בלי חלונות. יותר זמן שעובד בשבילך.</span><span class="rhythm-art" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span class="rhythm-action">לבחור את הקצב הזה</span></button>
   </div>
 </section>
 
 <section class="planner-section" id="planner" aria-labelledby="workspace-title">
 <div class="workspace-heading reveal">
-  <div><span class="eyebrow">02 / YOUR PERSONAL STUDIO</span><h2 id="workspace-title">נותנים לשבוע <span>צורה.</span></h2></div>
-  <p>בוחרים קורסים, מגדירים מה חשוב.<br>אנחנו נמצא את החיבורים.</p>
+  <h2 id="workspace-title">מרחב התכנון.</h2>
+  <p>בוחרים קורסים והעדפות, משווים חלופות ומוצאים את השבוע שמתאים לך.</p>
 </div>
-<nav class="planner-steps" aria-label="שלבי התכנון"><a href="#course-panel"><span>01</span> הקורסים שלך</a><a href="#preferences-form"><span>02</span> ההעדפות שלך</a><a href="#results"><span>03</span> השבוע שלך</a></nav>
+<nav class="planner-steps" aria-label="שלבי התכנון"><ol><li><a href="#course-panel">הקורסים שלך</a></li><li><a href="#preferences-form">ההעדפות שלך</a></li><li><a href="#results">השבוע שלך</a></li></ol></nav>
 
       <div
         id="notice"
@@ -178,6 +202,7 @@
             <div
               id="course-list"
               class="course-list"
+              data-ui
               aria-label="קורסים לבחירה"
             ></div>
             <div class="course-total">
@@ -248,7 +273,7 @@
           aria-busy="false"
         >
           <div class="results-topline">
-            <span class="eyebrow">השבוע, בתמונה אחת</span
+            <h3 class="results-title">השבוע, בתמונה אחת</h3
             ><span id="result-status" class="result-status"
               >ממתינים לנתונים</span
             >
@@ -272,10 +297,7 @@
             aria-labelledby="calendar-title"
           >
             <div class="calendar-toolbar">
-              <div>
-                <p class="eyebrow small">YOUR WEEK, REFINED</p>
-                <h3 id="calendar-title">מערכת שבועית</h3>
-              </div>
+              <h3 id="calendar-title">מערכת שבועית</h3>
               <button
                 id="export"
                 class="secondary-button"
@@ -288,7 +310,7 @@
               </button>
             </div>
             <div id="empty-state" class="empty-state">
-              <span class="empty-symbol" aria-hidden="true">▦</span>
+              <span class="empty-symbol" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
               <h4>מקום לשבוע טוב יותר.</h4>
               <p>בחרו קורסים והעדפות כדי למצוא את המערכת שלכם.</p>
             </div>
@@ -301,7 +323,7 @@
               hidden
             >
               <p class="calendar-mobile-hint">לכל חמשת הימים, גללו את הלוח לצדדים ↔</p>
-              <div id="calendar" class="calendar"></div>
+              <div id="calendar" class="calendar" data-ui></div>
             </div>
             <div class="calendar-footer">
               <span
@@ -342,17 +364,25 @@
       </div>
 </section>
 <section class="approach-section" id="approach" aria-labelledby="approach-title">
-  <div class="approach-title reveal"><span class="eyebrow">03 / CONSIDERED, NOT COMPLICATED</span><h2 id="approach-title">מאחורי שבוע טוב,<br><span>יש מחשבה.</span></h2><button class="secondary-button" id="help-button" type="button">מבט מקרוב על התהליך <span aria-hidden="true">↗</span></button></div>
-  <div class="approach-list">
-    <article class="approach-item reveal"><span class="approach-number">01</span><div><h3>כל האפשרויות. תמונה אחת.</h3><p>המנוע משלב קבוצות לפי קשרי הרישום והזמנים הפנויים, ומוודא שתוכנית ההגעה אינה כוללת התנגשויות.</p></div></article>
-    <article class="approach-item reveal"><span class="approach-number">02</span><div><h3>ההעדפות שלך קובעות.</h3><p>חמישה משקלים מדרגים את האפשרויות: ימי לימוד, חלונות, התחלה מאוחרת, עדיפות לקבוצות ואורך היום.</p></div></article>
-    <article class="approach-item reveal"><span class="approach-number">03</span><div><h3>משווים. מרגישים. בוחרים.</h3><p>עוברים בין חלופות, רואים את ההבדל בלוח ומייצאים את המערכת שמתאימה לחיים שלך.</p></div></article>
-  </div>
+  <div class="approach-title reveal"><h2 id="approach-title">מאות שילובים, שבוע אחד.</h2><p>בקובץ הדוגמה יש ארבעה קורסים ו־468 דרכים לשבץ את הקבוצות שלהם. המנוע עובר על כולן, מסנן התנגשויות ומדרג את מה שנשאר לפי מה שביקשת.</p><button class="secondary-button" id="help-button" type="button">מבט מקרוב על התהליך</button></div>
+  <figure class="approach-diagram reveal">
+    <svg class="flow-diagram flow-horizontal" viewBox="0 0 1200 270" role="img" aria-label="ריבועים מפוזרים של כל שילובי הקבוצות נאספים לפס צר של שילובים ללא התנגשות, ומשם לשורות מסודרות של שבועות מדורגים"><rect class="sq-b" x="830.0" y="227.5" width="12" height="12" transform="rotate(-14 836.0 233.5)"/><rect class="sq-b" x="1083.8" y="136.7" width="12" height="12" transform="rotate(13 1089.8 142.7)"/><rect class="sq-a" x="1092.8" y="139.0" width="12" height="12" transform="rotate(7 1098.8 145.0)"/><rect class="sq-b" x="1114.2" y="68.6" width="12" height="12" transform="rotate(10 1120.2 74.6)"/><rect class="sq-a" x="1072.9" y="24.6" width="12" height="12" transform="rotate(-2 1078.9 30.6)"/><rect class="sq-b" x="1151.0" y="200.9" width="12" height="12" transform="rotate(1 1157.0 206.9)"/><rect class="sq-a" x="1151.3" y="173.1" width="12" height="12" transform="rotate(4 1157.3 179.1)"/><rect class="sq-b" x="1147.4" y="224.6" width="12" height="12" transform="rotate(-8 1153.4 230.6)"/><rect class="sq-b" x="1121.3" y="89.7" width="12" height="12" transform="rotate(-10 1127.3 95.7)"/><rect class="sq-a" x="979.1" y="81.0" width="12" height="12" transform="rotate(3 985.1 87.0)"/><rect class="sq-b" x="1083.8" y="217.4" width="12" height="12" transform="rotate(-11 1089.8 223.4)"/><rect class="sq-b" x="1025.1" y="131.1" width="12" height="12" transform="rotate(-15 1031.1 137.1)"/><rect class="sq-b" x="1146.3" y="24.8" width="12" height="12" transform="rotate(-8 1152.3 30.8)"/><rect class="sq-a" x="1061.2" y="228.3" width="12" height="12" transform="rotate(-17 1067.2 234.3)"/><rect class="sq-b" x="971.2" y="78.4" width="12" height="12" transform="rotate(-4 977.2 84.4)"/><rect class="sq-a" x="945.7" y="136.4" width="12" height="12" transform="rotate(-13 951.7 142.4)"/><rect class="sq-a" x="1145.5" y="119.1" width="12" height="12" transform="rotate(7 1151.5 125.1)"/><rect class="sq-a" x="1050.8" y="132.8" width="12" height="12" transform="rotate(9 1056.8 138.8)"/><rect class="sq-a" x="1157.0" y="104.8" width="12" height="12" transform="rotate(-12 1163.0 110.8)"/><rect class="sq-b" x="1034.2" y="94.0" width="12" height="12" transform="rotate(-5 1040.2 100.0)"/><rect class="sq-b" x="1106.6" y="217.3" width="12" height="12" transform="rotate(16 1112.6 223.3)"/><rect class="sq-b" x="857.1" y="107.2" width="12" height="12" transform="rotate(-21 863.1 113.2)"/><rect class="sq-a" x="1176.7" y="63.5" width="12" height="12" transform="rotate(-18 1182.7 69.5)"/><rect class="sq-b" x="989.1" y="150.7" width="12" height="12" transform="rotate(21 995.1 156.7)"/><rect class="sq-a" x="1137.8" y="220.4" width="12" height="12" transform="rotate(20 1143.8 226.4)"/><rect class="sq-b" x="1094.9" y="76.4" width="12" height="12" transform="rotate(-13 1100.9 82.4)"/><rect class="sq-a" x="856.5" y="12.4" width="12" height="12" transform="rotate(-13 862.5 18.4)"/><rect class="sq-a" x="1087.9" y="126.5" width="12" height="12" transform="rotate(-13 1093.9 132.5)"/><rect class="sq-b" x="1137.0" y="67.0" width="12" height="12" transform="rotate(20 1143.0 73.0)"/><rect class="sq-b" x="871.2" y="126.5" width="12" height="12" transform="rotate(21 877.2 132.5)"/><rect class="sq-b" x="1051.7" y="227.8" width="12" height="12" transform="rotate(20 1057.7 233.8)"/><rect class="sq-a" x="895.5" y="238.7" width="12" height="12" transform="rotate(9 901.5 244.7)"/><rect class="sq-b" x="922.7" y="64.1" width="12" height="12" transform="rotate(3 928.7 70.1)"/><rect class="sq-a" x="848.2" y="192.0" width="12" height="12" transform="rotate(11 854.2 198.0)"/><rect class="sq-b" x="1003.4" y="19.7" width="12" height="12" transform="rotate(21 1009.4 25.7)"/><rect class="sq-a" x="875.5" y="173.0" width="12" height="12" transform="rotate(-23 881.5 179.0)"/><rect class="sq-a" x="1137.3" y="213.6" width="12" height="12" transform="rotate(23 1143.3 219.6)"/><rect class="sq-b" x="1096.2" y="110.2" width="12" height="12" transform="rotate(11 1102.2 116.2)"/><rect class="sq-b" x="1137.0" y="105.2" width="12" height="12" transform="rotate(-5 1143.0 111.2)"/><rect class="sq-b" x="1138.7" y="142.8" width="12" height="12" transform="rotate(6 1144.7 148.8)"/><rect class="sq-a" x="1085.7" y="90.4" width="12" height="12" transform="rotate(-4 1091.7 96.4)"/><rect class="sq-a" x="899.1" y="84.9" width="12" height="12" transform="rotate(25 905.1 90.9)"/><rect class="sq-a" x="1050.1" y="216.1" width="12" height="12" transform="rotate(-15 1056.1 222.1)"/><rect class="sq-b" x="1054.5" y="43.7" width="12" height="12" transform="rotate(3 1060.5 49.7)"/><rect class="sq-b" x="1098.4" y="233.3" width="12" height="12" transform="rotate(-16 1104.4 239.3)"/><rect class="sq-a" x="985.4" y="50.9" width="12" height="12" transform="rotate(1 991.4 56.9)"/><rect class="sq-a" x="1025.4" y="130.6" width="12" height="12" transform="rotate(-7 1031.4 136.6)"/><rect class="sq-b" x="1091.3" y="18.1" width="12" height="12" transform="rotate(2 1097.3 24.1)"/><rect class="sq-b" x="900.6" y="181.2" width="12" height="12" transform="rotate(-13 906.6 187.2)"/><rect class="sq-b" x="1059.5" y="112.4" width="12" height="12" transform="rotate(14 1065.5 118.4)"/><rect class="sq-c" x="480.0" y="111.0" width="12" height="12"/><rect class="sq-c" x="480.0" y="127.0" width="12" height="12"/><rect class="sq-c" x="480.0" y="143.0" width="12" height="12"/><rect class="sq-c" x="496.0" y="111.0" width="12" height="12"/><rect class="sq-c" x="496.0" y="127.0" width="12" height="12"/><rect class="sq-c" x="496.0" y="143.0" width="12" height="12"/><rect class="sq-c" x="512.0" y="111.0" width="12" height="12"/><rect class="sq-c" x="512.0" y="127.0" width="12" height="12"/><rect class="sq-c" x="512.0" y="143.0" width="12" height="12"/><rect class="sq-c" x="528.0" y="111.0" width="12" height="12"/><rect class="sq-c" x="528.0" y="127.0" width="12" height="12"/><rect class="sq-c" x="528.0" y="143.0" width="12" height="12"/><rect class="sq-c" x="544.0" y="111.0" width="12" height="12"/><rect class="sq-c" x="544.0" y="127.0" width="12" height="12"/><rect class="sq-c" x="544.0" y="143.0" width="12" height="12"/><rect class="sq-c" x="560.0" y="111.0" width="12" height="12"/><rect class="sq-c" x="560.0" y="127.0" width="12" height="12"/><rect class="sq-c" x="560.0" y="143.0" width="12" height="12"/><rect class="sq-c" x="576.0" y="111.0" width="12" height="12"/><rect class="sq-c" x="576.0" y="127.0" width="12" height="12"/><rect class="sq-c" x="576.0" y="143.0" width="12" height="12"/><rect class="sq-c" x="592.0" y="111.0" width="12" height="12"/><rect class="sq-c" x="592.0" y="127.0" width="12" height="12"/><rect class="sq-c" x="592.0" y="143.0" width="12" height="12"/><rect class="sq-c" x="608.0" y="111.0" width="12" height="12"/><rect class="sq-c" x="608.0" y="127.0" width="12" height="12"/><rect class="sq-c" x="608.0" y="143.0" width="12" height="12"/><rect class="sq-c" x="624.0" y="111.0" width="12" height="12"/><rect class="sq-c" x="624.0" y="127.0" width="12" height="12"/><rect class="sq-c" x="624.0" y="143.0" width="12" height="12"/><rect class="sq-c" x="640.0" y="111.0" width="12" height="12"/><rect class="sq-c" x="640.0" y="127.0" width="12" height="12"/><rect class="sq-c" x="640.0" y="143.0" width="12" height="12"/><rect class="sq-c" x="656.0" y="111.0" width="12" height="12"/><rect class="sq-c" x="656.0" y="127.0" width="12" height="12"/><rect class="sq-c" x="656.0" y="143.0" width="12" height="12"/><rect class="sq-c" x="672.0" y="111.0" width="12" height="12"/><rect class="sq-c" x="672.0" y="127.0" width="12" height="12"/><rect class="sq-c" x="672.0" y="143.0" width="12" height="12"/><rect class="sq-c" x="688.0" y="111.0" width="12" height="12"/><rect class="sq-c" x="688.0" y="127.0" width="12" height="12"/><rect class="sq-c" x="688.0" y="143.0" width="12" height="12"/><rect class="sq-c" x="704.0" y="111.0" width="12" height="12"/><rect class="sq-c" x="704.0" y="127.0" width="12" height="12"/><rect class="sq-c" x="704.0" y="143.0" width="12" height="12"/><rect class="sq-best" x="300.0" y="89.0" width="12" height="12"/><rect class="sq-best" x="316.0" y="89.0" width="12" height="12"/><rect class="sq-best" x="332.0" y="89.0" width="12" height="12"/><rect class="sq-best" x="348.0" y="89.0" width="12" height="12"/><rect class="sq-best" x="364.0" y="89.0" width="12" height="12"/><rect class="sq-d" x="204.0" y="89.0" width="12" height="12"/><rect class="sq-d" x="220.0" y="89.0" width="12" height="12"/><rect class="sq-d" x="236.0" y="89.0" width="12" height="12"/><rect class="sq-d" x="252.0" y="89.0" width="12" height="12"/><rect class="sq-d" x="268.0" y="89.0" width="12" height="12"/><rect class="sq-d" x="108.0" y="89.0" width="12" height="12"/><rect class="sq-d" x="124.0" y="89.0" width="12" height="12"/><rect class="sq-d" x="140.0" y="89.0" width="12" height="12"/><rect class="sq-d" x="156.0" y="89.0" width="12" height="12"/><rect class="sq-d" x="172.0" y="89.0" width="12" height="12"/><rect class="sq-d" x="12.0" y="89.0" width="12" height="12"/><rect class="sq-d" x="28.0" y="89.0" width="12" height="12"/><rect class="sq-d" x="44.0" y="89.0" width="12" height="12"/><rect class="sq-d" x="60.0" y="89.0" width="12" height="12"/><rect class="sq-d" x="76.0" y="89.0" width="12" height="12"/><rect class="sq-d" x="300.0" y="129.0" width="12" height="12"/><rect class="sq-d" x="316.0" y="129.0" width="12" height="12"/><rect class="sq-d" x="332.0" y="129.0" width="12" height="12"/><rect class="sq-d" x="348.0" y="129.0" width="12" height="12"/><rect class="sq-d" x="364.0" y="129.0" width="12" height="12"/><rect class="sq-d" x="204.0" y="129.0" width="12" height="12"/><rect class="sq-d" x="220.0" y="129.0" width="12" height="12"/><rect class="sq-d" x="236.0" y="129.0" width="12" height="12"/><rect class="sq-d" x="252.0" y="129.0" width="12" height="12"/><rect class="sq-d" x="268.0" y="129.0" width="12" height="12"/><rect class="sq-d" x="108.0" y="129.0" width="12" height="12"/><rect class="sq-d" x="124.0" y="129.0" width="12" height="12"/><rect class="sq-d" x="140.0" y="129.0" width="12" height="12"/><rect class="sq-d" x="156.0" y="129.0" width="12" height="12"/><rect class="sq-d" x="172.0" y="129.0" width="12" height="12"/><rect class="sq-d" x="12.0" y="129.0" width="12" height="12"/><rect class="sq-d" x="28.0" y="129.0" width="12" height="12"/><rect class="sq-d" x="44.0" y="129.0" width="12" height="12"/><rect class="sq-d" x="60.0" y="129.0" width="12" height="12"/><rect class="sq-d" x="76.0" y="129.0" width="12" height="12"/><rect class="sq-d" x="300.0" y="169.0" width="12" height="12"/><rect class="sq-d" x="316.0" y="169.0" width="12" height="12"/><rect class="sq-d" x="332.0" y="169.0" width="12" height="12"/><rect class="sq-d" x="348.0" y="169.0" width="12" height="12"/><rect class="sq-d" x="364.0" y="169.0" width="12" height="12"/><rect class="sq-d" x="204.0" y="169.0" width="12" height="12"/><rect class="sq-d" x="220.0" y="169.0" width="12" height="12"/><rect class="sq-d" x="236.0" y="169.0" width="12" height="12"/><rect class="sq-d" x="252.0" y="169.0" width="12" height="12"/><rect class="sq-d" x="268.0" y="169.0" width="12" height="12"/><rect class="sq-d" x="108.0" y="169.0" width="12" height="12"/><rect class="sq-d" x="124.0" y="169.0" width="12" height="12"/><rect class="sq-d" x="140.0" y="169.0" width="12" height="12"/><rect class="sq-d" x="156.0" y="169.0" width="12" height="12"/><rect class="sq-d" x="172.0" y="169.0" width="12" height="12"/><rect class="sq-d" x="12.0" y="169.0" width="12" height="12"/><rect class="sq-d" x="28.0" y="169.0" width="12" height="12"/><rect class="sq-d" x="44.0" y="169.0" width="12" height="12"/><rect class="sq-d" x="60.0" y="169.0" width="12" height="12"/><rect class="sq-d" x="76.0" y="169.0" width="12" height="12"/></svg>
+    <svg class="flow-diagram flow-vertical" viewBox="0 0 360 480" role="img" aria-label="ריבועים מפוזרים של כל שילובי הקבוצות נאספים לפס צר של שילובים ללא התנגשות, ומשם לשורות מסודרות של שבועות מדורגים"><rect class="sq-b" x="10.0" y="64.1" width="12" height="12" transform="rotate(-23 16.0 70.1)"/><rect class="sq-a" x="292.2" y="59.1" width="12" height="12" transform="rotate(-2 298.2 65.1)"/><rect class="sq-b" x="164.9" y="42.6" width="12" height="12" transform="rotate(11 170.9 48.6)"/><rect class="sq-a" x="56.1" y="55.4" width="12" height="12" transform="rotate(16 62.1 61.4)"/><rect class="sq-b" x="135.5" y="17.0" width="12" height="12" transform="rotate(12 141.5 23.0)"/><rect class="sq-b" x="204.3" y="78.1" width="12" height="12" transform="rotate(-13 210.3 84.1)"/><rect class="sq-b" x="111.0" y="109.5" width="12" height="12" transform="rotate(-15 117.0 115.5)"/><rect class="sq-b" x="198.9" y="98.7" width="12" height="12" transform="rotate(-6 204.9 104.7)"/><rect class="sq-b" x="300.9" y="73.9" width="12" height="12" transform="rotate(6 306.9 79.9)"/><rect class="sq-a" x="324.6" y="47.7" width="12" height="12" transform="rotate(-24 330.6 53.7)"/><rect class="sq-a" x="245.3" y="111.0" width="12" height="12" transform="rotate(-11 251.3 117.0)"/><rect class="sq-a" x="64.7" y="109.9" width="12" height="12" transform="rotate(12 70.7 115.9)"/><rect class="sq-b" x="337.9" y="110.1" width="12" height="12" transform="rotate(-12 343.9 116.1)"/><rect class="sq-a" x="211.9" y="9.1" width="12" height="12" transform="rotate(17 217.9 15.1)"/><rect class="sq-b" x="125.4" y="119.6" width="12" height="12" transform="rotate(8 131.4 125.6)"/><rect class="sq-a" x="322.0" y="77.5" width="12" height="12" transform="rotate(0 328.0 83.5)"/><rect class="sq-a" x="289.8" y="62.4" width="12" height="12" transform="rotate(25 295.8 68.4)"/><rect class="sq-a" x="149.5" y="111.5" width="12" height="12" transform="rotate(-14 155.5 117.5)"/><rect class="sq-a" x="25.7" y="12.8" width="12" height="12" transform="rotate(-20 31.7 18.8)"/><rect class="sq-b" x="125.1" y="77.6" width="12" height="12" transform="rotate(-1 131.1 83.6)"/><rect class="sq-b" x="44.8" y="55.3" width="12" height="12" transform="rotate(4 50.8 61.3)"/><rect class="sq-b" x="190.6" y="126.2" width="12" height="12" transform="rotate(24 196.6 132.2)"/><rect class="sq-a" x="336.0" y="106.7" width="12" height="12" transform="rotate(-7 342.0 112.7)"/><rect class="sq-a" x="292.5" y="90.0" width="12" height="12" transform="rotate(-10 298.5 96.0)"/><rect class="sq-a" x="184.8" y="39.4" width="12" height="12" transform="rotate(3 190.8 45.4)"/><rect class="sq-b" x="308.6" y="25.1" width="12" height="12" transform="rotate(23 314.6 31.1)"/><rect class="sq-a" x="236.6" y="43.5" width="12" height="12" transform="rotate(-7 242.6 49.5)"/><rect class="sq-a" x="298.3" y="68.8" width="12" height="12" transform="rotate(-13 304.3 74.8)"/><rect class="sq-a" x="42.9" y="109.8" width="12" height="12" transform="rotate(-12 48.9 115.8)"/><rect class="sq-a" x="258.4" y="50.2" width="12" height="12" transform="rotate(-3 264.4 56.2)"/><rect class="sq-b" x="10.3" y="8.7" width="12" height="12" transform="rotate(3 16.3 14.7)"/><rect class="sq-b" x="107.0" y="111.0" width="12" height="12" transform="rotate(7 113.0 117.0)"/><rect class="sq-a" x="334.7" y="70.1" width="12" height="12" transform="rotate(-16 340.7 76.1)"/><rect class="sq-b" x="224.4" y="70.3" width="12" height="12" transform="rotate(-12 230.4 76.3)"/><rect class="sq-b" x="173.1" y="87.0" width="12" height="12" transform="rotate(-10 179.1 93.0)"/><rect class="sq-b" x="171.1" y="72.2" width="12" height="12" transform="rotate(6 177.1 78.2)"/><rect class="sq-a" x="277.8" y="70.5" width="12" height="12" transform="rotate(-14 283.8 76.5)"/><rect class="sq-b" x="263.7" y="54.6" width="12" height="12" transform="rotate(4 269.7 60.6)"/><rect class="sq-a" x="136.7" y="31.7" width="12" height="12" transform="rotate(21 142.7 37.7)"/><rect class="sq-a" x="139.2" y="27.3" width="12" height="12" transform="rotate(17 145.2 33.3)"/><rect class="sq-b" x="248.2" y="37.3" width="12" height="12" transform="rotate(-13 254.2 43.3)"/><rect class="sq-a" x="112.4" y="125.4" width="12" height="12" transform="rotate(3 118.4 131.4)"/><rect class="sq-b" x="148.5" y="72.7" width="12" height="12" transform="rotate(12 154.5 78.7)"/><rect class="sq-a" x="14.6" y="107.9" width="12" height="12" transform="rotate(-24 20.6 113.9)"/><rect class="sq-a" x="267.0" y="69.2" width="12" height="12" transform="rotate(-25 273.0 75.2)"/><rect class="sq-a" x="287.1" y="132.8" width="12" height="12" transform="rotate(-13 293.1 138.8)"/><rect class="sq-b" x="65.1" y="53.8" width="12" height="12" transform="rotate(25 71.1 59.8)"/><rect class="sq-b" x="256.5" y="67.0" width="12" height="12" transform="rotate(3 262.5 73.0)"/><rect class="sq-b" x="208.2" y="135.1" width="12" height="12" transform="rotate(-21 214.2 141.1)"/><rect class="sq-a" x="162.5" y="130.8" width="12" height="12" transform="rotate(-21 168.5 136.8)"/><rect class="sq-c" x="156.0" y="160.0" width="12" height="12"/><rect class="sq-c" x="172.0" y="160.0" width="12" height="12"/><rect class="sq-c" x="188.0" y="160.0" width="12" height="12"/><rect class="sq-c" x="156.0" y="170.5" width="12" height="12"/><rect class="sq-c" x="172.0" y="170.5" width="12" height="12"/><rect class="sq-c" x="188.0" y="170.5" width="12" height="12"/><rect class="sq-c" x="156.0" y="181.0" width="12" height="12"/><rect class="sq-c" x="172.0" y="181.0" width="12" height="12"/><rect class="sq-c" x="188.0" y="181.0" width="12" height="12"/><rect class="sq-c" x="156.0" y="191.5" width="12" height="12"/><rect class="sq-c" x="172.0" y="191.5" width="12" height="12"/><rect class="sq-c" x="188.0" y="191.5" width="12" height="12"/><rect class="sq-c" x="156.0" y="202.0" width="12" height="12"/><rect class="sq-c" x="172.0" y="202.0" width="12" height="12"/><rect class="sq-c" x="188.0" y="202.0" width="12" height="12"/><rect class="sq-c" x="156.0" y="212.5" width="12" height="12"/><rect class="sq-c" x="172.0" y="212.5" width="12" height="12"/><rect class="sq-c" x="188.0" y="212.5" width="12" height="12"/><rect class="sq-c" x="156.0" y="223.0" width="12" height="12"/><rect class="sq-c" x="172.0" y="223.0" width="12" height="12"/><rect class="sq-c" x="188.0" y="223.0" width="12" height="12"/><rect class="sq-c" x="156.0" y="233.5" width="12" height="12"/><rect class="sq-c" x="172.0" y="233.5" width="12" height="12"/><rect class="sq-c" x="188.0" y="233.5" width="12" height="12"/><rect class="sq-c" x="156.0" y="244.0" width="12" height="12"/><rect class="sq-c" x="172.0" y="244.0" width="12" height="12"/><rect class="sq-c" x="188.0" y="244.0" width="12" height="12"/><rect class="sq-c" x="156.0" y="254.5" width="12" height="12"/><rect class="sq-c" x="172.0" y="254.5" width="12" height="12"/><rect class="sq-c" x="188.0" y="254.5" width="12" height="12"/><rect class="sq-c" x="156.0" y="265.0" width="12" height="12"/><rect class="sq-c" x="172.0" y="265.0" width="12" height="12"/><rect class="sq-c" x="188.0" y="265.0" width="12" height="12"/><rect class="sq-c" x="156.0" y="275.5" width="12" height="12"/><rect class="sq-c" x="172.0" y="275.5" width="12" height="12"/><rect class="sq-c" x="188.0" y="275.5" width="12" height="12"/><rect class="sq-c" x="156.0" y="286.0" width="12" height="12"/><rect class="sq-c" x="172.0" y="286.0" width="12" height="12"/><rect class="sq-c" x="188.0" y="286.0" width="12" height="12"/><rect class="sq-c" x="156.0" y="296.5" width="12" height="12"/><rect class="sq-c" x="172.0" y="296.5" width="12" height="12"/><rect class="sq-c" x="188.0" y="296.5" width="12" height="12"/><rect class="sq-c" x="156.0" y="307.0" width="12" height="12"/><rect class="sq-c" x="172.0" y="307.0" width="12" height="12"/><rect class="sq-c" x="188.0" y="307.0" width="12" height="12"/><rect class="sq-best" x="276.0" y="352.0" width="12" height="12"/><rect class="sq-best" x="292.0" y="352.0" width="12" height="12"/><rect class="sq-best" x="308.0" y="352.0" width="12" height="12"/><rect class="sq-best" x="324.0" y="352.0" width="12" height="12"/><rect class="sq-best" x="340.0" y="352.0" width="12" height="12"/><rect class="sq-d" x="190.0" y="352.0" width="12" height="12"/><rect class="sq-d" x="206.0" y="352.0" width="12" height="12"/><rect class="sq-d" x="222.0" y="352.0" width="12" height="12"/><rect class="sq-d" x="238.0" y="352.0" width="12" height="12"/><rect class="sq-d" x="254.0" y="352.0" width="12" height="12"/><rect class="sq-d" x="104.0" y="352.0" width="12" height="12"/><rect class="sq-d" x="120.0" y="352.0" width="12" height="12"/><rect class="sq-d" x="136.0" y="352.0" width="12" height="12"/><rect class="sq-d" x="152.0" y="352.0" width="12" height="12"/><rect class="sq-d" x="168.0" y="352.0" width="12" height="12"/><rect class="sq-d" x="18.0" y="352.0" width="12" height="12"/><rect class="sq-d" x="34.0" y="352.0" width="12" height="12"/><rect class="sq-d" x="50.0" y="352.0" width="12" height="12"/><rect class="sq-d" x="66.0" y="352.0" width="12" height="12"/><rect class="sq-d" x="82.0" y="352.0" width="12" height="12"/><rect class="sq-d" x="276.0" y="392.0" width="12" height="12"/><rect class="sq-d" x="292.0" y="392.0" width="12" height="12"/><rect class="sq-d" x="308.0" y="392.0" width="12" height="12"/><rect class="sq-d" x="324.0" y="392.0" width="12" height="12"/><rect class="sq-d" x="340.0" y="392.0" width="12" height="12"/><rect class="sq-d" x="190.0" y="392.0" width="12" height="12"/><rect class="sq-d" x="206.0" y="392.0" width="12" height="12"/><rect class="sq-d" x="222.0" y="392.0" width="12" height="12"/><rect class="sq-d" x="238.0" y="392.0" width="12" height="12"/><rect class="sq-d" x="254.0" y="392.0" width="12" height="12"/><rect class="sq-d" x="104.0" y="392.0" width="12" height="12"/><rect class="sq-d" x="120.0" y="392.0" width="12" height="12"/><rect class="sq-d" x="136.0" y="392.0" width="12" height="12"/><rect class="sq-d" x="152.0" y="392.0" width="12" height="12"/><rect class="sq-d" x="168.0" y="392.0" width="12" height="12"/><rect class="sq-d" x="18.0" y="392.0" width="12" height="12"/><rect class="sq-d" x="34.0" y="392.0" width="12" height="12"/><rect class="sq-d" x="50.0" y="392.0" width="12" height="12"/><rect class="sq-d" x="66.0" y="392.0" width="12" height="12"/><rect class="sq-d" x="82.0" y="392.0" width="12" height="12"/><rect class="sq-d" x="276.0" y="432.0" width="12" height="12"/><rect class="sq-d" x="292.0" y="432.0" width="12" height="12"/><rect class="sq-d" x="308.0" y="432.0" width="12" height="12"/><rect class="sq-d" x="324.0" y="432.0" width="12" height="12"/><rect class="sq-d" x="340.0" y="432.0" width="12" height="12"/><rect class="sq-d" x="190.0" y="432.0" width="12" height="12"/><rect class="sq-d" x="206.0" y="432.0" width="12" height="12"/><rect class="sq-d" x="222.0" y="432.0" width="12" height="12"/><rect class="sq-d" x="238.0" y="432.0" width="12" height="12"/><rect class="sq-d" x="254.0" y="432.0" width="12" height="12"/><rect class="sq-d" x="104.0" y="432.0" width="12" height="12"/><rect class="sq-d" x="120.0" y="432.0" width="12" height="12"/><rect class="sq-d" x="136.0" y="432.0" width="12" height="12"/><rect class="sq-d" x="152.0" y="432.0" width="12" height="12"/><rect class="sq-d" x="168.0" y="432.0" width="12" height="12"/><rect class="sq-d" x="18.0" y="432.0" width="12" height="12"/><rect class="sq-d" x="34.0" y="432.0" width="12" height="12"/><rect class="sq-d" x="50.0" y="432.0" width="12" height="12"/><rect class="sq-d" x="66.0" y="432.0" width="12" height="12"/><rect class="sq-d" x="82.0" y="432.0" width="12" height="12"/></svg>
+  </figure>
+  <ol class="approach-list">
+    <li class="approach-item reveal"><h3>כל השילובים.</h3><p>המנוע משלב קבוצות לפי קשרי הרישום והזמנים הפנויים של כל קורס שבחרת.</p></li>
+    <li class="approach-item reveal"><h3>בלי התנגשויות.</h3><p>כל שילוב שבו שני מפגשים חופפים בתוכנית ההגעה יוצא מהחישוב.</p></li>
+    <li class="approach-item reveal"><h3>לפי מה שחשוב לך.</h3><p>חמישה משקלים מדרגים את מה שנשאר: ימי לימוד, חלונות, שעת התחלה, עדיפות לקבוצות ואורך היום.</p></li>
+  </ol>
 </section>
 <footer class="site-footer">
-  <div class="footer-top"><p>כל מה שצריך ללמוד.<br><span>וכל מה שרוצים לחיות.</span></p><a href="#planner" class="footer-cta" aria-label="חזרה למרחב התכנון">↖</a></div>
-  <div class="footer-wordmark" aria-hidden="true"><i class="carpedio-symbol"></i><b class="carpedio-wordmark">Carped<span>IO</span></b></div>
-  <div class="footer-bottom"><span>CarpedIO · תכנון מערכת שעות אישית</span><a href="#page-title">בחזרה למעלה ↑</a><span>זמן. בצורה אחרת.</span></div>
+  <div class="footer-columns">
+    <div><h2>CarpedIO</h2><p>carpe diem ו־I/O: תכנון הזמן והלימודים דרך הנתונים שלך. מערכת שעות אישית ומחשבון ממוצע, בעברית.</p></div>
+    <nav aria-label="ניווט בתחתית העמוד"><h2>באתר</h2><a href="#planner">מרחב התכנון</a><a href="#rhythms">נקודות פתיחה</a><a href="#approach">איך זה עובד</a><a href="grades.html">מחשבון ציונים</a></nav>
+    <div><h2>פרטיות</h2><p>קובצי הקורסים מעובדים בשרת המקומי במחשב שלך ואינם נשמרים בדיסק.</p></div>
+    <div><h2>קובץ לדוגמה</h2><a href="/sample.xlsx" download="courses_sample.xlsx">הורדת קובץ הקורסים לדוגמה</a><a href="#page-title">בחזרה למעלה</a></div>
+  </div>
+  <p class="footer-wordmark" aria-hidden="true"><b class="carpedio-wordmark">Carped<span>IO</span></b></p>
 </footer>
     </main>
 
@@ -383,7 +413,7 @@
     </dialog>
     <dialog id="detail-dialog" aria-labelledby="dialog-title">
       <div class="dialog-top">
-        <span class="eyebrow">CarpedIO / פרטי המפגש</span
+        <span class="dialog-kicker">פרטי המפגש</span
         ><button
           id="close-dialog"
           class="icon-button"

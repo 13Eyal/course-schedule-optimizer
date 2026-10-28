@@ -22,11 +22,14 @@ export function initShell() {
   menu.innerHTML = '<span></span><span></span>';
   nav.id = 'main-navigation';
   nav.before(menu);
-  nav.inert = true;
+  // Wide screens show the links in the bar; only the compact menu hides them.
+  const compact = matchMedia('(max-width: 900px)');
+  nav.inert = compact.matches;
+  compact.addEventListener('change', () => setMenu(false));
 
   function setMenu(open) {
     root.dataset.menu = open ? 'open' : 'closed';
-    nav.inert = !open;
+    nav.inert = compact.matches && !open;
     menu.setAttribute('aria-expanded', String(open));
     menu.setAttribute('aria-label', open ? 'סגירת תפריט' : 'פתיחת תפריט');
   }

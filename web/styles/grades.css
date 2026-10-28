@@ -93,3 +93,60 @@
   .grade-two-fields {grid-template-columns:1fr}.grade-undo {gap:12px}.grade-undo>span {display:none}
   .grade-import-options {grid-template-columns:1fr}.grades-page dialog {padding:18px}
 }
+
+/* Printed-booklet layer: flat paper surfaces, serif headings, cobalt only where it means something. */
+.grades-page {font:400 16px/1.6 var(--sans)}
+.grades-page main,.grade-header {width:auto;margin-inline:var(--gutter)}
+.grade-header {height:84px;padding:0;border:0}
+.grade-brand {align-items:center;font-size:inherit;color:var(--ink)}
+.grade-brand .brand-tagline {font-size:14px;color:var(--muted)}
+.grade-header nav {gap:4px;margin-inline-start:auto}
+.grade-header nav a {padding:8px 14px;border-radius:0;font-size:15px;font-weight:500}
+.grade-header nav a:hover {color:var(--accent)}
+.grade-header [aria-current=page] {background:var(--accent-soft);color:var(--ink)}
+.grade-intro {display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(32px,4vw,72px);align-items:end;margin:clamp(48px,6vw,96px) 0 40px}
+.grades-page h1 {font:500 var(--step-display)/1.04 var(--serif);letter-spacing:-.02em}
+.grade-intro>p {max-width:46ch;font-size:var(--step-lead);line-height:1.55;color:var(--ink)}
+.grades-page .primary-button {min-height:48px;padding:12px 24px}
+.grades-page .secondary-button {min-height:46px;font-size:15px}
+.grade-toolbar {gap:16px;margin:0 0 12px}
+.grade-toolbar .text-button {font-size:15px}
+.grade-muted {color:var(--muted);font-size:15px;line-height:1.7}
+.grade-stats {gap:8px;margin:32px 0 16px}
+.grade-stat,.grade-panel {border:0;border-radius:0;background:var(--surface);box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
+.grade-stat {padding:28px;gap:4px}
+.grade-stat strong {order:-1;margin-bottom:10px;font:500 clamp(44px,4vw,64px)/1 var(--serif);text-align:start}
+.grade-stat>span {font-size:15px;font-weight:500;color:var(--ink)}
+.grade-stat small {font-size:14px}
+.grade-stat-projected {background:var(--field);color:var(--on-field)}
+.grade-stat-projected strong,.grade-stat-projected>span {color:var(--on-field)}
+.grade-stat-projected small {color:var(--on-field-soft)}
+.grade-layout,.grade-analysis-grid {gap:16px}
+.grade-analysis-grid {margin-top:16px}
+.grade-scenarios {gap:16px}
+.grade-panel {padding:32px}
+.grades-page h2 {font:500 26px/1.2 var(--serif)}
+.grades-page h3 {font:500 20px/1.3 var(--serif)}
+.grade-table {font-size:15px}
+.grade-table th {font-size:14px;color:var(--muted)}
+.grade-table small {font-size:13px}
+.grade-table button {font-size:14px}
+.grade-empty {font-size:15px;background:var(--surface-soft);margin-top:8px}
+.grade-formula {padding:20px;margin-top:20px;font-size:15px;background:var(--surface-soft)}
+.grades-page label:not(.grade-check,.grade-upload) {font-size:14px}
+.grades-page input:not([type=checkbox],[type=file],[type=range]),.grades-page select {border-radius:0;background:var(--bg);font-size:16px}
+.grade-target-result {font:500 22px/1.5 var(--serif)}
+.grade-slider-label output {font:500 28px/1 var(--serif)}
+.grade-range-labels {font-size:13px}
+.grade-chart-text {font-size:13px}
+.grade-notice,.grade-error {border-radius:0;font-size:15px}
+.grade-check {font-size:15px}
+.grade-undo {border:0;border-radius:0;background:var(--footer);color:var(--on-footer);box-shadow:var(--float-shadow)}
+.grade-footer {margin-top:var(--section-space);padding:28px 0;font-size:14px}
+@media(max-width:900px) {.grade-intro {grid-template-columns:1fr;gap:20px}}
+@media(max-width:600px) {
+  .grade-header {height:auto;padding:16px 0}
+  .grade-stat {padding:18px}.grade-stat strong {font-size:38px}.grade-stat>span {font-size:14px}.grade-stat small {font-size:13px}
+  .grade-panel {padding:22px 18px}.grades-page h2 {font-size:24px}.grade-table {font-size:14px}
+  .grade-header nav {font-size:14px}
+}

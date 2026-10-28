@@ -7,7 +7,8 @@
   <link rel="stylesheet" href="styles/base.css" /><link rel="stylesheet" href="styles/cobalt.css" /><link rel="stylesheet" href="styles/grades.css" />
   <link rel="stylesheet" href="styles/brand.css" />
   <script src="scripts/brand-storage.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700&family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <script>try { document.documentElement.dataset.theme = (globalThis.CarpedIOStorage?.read('carpedio-theme') ?? localStorage.getItem('carpedio-theme')) || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); } catch {}</script>
 </head>
 <body class="grades-page">
@@ -18,7 +19,7 @@
     <button class="secondary-button" id="grades-theme" type="button">החלפת מצב תצוגה</button>
   </header>
   <main id="grade-workspace">
-    <div class="grade-intro"><div><p class="grade-kicker">מחשבון ממוצע ציונים</p><h1>הציונים שלך.<br><span>היעד הבא שלך.</span></h1></div>
+    <div class="grade-intro"><h1>מחשבון ממוצע לפי נק״ז.</h1>
       <p>מחשבים ממוצע לפי נק״ז, בודקים איך קורס עתידי ישפיע עליו ומגלים איזה ציון נדרש כדי להגיע ליעד.</p></div>
     <div class="grade-toolbar">
       <button class="primary-button" id="add-grade" type="button">הוספת ציון ידנית</button>
