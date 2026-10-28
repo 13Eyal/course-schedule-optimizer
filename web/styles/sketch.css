@@ -29,7 +29,16 @@
   --line: #3A4246;
 }
 
-:root[data-design] body { background: var(--sk-paper); }
+/* Paper with a few construction lines, like the start of a sketch. */
+:root[data-design] body {
+  background-color: var(--sk-paper);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='1100'%3E%3Cg stroke='%23D5DADC' stroke-width='1' fill='none'%3E%3Cpath d='M-80 120L1680 330M-80 980L1680 420M0 96H1600M930 0V1100'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center top;
+}
+:root[data-design][data-theme="dark"] body {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='1100'%3E%3Cg stroke='%23283034' stroke-width='1' fill='none'%3E%3Cpath d='M-80 120L1680 330M-80 980L1680 420M0 96H1600M930 0V1100'/%3E%3C/g%3E%3C/svg%3E");
+}
 
 /* ---------- The sketched frame: lines overshoot the corners, a marker shadow sits behind ---------- */
 :root[data-design] :is(.site-header, .panel, .approach-diagram, .grade-header, .grade-panel, dialog) {

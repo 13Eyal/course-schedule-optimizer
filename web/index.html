@@ -9,7 +9,7 @@
       content="מערכת שעות שמתאימה לקצב שלך. בחירת קורסים, התאמה אישית והשוואת חלופות."
     />
     <title>CarpedIO — מערכת שעות בדרך שלך</title>
-    <link rel="icon" type="image/svg+xml" href="../assets/brand/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="../assets/brand/favicon.svg?v=2" />
     <script src="scripts/brand-storage.js"></script>
     <script>try { if (localStorage.getItem('carpedio-lang') === 'en') { document.documentElement.lang = 'en'; document.documentElement.dir = 'ltr'; } } catch {}</script>
     <script src="scripts/i18n.js" defer></script>
@@ -197,8 +197,6 @@
                 <button class="preset" type="button" data-preset="morning" aria-pressed="false"><b>בוקר רגוע</b><small>מתחילים מאוחר</small></button>
                 <button class="preset" type="button" data-preset="flow" aria-pressed="false"><b>רצף</b><small>כמעט בלי חלונות</small></button>
               </div>
-              <details class="fine-tune">
-                <summary>כוונון מדויק</summary>
               <div class="time-preference">
                 <label for="preferred-start">מתחילים את היום מ־</label
                 ><input
@@ -213,7 +211,6 @@
               <div class="range-hint">
                 <span>פחות חשוב</span><span>חשוב מאוד</span>
               </div>
-              </details>
               <div id="search-controls"></div>
               <button id="generate" class="primary-button" type="submit">
                 <span id="generate-label">מציאת המערכת שלי</span
@@ -256,7 +253,7 @@
             aria-labelledby="calendar-title"
           >
             <div class="calendar-toolbar">
-              <h3 id="calendar-title">מערכת שבועית</h3>
+              <h3 id="calendar-title" aria-live="polite">מערכת שבועית</h3>
               <button
                 id="export"
                 class="secondary-button"

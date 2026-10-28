@@ -242,15 +242,6 @@ html[data-launch="file"] .local-launch {
 :root[data-design] :is(.notice, .planner-actionbar) { max-width: var(--step-width); margin-inline: auto; }
 :root[data-design] .planner-section[data-step="3"] :is(.notice, .planner-actionbar) { max-width: none; }
 :root[data-design] :is(.panel-heading h3, .results-title):focus { outline: 0; }
-/* The fine controls fold under the three presets. */
-:root[data-design] .fine-tune { margin-top: 16px; border-top: 1px solid var(--line); }
-:root[data-design] .fine-tune > summary {
-  display: flex; align-items: center; justify-content: space-between; padding: 14px 0 4px; cursor: pointer; list-style: none;
-  font: 500 15px/1.4 var(--sans); color: var(--ink);
-}
-:root[data-design] .fine-tune > summary::-webkit-details-marker { display: none; }
-:root[data-design] .fine-tune > summary::after { content: "+"; font: 400 20px/1 var(--sans); color: var(--accent); }
-:root[data-design] .fine-tune[open] > summary::after { content: "−"; }
 .search-actions { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 8px; }
 :root[data-design] .panel {
   background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: none;
@@ -525,6 +516,17 @@ html[data-launch="file"] .local-launch {
   :root[data-design][data-motion="on"] .reveal.is-waiting { opacity: 0; transform: translateY(20px); }
   :root[data-design]:not([data-motion="off"]) .notice.question { animation: rise-in .45s var(--ease) both; }
 }
+
+/* ---------- Switching alternatives ----------
+   Each meeting glides from its old slot to its new one; the rest of the page cross-fades.
+   The snapshots keep their own size and are clipped to the moving box, so text never stretches. */
+:root.is-gliding::view-transition-group(*) { animation-duration: .55s; animation-timing-function: cubic-bezier(.22, 1, .36, 1); }
+:root.is-gliding::view-transition-group(root) { animation-duration: .3s; }
+:root.is-gliding::view-transition-image-pair(*) { overflow: clip; }
+:root.is-gliding::view-transition-old(*),
+:root.is-gliding::view-transition-new(*) { block-size: 100%; object-fit: none; object-position: top; }
+:root.is-gliding::view-transition-old(root),
+:root.is-gliding::view-transition-new(root) { object-fit: fill; animation-duration: .3s; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 1200px) {

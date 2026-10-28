@@ -118,7 +118,6 @@
     'בשלב הבא: מה חשוב לך': 'Next: what matters to you',
     'המשך': 'Continue',
     'חזרה': 'Back',
-    'כוונון מדויק': 'Fine-tune',
     'הבחירה שלך עודכנה': 'Your selection changed',
     'הלוח מציג את החישוב הקודם. חשבו מחדש כדי לעדכן אותו.': 'The board shows the previous calculation. Calculate again to update it.',
     'ממתינים לנתונים': 'Waiting for data',

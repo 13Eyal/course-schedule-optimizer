@@ -464,7 +464,7 @@ $('#continue-search').addEventListener('click', () => {
 for (const view of ['attendance', 'registration']) {
   $('#' + view + '-view').addEventListener('click', () => {
     state.view = view;
-    if (state.results.length) renderActive();
+    if (state.results.length) glide(renderActive);
   });
 }
 $("#preferences-form").addEventListener("submit", (event) => {
@@ -505,7 +505,32 @@ function renderActive() {
   visualEffects.result(schedule.score);
   syncPlanner();
 }
+// A meeting keeps one name across alternatives (course, type and its order in the week),
+// so a view transition can glide it from its old slot to its new one.
+const meetingNames = new Map();
+function meetingName(key) {
+  if (!meetingNames.has(key)) meetingNames.set(key, `meeting-${meetingNames.size}`);
+  return meetingNames.get(key);
+}
+function nameMeetings(sessions) {
+  const seen = new Map();
+  return [...sessions].sort((a, b) => a.day - b.day || a.start - b.start).map((session) => {
+    const key = `${session.course_id}|${session.type}`;
+    const order = seen.get(key) || 0;
+    seen.set(key, order + 1);
+    return { ...session, transition: meetingName(`${key}|${order}`) };
+  });
+}
+/** Runs a board update inside a view transition when the browser and motion settings allow. */
+function glide(update) {
+  const root = document.documentElement;
+  if (!document.startViewTransition || root.dataset.motion === "off") { update(); return; }
+  root.classList.add("is-gliding");
+  const transition = document.startViewTransition(update);
+  transition.finished.catch(() => {}).finally(() => root.classList.remove("is-gliding"));
+}
 function renderCalendar(sessions) {
+  sessions = nameMeetings(sessions);
   const calendar = $("#calendar");
   calendar.replaceChildren();
   const start = Math.min(
@@ -554,6 +579,7 @@ function renderCalendar(sessions) {
       node.style.height = `${Math.max(1, (session.end - session.start) * pixelsPerMinute - 3)}px`;
       node.style.width = `calc(${100 / session.lanes}% - 6px)`;
       node.style.insetInlineStart = `calc(${(session.lane * 100) / session.lanes}% + 3px)`;
+      node.style.viewTransitionName = session.transition;
       if (session.end - session.start <= 60) node.classList.add("compact");
       const time = `${formatTime(session.start)}–${formatTime(session.end)}`;
       node.setAttribute(
@@ -624,13 +650,13 @@ function renderAlternatives() {
             : "הצגה בלוח ←",
       ),
     );
-    button.addEventListener("click", () => {
+    // The board title announces the change, so no notice box shifts the page mid-glide.
+    button.addEventListener("click", () => glide(() => {
       state.active = index;
       renderActive();
       renderAlternatives();
       $("#alternatives").children[index]?.focus({ preventScroll: true });
-      notify(`חלופה ${index + 1} מוצגת כעת בלוח השבועי.`);
-    });
+    }));
     target.append(button);
   });
   $("#more-results").hidden = state.visible >= state.results.length;
