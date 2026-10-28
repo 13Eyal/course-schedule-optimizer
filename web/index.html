@@ -97,18 +97,15 @@
     <h1 id="page-title">מערכת השעות שלך, <span class="marker">בלי התנגשויות.</span></h1>
     <p class="hero-description">בוחרים קורסים ומגדירים מה חשוב לכם. CarpedIO עובר על כל שילובי הקבוצות ומציג את השבועות שמתאימים לכם, מראשון עד חמישי.</p>
   </div>
-  <div class="hero-art">
-    <ol class="hero-artwork intro-steps" aria-label="איך מתכננים">
-      <li><span>שלב 1</span><b>בוחרים קורסים</b><small>מקובץ Excel, מקובץ הדוגמה או בהוספה ידנית</small></li>
-      <li><span>שלב 2</span><b>מגדירים מה חשוב</b><small>קצב השבוע, שעת התחלה ומשקלים</small></li>
-      <li><span>שלב 3</span><b>משווים ומייצאים</b><small>לוח שבועי, חלופות וקובץ CSV</small></li>
-    </ol>
-  </div>
 </section>
 
 <section class="planner-section" id="planner" aria-labelledby="workspace-title">
 <h2 id="workspace-title" class="visually-hidden">מרחב התכנון</h2>
-<nav class="planner-steps" aria-label="שלבי התכנון" hidden><ol><li><a href="#course-panel">הקורסים שלך</a></li><li><a href="#preferences-form">ההעדפות שלך</a></li><li><a href="#results">השבוע שלך</a></li></ol></nav>
+<nav class="planner-steps" aria-label="שלבי התכנון"><ol>
+  <li><button type="button" data-step="1" aria-controls="course-panel"><span class="step-no">1</span><b>בוחרים קורסים</b><small data-step-status></small></button></li>
+  <li><button type="button" data-step="2" aria-controls="preferences-form"><span class="step-no">2</span><b>מה חשוב לך</b><small data-step-status></small></button></li>
+  <li><button type="button" data-step="3" aria-controls="results"><span class="step-no">3</span><b>השבוע שלך</b><small data-step-status></small></button></li>
+</ol></nav>
 
       <div
         id="notice"
@@ -126,7 +123,7 @@
         <aside class="sidebar" aria-label="הגדרות מערכת השעות">
           <section class="panel course-panel" id="course-panel">
             <div class="panel-heading">
-              <h3><span class="step-no">1</span>בוחרים קורסים</h3>
+              <h3 tabindex="-1">בוחרים קורסים</h3>
               <span id="course-count" class="count-badge">0</span>
             </div>
             <p class="section-description" id="source-label">
@@ -185,7 +182,7 @@
           <form id="preferences-form" class="panel preferences-panel">
             <fieldset id="preferences-fields">
               <div class="panel-heading">
-                <h3><span class="step-no">2</span>מה חשוב לך?</h3>
+                <h3 tabindex="-1">מה חשוב לך?</h3>
                 <button
                   id="reset-preferences"
                   class="text-button"
@@ -200,6 +197,8 @@
                 <button class="preset" type="button" data-preset="morning" aria-pressed="false"><b>בוקר רגוע</b><small>מתחילים מאוחר</small></button>
                 <button class="preset" type="button" data-preset="flow" aria-pressed="false"><b>רצף</b><small>כמעט בלי חלונות</small></button>
               </div>
+              <details class="fine-tune">
+                <summary>כוונון מדויק</summary>
               <div class="time-preference">
                 <label for="preferred-start">מתחילים את היום מ־</label
                 ><input
@@ -214,14 +213,13 @@
               <div class="range-hint">
                 <span>פחות חשוב</span><span>חשוב מאוד</span>
               </div>
+              </details>
               <div id="search-controls"></div>
               <button id="generate" class="primary-button" type="submit">
                 <span id="generate-label">מציאת המערכת שלי</span
                 ><span class="button-arrow" aria-hidden="true">←</span>
               </button>
             </fieldset>
-            <button id="cancel-search" class="text-button" type="button" hidden>ביטול החיפוש</button>
-            <button id="continue-search" class="text-button" type="button" hidden>חיפוש נוסף עם יותר זמן</button>
             <p class="privacy-note">
               הקובץ מעובד בשרת המקומי ואינו נשמר בדיסק.
             </p>
@@ -234,8 +232,8 @@
           aria-busy="false"
         >
           <div class="results-topline">
-            <h3 class="results-title"><span class="step-no">3</span>השבוע שלך</h3
-            ><span id="result-status" class="result-status"
+            <h3 class="results-title" tabindex="-1">השבוע שלך</h3
+            ><span id="result-status" class="result-status" role="status"
               >ממתינים לנתונים</span
             >
           </div>
@@ -321,6 +319,7 @@
             העדיפות שלך היא נקודת ההתחלה. אפשר לשנות את המשקלים ולגלות אפשרויות
             נוספות.
           </p>
+          <div class="search-actions"><button id="cancel-search" class="text-button" type="button" hidden>ביטול החיפוש</button><button id="continue-search" class="text-button" type="button" hidden>חיפוש נוסף עם יותר זמן</button></div>
         </section>
       </div>
 </section>

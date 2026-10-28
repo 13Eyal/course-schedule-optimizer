@@ -114,6 +114,7 @@ function askLinks() {
     optimize(true);
   });
   manual.addEventListener("click", () => {
+    plannerUX.go(2);
     searchControls.revealMissing();
     document.querySelector(".search-settings")?.scrollIntoView({ block: "start" });
   });
@@ -322,7 +323,6 @@ async function addManualCourse(course) {
     else if (!source.dataset.manual) source.textContent += ' · כולל קורסים ידניים';
     source.dataset.manual = 'true';
     notify(`הקורס ${course.name} נוסף ונבחר לתכנון.`);
-    if (!searchControls.ready(state.selected)) askLinks();
   } finally {
     busy(false);
     if (state.dataset === previous) $('#result-status').textContent = previousStatus;
@@ -366,8 +366,8 @@ async function loadDataset(file = null) {
       $("#source-label").textContent = "לא נטען קובץ. אפשר לנסות שוב.";
     $("#course-file").value = "";
   }
+  // The registration-links question waits for the calculate button, in step 2.
   if (loaded && searchControls.ready(state.selected)) await optimize();
-  else if (loaded) askLinks();
 }
 $("#course-file").addEventListener("change", (event) => {
   if (event.target.files[0]) loadDataset(event.target.files[0]);
@@ -420,6 +420,7 @@ async function optimize(revealResults = false) {
     notify('לפחות העדפה אחת צריכה לקבל משקל גדול מאפס.', true); return;
   }
   if (!searchControls.ready(state.selected)) { askLinks(); return; }
+  if (revealResults) plannerUX.go(3);
   clearResults();
   state.active = 0; state.visible = 3;
   busy(true);
@@ -438,11 +439,8 @@ async function optimize(revealResults = false) {
       if (snapshot.state !== 'running') break;
       await new Promise(resolve => setTimeout(resolve, 500));
     }
-    notify(searchStatus(state.searchResult));
-    if (revealResults) {
-      $('#results').scrollIntoView({behavior:document.documentElement.dataset.motion === 'off' ? 'instant' : 'smooth', block:'start'});
-      $('#results').focus({preventScroll:true});
-    }
+    // The outcome is announced by #result-status beside the title, so no second notice.
+    notify("");
   } catch (error) {
     // Stop server work as well when polling fails; an aborted fetch alone is insufficient.
     if (state.job) api.cancelSearch(state.job).catch(() => {});

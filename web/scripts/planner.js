@@ -38,11 +38,38 @@ export function initPlannerUX({ onSession, onGenerate }) {
   function filterCourses(){let count=0;$('#course-list').querySelectorAll('.course-row').forEach(row=>{const course=courses.find(c=>c.id===row.querySelector('input').value);const visible=course&&courseMatches(course,search.value);row.hidden=!visible;if(visible)count++;});searchStatus.textContent=search.value.trim()?(count?`${count} קורסים תואמים · החיפוש אינו משנה את הבחירה`:'לא נמצאו קורסים. נסו שם או מספר אחר.') : '';}
   search.addEventListener('input',filterCourses);
 
+  // One step on screen at a time. The stepper above and the bar below move between them.
+  const section=$('#planner'),stepper=$('.planner-steps');
+  let step=1,status={selected:0,total:0,busy:false,results:0,dirty:false};
   const actionbar=node('div','planner-actionbar');actionbar.setAttribute('aria-label','מצב התכנון');
+  const back=node('button','secondary-button back-button','חזרה');back.type='button';back.addEventListener('click',()=>go(step-1));
   const actioncopy=node('div','planner-actioncopy'), actiontitle=node('strong'), actiondetail=node('span');
   actioncopy.append(actiontitle,actiondetail);
-  const actionbutton=node('button','primary-button','חישוב המערכת');actionbutton.type='button';actionbutton.addEventListener('click',onGenerate);
-  actionbar.append(actioncopy,actionbutton);$('#workspace').after(actionbar);
+  const actionbutton=node('button','primary-button','המשך');actionbutton.type='button';actionbutton.addEventListener('click',()=>step===1?go(2):onGenerate());
+  actionbar.append(back,actioncopy,actionbutton);$('#workspace').after(actionbar);
+  // A field that fails validation may sit in another step or a folded section; bring it into view.
+  $('#preferences-form').addEventListener('invalid',event=>{event.target.closest('details')?.setAttribute('open','');if(step!==2)go(2);},true);
+  stepper.querySelectorAll('[data-step]').forEach(button=>button.addEventListener('click',()=>go(Number(button.dataset.step))));
+  function go(next){
+    step=Math.min(3,Math.max(1,next));sync();
+    if(stepper.getBoundingClientRect().top<0)stepper.scrollIntoView({behavior:motion()?'smooth':'instant',block:'start'});
+    $(['#course-panel h3','#preferences-form h3','.results-title'][step-1]).focus({preventScroll:true});
+  }
+  function sync(){
+    const {selected,total,busy,results,dirty}=status,ready=results>0&&!dirty;
+    section.dataset.step=step;
+    const notes=[selected?`${selected} קורסים`:'עוד לא נבחרו',$('.preset[aria-pressed="true"] b')?.textContent||'העדפות אישיות',busy?'מחשבים…':ready?'המערכת מוכנה':results?'נדרש חישוב מחדש':'אחרי החישוב'];
+    stepper.querySelectorAll('[data-step]').forEach((button,i)=>{
+      if(i===step-1)button.setAttribute('aria-current','step');else button.removeAttribute('aria-current');
+      button.disabled=i===1?!selected:i===2?!results&&!busy:false;
+      button.classList.toggle('step-complete',i===0?selected>0:i===1?ready:ready&&step===3);
+      button.querySelector('[data-step-status]').textContent=notes[i];
+    });
+    actiontitle.textContent=busy?'מחשבים את האפשרויות…':step===1?(selected?`${selected} קורסים נבחרו`:'בחרו לפחות קורס אחד'):step===2?(dirty&&results?'הבחירה השתנתה. חשבו מחדש כדי לעדכן את הלוח':'הכול מוכן לחישוב'):dirty&&results?'הבחירה השתנתה. חשבו מחדש כדי לעדכן את הלוח':results?'המערכת שלך מוכנה. אפשר להשוות חלופות':'עוד אין מערכת להצגה';
+    actiondetail.textContent=step===1?'בשלב הבא: מה חשוב לך':`${selected} מתוך ${total} קורסים נבחרו`;
+    actionbutton.textContent=step===1?'המשך':busy?'מחשבים…':ready?'חישוב מחדש':'חישוב המערכת';
+    actionbutton.hidden=step===3&&!(dirty&&results);actionbutton.disabled=busy||!selected;back.hidden=step===1;
+  }
   const stale=node('div','stale-results');stale.hidden=true;stale.setAttribute('role','status');
   stale.append(node('strong','','הבחירה שלך עודכנה'),node('span','','הלוח מציג את החישוב הקודם. חשבו מחדש כדי לעדכן אותו.'));
   $('#results').prepend(stale);
@@ -93,29 +120,24 @@ export function initPlannerUX({ onSession, onGenerate }) {
     live.textContent=selectedDay?`מוצג יום ${DAYS[selectedDay-1]}`:'מוצגים כל ימי השבוע';
   }
   const weeknote=node('div','week-insight');weeknote.hidden=true;$('.metrics').after(weeknote);
-  const preview=node('div','hero-week-preview');preview.hidden=true;preview.setAttribute('aria-label','סיכום המערכת המוצגת');$('.hero-art').removeAttribute('aria-hidden');$('.hero-art').append(preview);
   function updateInsights(){
     const days=agendaDays(sessions),free=days.filter(d=>!d.sessions.length),total=days.reduce((sum,d)=>sum+d.minutes,0);
     weeknote.replaceChildren(node('strong','',free.length?`ימים פנויים: ${free.map(d=>d.name).join(', ')}`:'לימודים בכל חמשת הימים'),node('span','',`${duration(total)} לימודים בשבוע · ללא ספירה כפולה של מפגשים חופפים`));
-    preview.replaceChildren(node('span','hero-week-caption','השבוע שמוצג בלוח'),node('strong','',`${5-free.length} ימי לימוד`));
-    const strip=node('div','hero-week-days');days.forEach(d=>{const day=node('span',d.sessions.length?'is-study-day':'',d.name);strip.append(day);});preview.append(strip);
-    weeknote.hidden=preview.hidden=!hasResults;
+    weeknote.hidden=!hasResults;
   }
   function stopMotion(){if(!motion()){transition?.skipTransition();animations.forEach(a=>a.cancel());}}
   reduced.addEventListener('change',stopMotion);new MutationObserver(stopMotion).observe(root,{attributes:true,attributeFilter:['data-motion']});
   phone.addEventListener('change',()=>{if(!viewChosen){view=phone.matches?'agenda':'week';applyView();}});
-  applyView();
+  applyView();sync();
   return {
-    update({selected,total,busy,results,dirty}){
-      actiontitle.textContent=busy?'מחשבים את האפשרויות…':dirty&&results?'הבחירה השתנתה. חשבו מחדש כדי לעדכן את הלוח':results?'המערכת שלך מוכנה. אפשר להשוות חלופות':selected?'הכול מוכן לחישוב':'בחרו לפחות קורס אחד';
-      actiondetail.textContent=`${selected} מתוך ${total} קורסים נבחרו`;
-      actionbutton.textContent=busy?'מחשבים…':results&&!dirty?'חישוב מחדש':'חישוב המערכת';actionbutton.disabled=busy||!selected;
+    go,
+    update(next){
+      status=next;sync();
+      const {results,dirty}=next;
       stale.hidden=!dirty||!results;$('#results').classList.toggle('has-stale-results',dirty&&!!results);
-      const previewCaption=preview.querySelector('.hero-week-caption');if(previewCaption)previewCaption.textContent=dirty?'החישוב הקודם · ממתין לעדכון':'השבוע שמוצג בלוח';
-      $('.planner-steps').querySelectorAll('a').forEach((link,i)=>{link.classList.toggle('step-complete',i===0?selected>0:i===1?selected>0&&!dirty:results>0&&!dirty);});
     },
     courses(data){courses=data;filterCourses();},
     result(schedule){sessions=schedule.sessions;hasResults=true;renderAgenda();applyView();updateInsights();},
-    clear(){revision++;transition?.skipTransition();sessions=[];hasResults=false;agendaContent.replaceChildren();weeknote.hidden=preview.hidden=true;applyView();},
+    clear(){revision++;transition?.skipTransition();sessions=[];hasResults=false;agendaContent.replaceChildren();weeknote.hidden=true;applyView();},
   };
 }

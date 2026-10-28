@@ -2,23 +2,13 @@
 export function initMotion() {
   const root = document.documentElement;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  const finePointer = matchMedia('(hover: hover) and (pointer: fine)');
   const header = document.querySelector('.site-header');
   const hero = document.querySelector('.hero');
-  const art = document.querySelector('.hero-art');
   let frame = 0;
-  let tiltX = 0;
-  let tiltY = 0;
-  let heroVisible = true;
 
   function update() {
     frame = 0;
     header.classList.toggle('is-scrolled', window.scrollY > 24);
-    if (root.dataset.motion !== 'on' || !heroVisible) return;
-    const progress = Math.min(1, Math.max(0, -hero.getBoundingClientRect().top / hero.offsetHeight));
-    art.style.setProperty('--art-scroll', `${progress * 35}px`);
-    art.style.setProperty('--tilt-x', `${tiltX}deg`);
-    art.style.setProperty('--tilt-y', `${tiltY}deg`);
   }
   function schedule() { if (!frame) frame = requestAnimationFrame(update); }
   function sync() {
@@ -26,9 +16,6 @@ export function initMotion() {
     const off = reduced.matches;
     root.dataset.motion = off ? 'off' : 'on';
     if (off) {
-      art.style.removeProperty('--art-scroll');
-      art.style.removeProperty('--tilt-x');
-      art.style.removeProperty('--tilt-y');
       document.querySelectorAll('.is-waiting').forEach(node => node.classList.remove('is-waiting'));
     }
     schedule();
@@ -36,21 +23,11 @@ export function initMotion() {
   reduced.addEventListener('change', sync);
   window.addEventListener('scroll', schedule, { passive: true });
   window.addEventListener('resize', schedule, { passive: true });
-  hero.addEventListener('pointermove', event => {
-    if (root.dataset.motion !== 'on' || !finePointer.matches) return;
-    const rect = hero.getBoundingClientRect();
-    tiltX = ((event.clientX - rect.left) / rect.width - .5) * 12;
-    tiltY = ((event.clientY - rect.top) / rect.height - .5) * -8;
-    schedule();
-  });
-  hero.addEventListener('pointerleave', () => { tiltX = 0; tiltY = 0; schedule(); });
   sync();
 
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(([entry]) => {
-      heroVisible = entry.isIntersecting;
-      if (heroVisible) document.querySelectorAll('.header-nav a').forEach(link => link.removeAttribute('aria-current'));
-      schedule();
+      if (entry.isIntersecting) document.querySelectorAll('.header-nav a').forEach(link => link.removeAttribute('aria-current'));
     }).observe(hero);
     const reveals = new IntersectionObserver(entries => {
       for (const entry of entries) if (entry.isIntersecting) {

@@ -1,6 +1,7 @@
 /* Industrial sketch layer: a product designer's marker sketch over the studio layout.
-   Construction lines run past the corners, a flat grey marker shadow sits under each card,
-   headings and notes are hand lettered, and the logo colours act as marker fills. */
+   The main cards get lines that run past their corners and a flat grey marker shadow;
+   smaller pieces inside them stay plain, so the page reads as a few sketched objects, not many.
+   Headings are hand lettered and the logo colours act as marker fills. */
 :root[data-design] {
   --sk-paper: #FBFBF8;
   --sk-ink: #1E2224;
@@ -28,37 +29,28 @@
   --line: #3A4246;
 }
 
-/* Paper with a few construction lines, like the start of a sketch. */
-:root[data-design] body {
-  background-color: var(--sk-paper);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='1100'%3E%3Cg stroke='%23D5DADC' stroke-width='1' fill='none'%3E%3Cpath d='M-80 120L1680 330M-80 980L1680 420M0 96H1600M930 0V1100'/%3E%3C/g%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: center top;
-}
-:root[data-design][data-theme="dark"] body {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='1100'%3E%3Cg stroke='%23283034' stroke-width='1' fill='none'%3E%3Cpath d='M-80 120L1680 330M-80 980L1680 420M0 96H1600M930 0V1100'/%3E%3C/g%3E%3C/svg%3E");
-}
+:root[data-design] body { background: var(--sk-paper); }
 
 /* ---------- The sketched frame: lines overshoot the corners, a marker shadow sits behind ---------- */
-:root[data-design] :is(.site-header, .panel, .metric, .alternative, .hero-art > .hero-week-preview, .approach-diagram, .notice, .stale-results, .grade-header, .grade-stat, .grade-panel, dialog) {
+:root[data-design] :is(.site-header, .panel, .approach-diagram, .grade-header, .grade-panel, dialog) {
   position: relative; border: 0; border-radius: 0; box-shadow: 8px 8px 0 var(--sk-shadow);
 }
-:root[data-design] :is(.site-header, .panel, .metric, .alternative, .hero-art > .hero-week-preview, .approach-diagram, .notice, .stale-results, .grade-header, .grade-stat, .grade-panel)::before,
-:root[data-design] :is(.site-header, .panel, .metric, .alternative, .hero-art > .hero-week-preview, .approach-diagram, .notice, .stale-results, .grade-header, .grade-stat, .grade-panel)::after {
+:root[data-design] :is(.site-header, .panel, .approach-diagram, .grade-header, .grade-panel)::before,
+:root[data-design] :is(.site-header, .panel, .approach-diagram, .grade-header, .grade-panel)::after {
   content: ""; position: absolute; pointer-events: none; z-index: 1;
 }
-:root[data-design] :is(.site-header, .panel, .metric, .alternative, .hero-art > .hero-week-preview, .approach-diagram, .notice, .stale-results, .grade-header, .grade-stat, .grade-panel)::before {
+:root[data-design] :is(.site-header, .panel, .approach-diagram, .grade-header, .grade-panel)::before {
   inset: 0 calc(var(--sk-over) * -1); border-block: 1.5px solid var(--sk-ink);
 }
-:root[data-design] :is(.site-header, .panel, .metric, .alternative, .hero-art > .hero-week-preview, .approach-diagram, .notice, .stale-results, .grade-header, .grade-stat, .grade-panel)::after {
+:root[data-design] :is(.site-header, .panel, .approach-diagram, .grade-header, .grade-panel)::after {
   inset: calc(var(--sk-over) * -1) 0; border-inline: 1.5px solid var(--sk-ink);
 }
 :root[data-design] dialog { border: 1.5px solid var(--sk-ink); box-shadow: 10px 10px 0 var(--sk-shadow); }
 :root[data-design] .calendar-panel { overflow: visible; }
 :root[data-design] .notice[hidden] { display: none; }
-@media (min-width: 1001px) {
-  /* The scrolling sidebar would clip the overshoot, so it gets room for it. */
-  :root[data-design] .sidebar { padding: 12px 14px 20px; margin: -12px -14px 0; }
+/* Pieces inside the cards: one plain ink line, no overshoot and no shadow. */
+:root[data-design] :is(.metric, .alternative, .notice, .stale-results, .grade-stat) {
+  border: 1.5px solid var(--sk-ink); border-radius: 0; box-shadow: none;
 }
 
 /* ---------- Hand lettering ---------- */
@@ -72,11 +64,7 @@
   text-decoration: underline; text-decoration-color: var(--sk-marker); text-decoration-thickness: .38em;
   text-underline-offset: -.12em; text-decoration-skip-ink: none; white-space: nowrap;
 }
-:root[data-design] .intro-steps span,
-:root[data-design] .hero-week-caption,
 :root[data-design] .footer-meta dt { font-family: var(--sk-hand); }
-:root[data-design] .intro-steps li { border-color: var(--sk-ink); border-top-style: dashed; }
-:root[data-design] .intro-steps li:last-child { border-bottom-style: dashed; }
 
 /* ---------- Controls drawn with a pen ---------- */
 :root[data-design] :is(.primary-button, .hero-cta) {
@@ -139,9 +127,7 @@
 :root[data-design] .metric strong,
 :root[data-design] .grade-stat strong,
 :root[data-design] .alternative-score { font-family: var(--sk-hand); font-weight: 600; letter-spacing: 0; }
-:root[data-design] .alternative[aria-pressed="true"] { box-shadow: 8px 8px 0 var(--logo-cyan); }
-:root[data-design] .hero-week-days span { border-radius: 0; }
-:root[data-design] .hero-week-days span.is-study-day { box-shadow: inset 0 0 0 1.2px var(--sk-ink); }
+:root[data-design] .alternative[aria-pressed="true"] { box-shadow: 5px 5px 0 var(--logo-cyan); }
 :root[data-design] .empty-symbol i { border: 1.2px solid var(--sk-ink); border-radius: 0; }
 :root[data-design] .approach-diagram { background: var(--panel); }
 :root[data-design] .approach-list { border-top: 1.5px dashed var(--sk-ink); }
@@ -153,21 +139,13 @@
   :root[data-design] .results-title::after {
     content: "צבע = קורס"; margin-inline-start: 14px; font: 400 15px var(--sk-hand); color: var(--logo-coral); transform: rotate(-4deg);
   }
-  :root[data-design] .intro-steps::after {
-    content: "שלושה צעדים, וזהו ↓"; display: block; margin-top: 12px; font: 400 15px var(--sk-hand); color: var(--accent); transform: rotate(-2deg);
-  }
-  :root[data-design] .preset-picker::before {
-    content: "בחירה מהירה, אפשר לכוונן אחר כך ↙"; grid-column: 1 / -1; font: 400 13px var(--sk-hand); color: var(--logo-coral);
-  }
   }
 @media (max-width: 760px) {
   :root[data-design] { --sk-over: 5px; }
-  :root[data-design] :is(.site-header, .panel, .metric, .alternative, .grade-stat, .grade-panel) { box-shadow: 5px 5px 0 var(--sk-shadow); }
+  :root[data-design] :is(.site-header, .panel, .grade-panel) { box-shadow: 5px 5px 0 var(--sk-shadow); }
 }
 
 .grades-page h1 .marker { color: inherit; }
 
 /* Margin notes in English. */
 :root[lang="en"][data-design] .results-title::after { content: "colour = course"; }
-:root[lang="en"][data-design] .intro-steps::after { content: "Three steps, that's it ↓"; }
-:root[lang="en"][data-design] .preset-picker::before { content: "A quick start; fine-tune it after ↓"; }

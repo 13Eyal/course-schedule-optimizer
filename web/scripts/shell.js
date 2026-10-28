@@ -4,14 +4,10 @@ import { burstAt, createCelebrationGate, isPerfectScore } from './effects.js';
 export function initShell() {
   const root = document.documentElement;
   const gate = createCelebrationGate();
-  const artwork = document.querySelector('.hero-artwork');
   const nav = document.querySelector('.header-nav');
   const scoreNode = document.querySelector('#metric-score');
   let stopBurst = () => {};
   let currentScore = null;
-  let pointerFrame = 0;
-  let px = 0;
-  let py = 0;
 
   const menu = document.createElement('button');
   menu.type = 'button';
@@ -55,20 +51,6 @@ export function initShell() {
   document.querySelector('#generate').prepend(heartbeat);
   const motionAllowed = () => root.dataset.motion !== 'off' && !matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  function drawParallax() {
-    pointerFrame = 0;
-    artwork.style.setProperty('--mx', `${px}px`);
-    artwork.style.setProperty('--my', `${py}px`);
-  }
-  artwork.addEventListener('pointermove', event => {
-    if (!motionAllowed() || event.pointerType === 'touch') return;
-    const rect = artwork.getBoundingClientRect();
-    px = (event.clientX - rect.left - rect.width / 2) * .055;
-    py = (event.clientY - rect.top - rect.height / 2) * .05;
-    if (!pointerFrame) pointerFrame = requestAnimationFrame(drawParallax);
-  });
-  artwork.addEventListener('pointerleave', () => { px = py = 0; drawParallax(); });
-
   function maybeCelebrate() {
     if (!motionAllowed() || document.hidden || !isPerfectScore(currentScore)) return;
     const rect = scoreNode.getBoundingClientRect();
@@ -77,11 +59,7 @@ export function initShell() {
   }
   new IntersectionObserver(maybeCelebrate, { threshold: .5 }).observe(scoreNode);
   new MutationObserver(() => {
-    if (!motionAllowed()) {
-      stopBurst();
-      px = py = 0;
-      drawParallax();
-    }
+    if (!motionAllowed()) stopBurst();
   }).observe(root, { attributes: true, attributeFilter: ['data-motion'] });
   document.addEventListener('visibilitychange', maybeCelebrate);
 

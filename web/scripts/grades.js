@@ -198,6 +198,8 @@ function renderRetake() {
 }
 function render() {
   renderRows('actual');renderRows('planned');renderAnalytics();
+  // Panels appear as they gain something to show: grades first, then future courses.
+  $('#grade-workspace').dataset.stage=state.planned.length?'future':state.actual.length?'actual':'empty';
   const codes=state.actual.filter(row=>row.included && row.code).map(row=>row.code);
   const duplicated=codes.length!==new Set(codes).size;
   $('#grade-duplicates').hidden=!duplicated;
