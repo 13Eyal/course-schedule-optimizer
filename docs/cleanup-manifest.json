@@ -1,0 +1,588 @@
+{
+  "status": "completed",
+  "created": "2026-10-20",
+  "root": "C:\\Users\\Admin\\PythonPractice\\course-schedule-optimizer",
+  "files": [
+    {
+      "id": 1,
+      "path": "yael_english.html",
+      "group": "ממשקים ישנים",
+      "reason": "הממשק האנגלי עם העיצובים הקודמים; אינו מוגש באתר הנוכחי.",
+      "bytes": 13053,
+      "sha256": "24c5aae4ef9bf0b79392d75738f7bd806945ce2bdfc4198c9c921aab4b644ab4",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 2,
+      "path": "yael_english.css",
+      "group": "ממשקים ישנים",
+      "reason": "הממשק האנגלי עם העיצובים הקודמים; אינו מוגש באתר הנוכחי.",
+      "bytes": 65511,
+      "sha256": "90b2d762c2fb5244d07b75a818db52aaa6f0908f26dff5039d4103aa760db085",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 3,
+      "path": "yael_english.js",
+      "group": "ממשקים ישנים",
+      "reason": "הממשק האנגלי עם העיצובים הקודמים; אינו מוגש באתר הנוכחי.",
+      "bytes": 22363,
+      "sha256": "55cb78d1cf4599aea525af22f51ffabb14814fff39dae9ee00cba3106a3d8728",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 4,
+      "path": "app.py",
+      "group": "ממשקים ישנים",
+      "reason": "ממשק Streamlit המקורי, חלופה נפרדת שאינה עיצוב הלבן והקובלט. אם תאושר המחיקה, תוסר גם תלות streamlit מ־requirements.txt.",
+      "bytes": 3189,
+      "sha256": "d1c9b5eab8b8d8dcedf6978e2db35edfe50c5b6605327bc8b916b2251357f0e2",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 5,
+      "path": "AWARD_RESEARCH_ENGLISH.md",
+      "group": "מסמכי עיצובים קודמים",
+      "reason": "מחקר או תיעוד של כיווני עיצוב קודמים. תיעוד העיצוב הנוכחי ומקורות האפקטים נשמרו ב־docs/DESIGN.md; החלטות המוצר וסקירת הקוד נשמרו בנפרד.",
+      "bytes": 11875,
+      "sha256": "ce56b38307df0e66e449c857c7e6ac770603825eb62d050796fb9f146b32131a",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 6,
+      "path": "DESIGN_EDITIONS_ROUND_2.md",
+      "group": "מסמכי עיצובים קודמים",
+      "reason": "מחקר או תיעוד של כיווני עיצוב קודמים. תיעוד העיצוב הנוכחי ומקורות האפקטים נשמרו ב־docs/DESIGN.md; החלטות המוצר וסקירת הקוד נשמרו בנפרד.",
+      "bytes": 3759,
+      "sha256": "72ffcacb6fb501e86f4af24a1ca98c12f8376b3dafd5e1adbddcd135493d9d20",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 7,
+      "path": "DESIGN_RESEARCH.md",
+      "group": "מסמכי עיצובים קודמים",
+      "reason": "מחקר או תיעוד של כיווני עיצוב קודמים. תיעוד העיצוב הנוכחי ומקורות האפקטים נשמרו ב־docs/DESIGN.md; החלטות המוצר וסקירת הקוד נשמרו בנפרד.",
+      "bytes": 5129,
+      "sha256": "d95b2426870eb4179d136379127c0e5e2cc8e8f4f290d4ac1f53eed5fda8a317",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 8,
+      "path": "DESIGN_COMBINATIONS.md",
+      "group": "מסמכי עיצובים קודמים",
+      "reason": "מחקר או תיעוד של כיווני עיצוב קודמים. תיעוד העיצוב הנוכחי ומקורות האפקטים נשמרו ב־docs/DESIGN.md; החלטות המוצר וסקירת הקוד נשמרו בנפרד.",
+      "bytes": 5017,
+      "sha256": "17f66a4bd5dee336c6189ef6d4d8413892e6e094699fa6a6a639e75d7aaba56c",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 9,
+      "path": "OAK_SAGE_REFINEMENT.md",
+      "group": "מסמכי עיצובים קודמים",
+      "reason": "מחקר או תיעוד של כיווני עיצוב קודמים. תיעוד העיצוב הנוכחי ומקורות האפקטים נשמרו ב־docs/DESIGN.md; החלטות המוצר וסקירת הקוד נשמרו בנפרד.",
+      "bytes": 3953,
+      "sha256": "984bf5ceccd73c26ab55fa2af4d6e85f09f717edbb72066af158238500ba4248",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 10,
+      "path": "design-previews/combo-cobalt.png",
+      "group": "צילומי עיצובים קודמים",
+      "reason": "צילום מתקופת ניסויי העיצוב, כולל הקובלט הישן. צילומי הזכוכית הנוכחיים נשמרים ב־artifacts/cobalt-glass/.",
+      "bytes": 69350,
+      "sha256": "c8fdc8d0effb013adc6c2c40dda2016ca71c9527e66ec7ffc78208dc17dff634",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 11,
+      "path": "design-previews/combo-oak.png",
+      "group": "צילומי עיצובים קודמים",
+      "reason": "צילום מתקופת ניסויי העיצוב, כולל הקובלט הישן. צילומי הזכוכית הנוכחיים נשמרים ב־artifacts/cobalt-glass/.",
+      "bytes": 66539,
+      "sha256": "c4d0950fcb5a8abe5b5485d41b126de930cf44110540658e275d0fa9c9220b9b",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 12,
+      "path": "design-previews/combo-paper.png",
+      "group": "צילומי עיצובים קודמים",
+      "reason": "צילום מתקופת ניסויי העיצוב, כולל הקובלט הישן. צילומי הזכוכית הנוכחיים נשמרים ב־artifacts/cobalt-glass/.",
+      "bytes": 82492,
+      "sha256": "14b6705a4efb072dd233cbfeb5159b10ec62b94650b919de38c38576bd9c92cd",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 13,
+      "path": "design-previews/combo-prism.png",
+      "group": "צילומי עיצובים קודמים",
+      "reason": "צילום מתקופת ניסויי העיצוב, כולל הקובלט הישן. צילומי הזכוכית הנוכחיים נשמרים ב־artifacts/cobalt-glass/.",
+      "bytes": 70990,
+      "sha256": "bc4d35dd650b5bced2d0e21e02b0dca7ae14a6b76586102b8f866bfa160e0cbf",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 14,
+      "path": "design-previews/combo-walnut.png",
+      "group": "צילומי עיצובים קודמים",
+      "reason": "צילום מתקופת ניסויי העיצוב, כולל הקובלט הישן. צילומי הזכוכית הנוכחיים נשמרים ב־artifacts/cobalt-glass/.",
+      "bytes": 71075,
+      "sha256": "96ebe1a7e60017c22f10d7f17e302d74a228ced3dd5fcada192083af5dba5a37",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 15,
+      "path": "design-previews/en-fieldnotes-depth-dark.jpg",
+      "group": "צילומי עיצובים קודמים",
+      "reason": "צילום מתקופת ניסויי העיצוב, כולל הקובלט הישן. צילומי הזכוכית הנוכחיים נשמרים ב־artifacts/cobalt-glass/.",
+      "bytes": 78450,
+      "sha256": "6566985d427229d10df92a1e1ced32de6c26ee7683d7f53393a64071d968846e",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 16,
+      "path": "design-previews/en-fieldnotes-depth-light.jpg",
+      "group": "צילומי עיצובים קודמים",
+      "reason": "צילום מתקופת ניסויי העיצוב, כולל הקובלט הישן. צילומי הזכוכית הנוכחיים נשמרים ב־artifacts/cobalt-glass/.",
+      "bytes": 98222,
+      "sha256": "01481a770237fc6abea2689a05e7617ccab5b76332fcc505800af89bb51571e6",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 17,
+      "path": "design-previews/en-fieldnotes-depth-planner.jpg",
+      "group": "צילומי עיצובים קודמים",
+      "reason": "צילום מתקופת ניסויי העיצוב, כולל הקובלט הישן. צילומי הזכוכית הנוכחיים נשמרים ב־artifacts/cobalt-glass/.",
+      "bytes": 76660,
+      "sha256": "0504c0124d91f6918ff3215aa3b9213922ab860f91e48fe7b96fe062bdb1f6a4",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 18,
+      "path": "design-previews/en-fieldnotes.png",
+      "group": "צילומי עיצובים קודמים",
+      "reason": "צילום מתקופת ניסויי העיצוב, כולל הקובלט הישן. צילומי הזכוכית הנוכחיים נשמרים ב־artifacts/cobalt-glass/.",
+      "bytes": 86815,
+      "sha256": "f70ea89ccfbffb7a12dd00ed8e54298872624b574d700351314e69ef2cd193ca",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 19,
+      "path": "design-previews/en-folio-planner.jpg",
+      "group": "צילומי עיצובים קודמים",
+      "reason": "צילום מתקופת ניסויי העיצוב, כולל הקובלט הישן. צילומי הזכוכית הנוכחיים נשמרים ב־artifacts/cobalt-glass/.",
+      "bytes": 51342,
+      "sha256": "17f4695c0c0b98860870fe4f52894ac87f80a4063b545272abf1e3c3a74b1258",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 20,
+      "path": "design-previews/en-folio.jpg",
+      "group": "צילומי עיצובים קודמים",
+      "reason": "צילום מתקופת ניסויי העיצוב, כולל הקובלט הישן. צילומי הזכוכית הנוכחיים נשמרים ב־artifacts/cobalt-glass/.",
+      "bytes": 90877,
+      "sha256": "b5b8073eee2f770319e5bb8eaa3fc622a3414aac58f533786acb1af1ed6d4d22",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 21,
+      "path": "design-previews/en-grove.png",
+      "group": "צילומי עיצובים קודמים",
+      "reason": "צילום מתקופת ניסויי העיצוב, כולל הקובלט הישן. צילומי הזכוכית הנוכחיים נשמרים ב־artifacts/cobalt-glass/.",
+      "bytes": 52602,
+      "sha256": "65d55672078ed6eb5bcf460d3505fd981b137daa04debfa701e5715c07c32dee",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 22,
+      "path": "design-previews/en-halo-planner.jpg",
+      "group": "צילומי עיצובים קודמים",
+      "reason": "צילום מתקופת ניסויי העיצוב, כולל הקובלט הישן. צילומי הזכוכית הנוכחיים נשמרים ב־artifacts/cobalt-glass/.",
+      "bytes": 59752,
+      "sha256": "3c0e9b44db20daf19f195d44fabeaeeb2414e7b0ac37d4bef55319de9e4fcdb0",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 23,
+      "path": "design-previews/en-halo.jpg",
+      "group": "צילומי עיצובים קודמים",
+      "reason": "צילום מתקופת ניסויי העיצוב, כולל הקובלט הישן. צילומי הזכוכית הנוכחיים נשמרים ב־artifacts/cobalt-glass/.",
+      "bytes": 89342,
+      "sha256": "ce64a1913260ea5acd1d1269e4467d760dbfed27cfddd256d3e4b91f588341be",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 24,
+      "path": "design-previews/en-index.png",
+      "group": "צילומי עיצובים קודמים",
+      "reason": "צילום מתקופת ניסויי העיצוב, כולל הקובלט הישן. צילומי הזכוכית הנוכחיים נשמרים ב־artifacts/cobalt-glass/.",
+      "bytes": 57106,
+      "sha256": "c27f2eb45f14824f38ee5b487a489ba1ef818ef7fe01aaba95ed957a4f288477",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 25,
+      "path": "design-previews/en-terra.jpg",
+      "group": "צילומי עיצובים קודמים",
+      "reason": "צילום מתקופת ניסויי העיצוב, כולל הקובלט הישן. צילומי הזכוכית הנוכחיים נשמרים ב־artifacts/cobalt-glass/.",
+      "bytes": 79724,
+      "sha256": "1765199fb5fdaa21e823f9464cf8a635abc89293df83ba0c8d3ba66622bb792c",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 26,
+      "path": "design-previews/five-combinations.jpg",
+      "group": "צילומי עיצובים קודמים",
+      "reason": "צילום מתקופת ניסויי העיצוב, כולל הקובלט הישן. צילומי הזכוכית הנוכחיים נשמרים ב־artifacts/cobalt-glass/.",
+      "bytes": 256823,
+      "sha256": "0974d4657251866e83feef115574945ae1792864fb86e5b220f1ef31c7537e4f",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 27,
+      "path": "design-previews/forma-dark.jpg",
+      "group": "צילומי עיצובים קודמים",
+      "reason": "צילום מתקופת ניסויי העיצוב, כולל הקובלט הישן. צילומי הזכוכית הנוכחיים נשמרים ב־artifacts/cobalt-glass/.",
+      "bytes": 59931,
+      "sha256": "c6715846e684c09c78b9a32e927b78dc2805ac9ffd3c2a2e606d6ab845f2c975",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 28,
+      "path": "design-previews/forma-light.jpg",
+      "group": "צילומי עיצובים קודמים",
+      "reason": "צילום מתקופת ניסויי העיצוב, כולל הקובלט הישן. צילומי הזכוכית הנוכחיים נשמרים ב־artifacts/cobalt-glass/.",
+      "bytes": 60055,
+      "sha256": "917943f02f779681456c7a7d43e2e8b8e736132c5787e07c296b20266c0a9901",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 29,
+      "path": "design-previews/oak-refined-mobile.png",
+      "group": "צילומי עיצובים קודמים",
+      "reason": "צילום מתקופת ניסויי העיצוב, כולל הקובלט הישן. צילומי הזכוכית הנוכחיים נשמרים ב־artifacts/cobalt-glass/.",
+      "bytes": 27068,
+      "sha256": "f267e89a75d6e93a31e39596e5e3b0f5772450f188898d4eb23ab64487f7124d",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 30,
+      "path": "design-previews/yael-dark.png",
+      "group": "צילומי עיצובים קודמים",
+      "reason": "צילום מתקופת ניסויי העיצוב, כולל הקובלט הישן. צילומי הזכוכית הנוכחיים נשמרים ב־artifacts/cobalt-glass/.",
+      "bytes": 51496,
+      "sha256": "55616a40363e0488d7b08f1a59d0b6fae227343c0bf44270d0a31fc6d1b16217",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 31,
+      "path": "design-previews/yael-light.png",
+      "group": "צילומי עיצובים קודמים",
+      "reason": "צילום מתקופת ניסויי העיצוב, כולל הקובלט הישן. צילומי הזכוכית הנוכחיים נשמרים ב־artifacts/cobalt-glass/.",
+      "bytes": 46321,
+      "sha256": "a390cbd85e2ffd92083e68fd7633d8edee2db036d490ba1e8e536f307c3ba424",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 32,
+      "path": "assets/design/Melamine-wood-001.png",
+      "group": "נכסי עיצובים קודמים",
+      "reason": "טקסטורת עץ, הדגמת צל או רישיון הנלווה לנכסים האלה. אין אליהם הפניות באתר הפעיל. רישיונות יימחקו רק יחד עם הנכסים הנלווים שאושרו למחיקה.",
+      "bytes": 304736,
+      "sha256": "49fac188b0974559ae74486c308a64e1919a773494c7565ba94f50551016409c",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 33,
+      "path": "assets/design/Melamine-wood-002.png",
+      "group": "נכסי עיצובים קודמים",
+      "reason": "טקסטורת עץ, הדגמת צל או רישיון הנלווה לנכסים האלה. אין אליהם הפניות באתר הפעיל. רישיונות יימחקו רק יחד עם הנכסים הנלווים שאושרו למחיקה.",
+      "bytes": 213984,
+      "sha256": "817a89067e16e70555a5bd72c48a49e1dd6a0793ecf7cac7fbc4be690740acca",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 34,
+      "path": "assets/design/Melamine-wood-003.png",
+      "group": "נכסי עיצובים קודמים",
+      "reason": "טקסטורת עץ, הדגמת צל או רישיון הנלווה לנכסים האלה. אין אליהם הפניות באתר הפעיל. רישיונות יימחקו רק יחד עם הנכסים הנלווים שאושרו למחיקה.",
+      "bytes": 383623,
+      "sha256": "4761a1233bd49d7a9b9577c983e20e954eab8e38db6ad10d5c7fdaa634e41bcd",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 35,
+      "path": "assets/design/Melamine-wood-004.png",
+      "group": "נכסי עיצובים קודמים",
+      "reason": "טקסטורת עץ, הדגמת צל או רישיון הנלווה לנכסים האלה. אין אליהם הפניות באתר הפעיל. רישיונות יימחקו רק יחד עם הנכסים הנלווים שאושרו למחיקה.",
+      "bytes": 396537,
+      "sha256": "543a2be53dde41b84c85e190b86b8d05cc3cbffd731912832815f7c6569cebd2",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 36,
+      "path": "assets/design/Melamine-wood-005.png",
+      "group": "נכסי עיצובים קודמים",
+      "reason": "טקסטורת עץ, הדגמת צל או רישיון הנלווה לנכסים האלה. אין אליהם הפניות באתר הפעיל. רישיונות יימחקו רק יחד עם הנכסים הנלווים שאושרו למחיקה.",
+      "bytes": 496285,
+      "sha256": "4aa8b76648b3807426e95aec0481095453fc183c9f16c15f496fead242e76806",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 37,
+      "path": "assets/design/Melamine-wood-006.png",
+      "group": "נכסי עיצובים קודמים",
+      "reason": "טקסטורת עץ, הדגמת צל או רישיון הנלווה לנכסים האלה. אין אליהם הפניות באתר הפעיל. רישיונות יימחקו רק יחד עם הנכסים הנלווים שאושרו למחיקה.",
+      "bytes": 638222,
+      "sha256": "19d66519749887d7a834c023790eea8250271e73ba396d1c98b2efde6037213b",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 38,
+      "path": "assets/design/shadow-license.txt",
+      "group": "נכסי עיצובים קודמים",
+      "reason": "טקסטורת עץ, הדגמת צל או רישיון הנלווה לנכסים האלה. אין אליהם הפניות באתר הפעיל. רישיונות יימחקו רק יחד עם הנכסים הנלווים שאושרו למחיקה.",
+      "bytes": 2170,
+      "sha256": "b152b5f6e8fc679cdbcc1766f245a7a48816d6c5129228ce42a5d6ebddb740f4",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 39,
+      "path": "assets/design/shadow-preview.jpg",
+      "group": "נכסי עיצובים קודמים",
+      "reason": "טקסטורת עץ, הדגמת צל או רישיון הנלווה לנכסים האלה. אין אליהם הפניות באתר הפעיל. רישיונות יימחקו רק יחד עם הנכסים הנלווים שאושרו למחיקה.",
+      "bytes": 73492,
+      "sha256": "e53df0f3d462dfce8e5093aacd6e1a3db4d51c1b39473ee8a3eff46c85f9a0fa",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 40,
+      "path": "assets/design/shadow-psd-composite.jpg",
+      "group": "נכסי עיצובים קודמים",
+      "reason": "טקסטורת עץ, הדגמת צל או רישיון הנלווה לנכסים האלה. אין אליהם הפניות באתר הפעיל. רישיונות יימחקו רק יחד עם הנכסים הנלווים שאושרו למחיקה.",
+      "bytes": 38660,
+      "sha256": "3e300a39ef9c79509964374565cf21cead44e8cf040f5bd864443e6df36aebd3",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 41,
+      "path": "assets/design/wood-license.txt",
+      "group": "נכסי עיצובים קודמים",
+      "reason": "טקסטורת עץ, הדגמת צל או רישיון הנלווה לנכסים האלה. אין אליהם הפניות באתר הפעיל. רישיונות יימחקו רק יחד עם הנכסים הנלווים שאושרו למחיקה.",
+      "bytes": 2170,
+      "sha256": "b152b5f6e8fc679cdbcc1766f245a7a48816d6c5129228ce42a5d6ebddb740f4",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 42,
+      "path": ".work/backups/solver-before-design-integration.py",
+      "group": "גיבוי ישן",
+      "reason": "עותק גיבוי של המנוע מלפני שילוב העיצוב. המנוע הנוכחי ובדיקותיו נשמרים.",
+      "bytes": 4820,
+      "sha256": "4156f2e2d74ee340c117a56046ed70caafdc3911bdc016cded5ec7c1e433fbdf",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 43,
+      "path": "src/calendar_export.py",
+      "group": "קבצים ריקים",
+      "reason": "קובץ ריק, ללא קוד או בדיקות. אינו נדרש לייבוא של הפרויקט; src/__init__.py נשמר.",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 44,
+      "path": "src/utils.py",
+      "group": "קבצים ריקים",
+      "reason": "קובץ ריק, ללא קוד או בדיקות. אינו נדרש לייבוא של הפרויקט; src/__init__.py נשמר.",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 45,
+      "path": "tests/test_data_loader.py",
+      "group": "קבצים ריקים",
+      "reason": "קובץ ריק, ללא קוד או בדיקות. אינו נדרש לייבוא של הפרויקט; src/__init__.py נשמר.",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 46,
+      "path": "tests/test_models.py",
+      "group": "קבצים ריקים",
+      "reason": "קובץ ריק, ללא קוד או בדיקות. אינו נדרש לייבוא של הפרויקט; src/__init__.py נשמר.",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 47,
+      "path": "tests/test_scoring.py",
+      "group": "קבצים ריקים",
+      "reason": "קובץ ריק, ללא קוד או בדיקות. אינו נדרש לייבוא של הפרויקט; src/__init__.py נשמר.",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 48,
+      "path": "tests/test_solver.py",
+      "group": "קבצים ריקים",
+      "reason": "קובץ ריק, ללא קוד או בדיקות. אינו נדרש לייבוא של הפרויקט; src/__init__.py נשמר.",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 49,
+      "path": "__pycache__/web_server.cpython-312.pyc",
+      "group": "מטמון Python",
+      "reason": "קובץ מטמון שנוצר אוטומטית. ניתן ליצור אותו מחדש מהרצת קוד המקור.",
+      "bytes": 23076,
+      "sha256": "3e5675ca56f86715b2b4f56323a4cc11fb1c8adf7887b7c854517493a31c6208",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 50,
+      "path": "src/__pycache__/__init__.cpython-312.pyc",
+      "group": "מטמון Python",
+      "reason": "קובץ מטמון שנוצר אוטומטית. ניתן ליצור אותו מחדש מהרצת קוד המקור.",
+      "bytes": 168,
+      "sha256": "0221a0dd0ab03d789881d5de6ea15abf2928f52dac156c9923518091aea55ed6",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 51,
+      "path": "src/__pycache__/course_parser.cpython-312.pyc",
+      "group": "מטמון Python",
+      "reason": "קובץ מטמון שנוצר אוטומטית. ניתן ליצור אותו מחדש מהרצת קוד המקור.",
+      "bytes": 7988,
+      "sha256": "812ee8f150e9177b026d6188785d106896e830e3909ee41f5ca364350c3f4d18",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 52,
+      "path": "src/__pycache__/data_loader.cpython-312.pyc",
+      "group": "מטמון Python",
+      "reason": "קובץ מטמון שנוצר אוטומטית. ניתן ליצור אותו מחדש מהרצת קוד המקור.",
+      "bytes": 6546,
+      "sha256": "de37ad9ad0beb0eac3c340df7ef4d23a5c721e2a54062d7080e7246b07ab8b5c",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 53,
+      "path": "src/__pycache__/models.cpython-312.pyc",
+      "group": "מטמון Python",
+      "reason": "קובץ מטמון שנוצר אוטומטית. ניתן ליצור אותו מחדש מהרצת קוד המקור.",
+      "bytes": 6634,
+      "sha256": "6cde55d6bf1c37b13b6783e785b48243cd90110edd529e99f505d9563fbad835",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 54,
+      "path": "src/__pycache__/scoring.cpython-312.pyc",
+      "group": "מטמון Python",
+      "reason": "קובץ מטמון שנוצר אוטומטית. ניתן ליצור אותו מחדש מהרצת קוד המקור.",
+      "bytes": 8754,
+      "sha256": "6d3196dd20110002c505777996223ec8568b1510f9e7e30bc3331d258dfd3049",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 55,
+      "path": "src/__pycache__/solver.cpython-312.pyc",
+      "group": "מטמון Python",
+      "reason": "קובץ מטמון שנוצר אוטומטית. ניתן ליצור אותו מחדש מהרצת קוד המקור.",
+      "bytes": 5081,
+      "sha256": "58645d58c0c553d6805fcd673a02676caadcc8b12d25d889327460983ee14739",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 56,
+      "path": "tests/__pycache__/test_solver_conflicts.cpython-312.pyc",
+      "group": "מטמון Python",
+      "reason": "קובץ מטמון שנוצר אוטומטית. ניתן ליצור אותו מחדש מהרצת קוד המקור.",
+      "bytes": 2915,
+      "sha256": "d7ae10e202cc4c6297aa1fe27f7cbddae80c2497909d4ad568d33466eb23cfd6",
+      "approval": "approved",
+      "status": "deleted"
+    },
+    {
+      "id": 57,
+      "path": "tests/__pycache__/test_web.cpython-312.pyc",
+      "group": "מטמון Python",
+      "reason": "קובץ מטמון שנוצר אוטומטית. ניתן ליצור אותו מחדש מהרצת קוד המקור.",
+      "bytes": 16286,
+      "sha256": "54c87e37773e0b2c268044a1ff06169dd500f0aff6327f3b0624f611a987454f",
+      "approval": "approved",
+      "status": "deleted"
+    }
+  ],
+  "approved_at": "2026-10-21T02:18:02.8233265+03:00",
+  "approval_source": "User explicitly approved deletion of the 57-file review list in this chat.",
+  "completed_at": "2026-10-21T02:18:03.1506802+03:00",
+  "removed_empty_directories": [
+    "design-previews",
+    ".work\\backups",
+    ".work",
+    "__pycache__",
+    "src\\__pycache__",
+    "tests\\__pycache__"
+  ]
+}

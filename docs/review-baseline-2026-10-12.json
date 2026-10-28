@@ -1,0 +1,80 @@
+{
+  "runtime": {
+    "python": "3.12.14",
+    "pandas": "3.0.1",
+    "openpyxl": "3.1.5",
+    "platform": "Windows-11-10.0.26300-SP0"
+  },
+  "sample": {
+    "courses": 4,
+    "groups": 21,
+    "raw_combinations": 1296,
+    "valid_schedules": 468,
+    "first_read_ms": 31.28,
+    "read": {
+      "median_ms": 25.628,
+      "min_ms": 25.224,
+      "max_ms": 26.908,
+      "runs": 9
+    },
+    "generate": {
+      "median_ms": 7.649,
+      "min_ms": 7.546,
+      "max_ms": 8.59,
+      "runs": 9
+    },
+    "evaluate": {
+      "median_ms": 10.98,
+      "min_ms": 10.804,
+      "max_ms": 11.641,
+      "runs": 9
+    },
+    "optimize_sample": {
+      "median_ms": 44.774,
+      "min_ms": 43.937,
+      "max_ms": 61.466,
+      "runs": 9
+    },
+    "optimize_in_memory": {
+      "median_ms": 19.365,
+      "min_ms": 19.178,
+      "max_ms": 20.384,
+      "runs": 9
+    }
+  },
+  "synthetic": [
+    {
+      "courses": 5,
+      "groups_per_course": 4,
+      "valid_schedules": 1024,
+      "pipeline": {
+        "median_ms": 19.462,
+        "min_ms": 18.912,
+        "max_ms": 19.676,
+        "runs": 3
+      },
+      "peak_python_mib": 0.96
+    },
+    {
+      "courses": 5,
+      "groups_per_course": 10,
+      "valid_schedules": 100000,
+      "pipeline": {
+        "median_ms": 2089.147,
+        "min_ms": 2037.398,
+        "max_ms": 2142.034,
+        "runs": 3
+      },
+      "peak_python_mib": 85.61,
+      "profile": "         15616145 function calls (15504685 primitive calls) in 6.856 seconds\n\n   Ordered by: cumulative time\n   List reduced from 82 to 14 due to restriction <14>\n\n   ncalls  tottime  percall  cumtime  percall filename:lineno(function)\n        1    0.000    0.000    6.896    6.896 web_server.py:183(optimize_payload)\n        1    0.215    0.215    5.237    5.237 scoring.py:178(evaluate_schedules)\n   100000    0.289    0.000    4.297    0.000 scoring.py:93(calculate_schedule_metrics)\n   100000    0.254    0.000    2.966    0.000 scoring.py:26(get_sessions_by_day)\n   100000    0.350    0.000    2.196    0.000 scoring.py:13(merge_schedule_sessions)\n   600000    1.023    0.000    1.765    0.000 heapq.py:316(merge)\n        1    0.000    0.000    1.658    1.658 solver.py:98(generate_schedules)\n 111111/1    0.404    0.000    1.658    1.658 solver.py:105(backtrack)\n   111160    0.108    0.000    1.125    0.000 solver.py:48(option_conflicts_with_schedule)\n   432100    0.141    0.000    1.017    0.000 solver.py:43(groups_conflict)\n   432100    0.458    0.000    0.875    0.000 solver.py:3(helper_for_conflict_overlap)\n  1364500    0.392    0.000    0.536    0.000 enum.py:202(__get__)\n   100000    0.240    0.000    0.447    0.000 scoring.py:73(calculate_daily_span)\n   199998    0.248    0.000    0.443    0.000 scoring.py:105(update_metrics)\n\n\n"
+    }
+  ],
+  "assets": {
+    "he_html_bytes": 543127,
+    "sculpture_bytes": 523455,
+    "sculpture_polygons": 5376,
+    "en_html_bytes": 13053,
+    "he_css_bytes": 77918,
+    "en_css_bytes": 65511
+  }
+}

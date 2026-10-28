@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="he" dir="rtl" data-design="cobalt">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light dark" /><title>CarpedIO — מחשבון ממוצע ציונים</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/brand/favicon.svg" />
+  <link rel="stylesheet" href="styles/base.css" /><link rel="stylesheet" href="styles/cobalt.css" /><link rel="stylesheet" href="styles/grades.css" />
+  <link rel="stylesheet" href="styles/brand.css" />
+  <script src="scripts/brand-storage.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script>try { document.documentElement.dataset.theme = (globalThis.CarpedIOStorage?.read('carpedio-theme') ?? localStorage.getItem('carpedio-theme')) || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); } catch {}</script>
+</head>
+<body class="grades-page">
+  <a class="skip-link" href="#grade-workspace">דילוג למחשבון</a>
+  <header class="grade-header">
+    <a class="grade-brand" href="index.html" aria-label="CarpedIO — עמוד הבית"><i class="carpedio-symbol" aria-hidden="true"></i><b class="carpedio-wordmark" dir="ltr">Carped<span>IO</span></b><span class="brand-tagline">תכנון הלימודים שלך</span></a>
+    <nav aria-label="ניווט ראשי"><a href="index.html#planner">מערכת שעות</a><a href="grades.html" aria-current="page">מחשבון ציונים</a></nav>
+    <button class="secondary-button" id="grades-theme" type="button">החלפת מצב תצוגה</button>
+  </header>
+  <main id="grade-workspace">
+    <div class="grade-intro"><div><p class="grade-kicker">מחשבון ממוצע ציונים</p><h1>הציונים שלך.<br><span>היעד הבא שלך.</span></h1></div>
+      <p>מחשבים ממוצע לפי נק״ז, בודקים איך קורס עתידי ישפיע עליו ומגלים איזה ציון נדרש כדי להגיע ליעד.</p></div>
+    <div class="grade-toolbar">
+      <button class="primary-button" id="add-grade" type="button">הוספת ציון ידנית</button>
+      <label class="secondary-button grade-upload" for="grade-file">ייבוא ציונים מ־Excel<input class="visually-hidden" id="grade-file" type="file" accept=".xlsx" /></label>
+      <a class="text-button" href="/api/grades/template" download="grade-template.xlsx">הורדת תבנית Excel</a>
+      <button class="text-button" id="export-grades" type="button" disabled>ייצוא ל־Excel</button>
+    </div>
+    <div id="grade-notice" class="grade-notice" role="status" aria-live="polite" hidden></div>
+    <p id="grade-storage" class="grade-muted">הנתונים נשמרים אוטומטית בדפדפן הזה. קובץ Excel לייבוא ציונים נפרד מקובץ מערכת השעות.</p>
+    <div class="grade-stats" aria-live="polite">
+      <div class="grade-stat"><span>הממוצע הנוכחי</span><strong id="actual-average">—</strong><small>משוקלל לפי נקודות הזכות</small></div>
+      <div class="grade-stat"><span>נק״ז שנכללות בממוצע</span><strong id="actual-credits">0</strong><small id="actual-count">אין קורסים לחישוב</small></div>
+      <div class="grade-stat grade-stat-projected"><span>הממוצע בתרחיש העתידי</span><strong id="projected-average">—</strong><small id="projected-delta">הוסיפו קורס עתידי לסימולציה</small></div>
+    </div>
+    <div class="grade-layout">
+      <section class="grade-panel grade-ledger" aria-labelledby="actual-title">
+        <div class="grade-panel-heading"><h2 id="actual-title">הציונים שלי</h2><button id="clear-grades" class="text-button" type="button" disabled>ניקוי הרשימה</button></div>
+        <p class="grade-muted">סמנו אילו קורסים נכללים בממוצע. ציון 0 נכלל; פטור או קורס ללא ציון מספרי אינם נכללים.</p>
+        <label class="grade-filter">חיפוש לפי שם או קוד<input id="grade-filter" type="search" placeholder="חיפוש קורס" /></label>
+        <div class="grade-table-scroll"><table class="grade-table"><caption class="visually-hidden">קורסים וציונים נוכחיים</caption><thead><tr><th>בממוצע</th><th>קורס</th><th>נק״ז</th><th>ציון</th><th>פעולות</th></tr></thead><tbody id="actual-rows"></tbody></table></div>
+        <p id="actual-empty" class="grade-empty">עדיין אין ציונים. אפשר להוסיף קורס ידנית או לייבא קובץ Excel.</p>
+        <p id="grade-duplicates" class="grade-notice" hidden></p>
+        <div class="grade-formula"><span>איך מחשבים?</span><p>סכום המכפלות של ציון × נק״ז, חלקי סך הנק״ז שנכללות בחישוב.</p><small>החישוב משתמש בערכים המלאים. העיגול הוא לתצוגה בלבד.</small></div>
+      </section>
+      <div class="grade-scenarios">
+        <section class="grade-panel" aria-labelledby="future-title">
+          <div class="grade-panel-heading"><h2 id="future-title">קורסים עתידיים</h2><button id="add-future" class="secondary-button" type="button">הוספת קורס עתידי</button></div>
+          <p class="grade-muted">הציונים כאן הם הנחות לתכנון ואינם משנים את הציונים הקיימים.</p>
+          <div class="grade-table-scroll"><table class="grade-table"><caption class="visually-hidden">קורסים בתרחיש העתידי</caption><thead><tr><th>בתרחיש</th><th>קורס</th><th>נק״ז</th><th>ציון צפוי</th><th>פעולות</th></tr></thead><tbody id="planned-rows"></tbody></table></div>
+          <p id="future-empty" class="grade-empty">הוסיפו קורס אחד או כמה קורסים כדי לבדוק את ההשפעה על הממוצע.</p>
+        </section>
+        <section class="grade-panel grade-target-panel" aria-labelledby="target-title">
+          <div class="grade-panel-heading"><h2 id="target-title">לאיזה ממוצע להגיע?</h2><label class="grade-target-label">ממוצע יעד<input id="grade-target" type="number" min="0" max="100" step="0.01" value="85" required /></label></div>
+          <p id="target-result" class="grade-target-result" aria-live="polite">הוסיפו קורסים עתידיים לחישוב הציון הדרוש.</p>
+          <p id="target-detail" class="grade-muted"></p>
+          <p id="target-maximum" class="grade-muted"></p>
+        </section>
+      </div>
+    </div>
+    <div class="grade-analysis-grid">
+      <section class="grade-panel" aria-labelledby="impact-title">
+        <h2 id="impact-title">איך הציון ישנה את הממוצע?</h2>
+        <div id="impact-empty" class="grade-empty">הוסיפו קורס עתידי כדי להזיז את הציון ולראות את ההשפעה.</div>
+        <div id="impact-controls" hidden>
+          <label>קורס לבדיקה<select id="focus-course"></select></label>
+          <div class="grade-slider-label"><label for="scenario-grade">ציון צפוי</label><output id="scenario-value" for="scenario-grade"></output></div>
+          <input id="scenario-grade" type="range" min="0" max="100" step="1" value="85" />
+          <div class="grade-range-labels"><span>0</span><span>100</span></div>
+          <div id="impact-chart"></div>
+          <p id="focus-target" class="grade-target-result" aria-live="polite"></p>
+          <p class="grade-muted">שאר הקורסים העתידיים נשארים בציונים הצפויים שהזנת. ציר הממוצע מותאם לטווח השינוי. הקו המקווקו, אם מוצג, מסמן את ממוצע היעד.</p>
+        </div>
+      </section>
+      <section class="grade-panel" aria-labelledby="retake-title">
+        <h2 id="retake-title">ומה אם אשפר ציון?</h2><p class="grade-muted">סימולציה על הממוצע הנוכחי, ללא הקורסים העתידיים וללא תוספת נק״ז.</p>
+        <p id="retake-empty" class="grade-empty">לאחר הוספת ציונים אפשר לבדוק שיפור בקורס קיים.</p>
+        <div id="retake-controls" hidden>
+          <label>קורס לשיפור<select id="retake-course"></select></label>
+          <div class="grade-two-fields"><label>ציון חדש<input id="retake-grade" type="number" min="0" max="100" step="0.1" value="90" /></label>
+            <label>איך מחליפים את הציון?<select id="retake-policy"><option value="replace">הציון החדש מחליף את הישן</option><option value="highest">הגבוה מבין שני הציונים</option></select></label></div>
+          <p id="retake-result" class="grade-target-result" aria-live="polite"></p>
+          <p class="grade-muted">בחרו את הכלל שמתאים למוסד שלכם. השינוי כאן הוא לצורך בדיקה בלבד.</p>
+        </div>
+      </section>
+    </div>
+    <div class="grade-undo" id="grade-undo-bar" hidden><span>הרשימה עודכנה.</span><button id="undo-grades" class="secondary-button" type="button">ביטול השינוי האחרון</button></div>
+    <footer class="grade-footer">סולם ציונים 0–100 · נק״ז במשקל יחסי · הכללת קורסים לפי הבחירה שלך</footer>
+  </main>
+
+  <dialog id="grade-editor" aria-labelledby="grade-editor-title">
+    <div class="grade-panel-heading"><h2 id="grade-editor-title">הוספת ציון</h2><button id="close-grade-editor" class="text-button" type="button">סגירה</button></div>
+    <form id="grade-record-form">
+      <label>שם הקורס<input name="name" required maxlength="200" /></label>
+      <label>קוד קורס (אופציונלי)<input name="code" maxlength="80" dir="ltr" /></label>
+      <div class="grade-two-fields"><label>נק״ז<input name="credits" type="number" min="0" max="1000" step="any" required /></label><label><span id="editor-grade-label">ציון</span><input name="grade" type="number" min="0" max="100" step="any" /></label></div>
+      <label class="grade-check"><input name="included" type="checkbox" checked /><span id="editor-included-label">נכלל בממוצע</span></label>
+      <p class="grade-muted" id="editor-grade-help">לפטור או לקורס ללא ציון מספרי, השאירו את הציון ריק והסירו את הסימון.</p>
+      <p id="grade-editor-error" class="grade-error" role="alert" hidden></p>
+      <button class="primary-button" type="submit">שמירת הקורס</button>
+    </form>
+  </dialog>
+  <dialog id="grade-import-dialog" aria-labelledby="grade-import-title">
+    <div class="grade-panel-heading"><h2 id="grade-import-title">בדיקת קובץ הציונים</h2><button id="close-grade-import" class="text-button" type="button">סגירה</button></div>
+    <p class="grade-muted" id="grade-import-file"></p>
+    <div class="grade-import-options">
+      <label>גיליון<select id="import-sheet"></select></label><label>שורת כותרות<select id="import-header"></select></label>
+      <label>לאן לייבא?<select id="import-destination"><option value="actual">ציונים קיימים</option><option value="planned">תרחיש עתידי</option></select></label>
+      <label>אופן הייבוא<select id="import-mode"><option value="append">הוספה לרשימה</option><option value="replace">החלפת הרשימה</option></select></label>
+    </div>
+    <h3>התאמת העמודות</h3><div id="import-mapping" class="grade-import-options"></div>
+    <p class="grade-muted">בחרו את השורות לייבוא. קורסים ללא ציון מספרי יוצעו כלא נכללים בממוצע. נוסחאות נקראות לפי הערכים שנשמרו ב־Excel.</p>
+    <div class="grade-import-actions"><label class="grade-check"><input id="import-select-all" type="checkbox" checked />בחירת כל השורות</label><button id="exclude-import-errors" class="text-button" type="button">ביטול בחירת שורות שגויות</button></div>
+    <p id="import-status" role="status" aria-live="polite"></p>
+    <div class="grade-table-scroll grade-preview"><table class="grade-table"><caption class="visually-hidden">תצוגה מקדימה של הייבוא</caption><thead><tr><th>לייבא</th><th>שורה</th><th>קורס</th><th>נק״ז</th><th>ציון</th><th>מצב</th></tr></thead><tbody id="import-preview"></tbody></table></div>
+    <p id="import-error" class="grade-error" role="alert" hidden></p>
+    <button id="commit-import" class="primary-button" type="button" disabled>ייבוא השורות שנבחרו</button>
+  </dialog>
+  <noscript><p>יש להפעיל JavaScript כדי להשתמש במחשבון.</p></noscript>
+  <script type="module" src="scripts/grades.js"></script>
+</body></html>

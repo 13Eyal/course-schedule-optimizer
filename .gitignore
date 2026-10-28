@@ -1,0 +1,16 @@
+__pycache__/
+.runtime/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.coverage
+htmlcov/
+node_modules/
+*.log
+.env
+.env.*
+!.env.example
+
+# Local scratch output
+tmp/

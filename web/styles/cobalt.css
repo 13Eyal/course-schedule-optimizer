@@ -1,0 +1,277 @@
+/* Cobalt: the supplied watercolor behind rounded, color-preserving glass. */
+html[data-design="cobalt"] {
+  --radius: 24px;
+  --focus: #002fa7;
+  --line: rgba(0, 47, 167, .18);
+  --glass: rgba(255, 255, 255, .76);
+  --cobalt-glass: rgba(255, 255, 255, .62);
+  --cobalt-glass-strong: rgba(255, 255, 255, .82);
+  --cobalt-soft-glass: rgba(247, 247, 248, .68);
+  --cobalt-blue-glass: rgba(231, 237, 249, .78);
+  --cobalt-glass-edge: rgba(255, 255, 255, .78);
+  --cobalt-background-wash: rgba(255, 255, 255, .12);
+  --shadow: 0 12px 34px rgba(16, 46, 75, .08),
+    inset 0 1px 0 var(--cobalt-glass-edge);
+  --float-shadow: 0 24px 64px rgba(16, 46, 75, .16);
+}
+
+html[data-design="cobalt"][data-theme="dark"] {
+  --focus: #9ab8ff;
+  --line: rgba(154, 184, 255, .25);
+  --glass: rgba(27, 31, 41, .86);
+  --cobalt-glass: rgba(27, 31, 41, .78);
+  --cobalt-glass-strong: rgba(27, 31, 41, .94);
+  --cobalt-soft-glass: rgba(37, 43, 57, .82);
+  --cobalt-blue-glass: rgba(41, 57, 88, .88);
+  --cobalt-glass-edge: rgba(255, 255, 255, .15);
+  --cobalt-background-wash: rgba(10, 21, 35, .48);
+  --shadow: 0 12px 34px rgba(7, 17, 30, .18),
+    inset 0 1px 0 var(--cobalt-glass-edge);
+}
+
+html[data-design="cobalt"] body {
+  position: relative;
+  isolation: isolate;
+  background: var(--bg);
+}
+
+/* A fixed layer avoids background-attachment's mobile scrolling problems. */
+html[data-design="cobalt"] body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(var(--cobalt-background-wash), var(--cobalt-background-wash)),
+    url("../../assets/design/sand-sea-watercolor-texture-background.jpg") center / cover no-repeat;
+}
+
+.local-launch { display: none; }
+html[data-launch="file"] body > :not(.local-launch) { display: none !important; }
+html[data-launch="file"] body { min-height: 100vh; padding: clamp(24px, 7vh, 80px) 20px; }
+html[data-launch="file"] .local-launch {
+  display: grid;
+  gap: 22px;
+  width: min(100%, 620px);
+  margin: auto;
+  padding: clamp(24px, 5vw, 48px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--cobalt-glass-strong);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  box-shadow: var(--shadow);
+  line-height: 1.8;
+}
+.local-launch img { object-fit: contain; }
+.local-launch h1 { margin: 0; font-size: clamp(26px, 5vw, 38px); line-height: 1.3; letter-spacing: -.03em; }
+.local-launch p { margin: 0; }
+.local-launch ol { margin: 0; padding-inline-start: 24px; }
+.local-launch li + li { margin-top: 12px; }
+.local-launch strong { display: inline-block; padding: 2px 10px; background: var(--cobalt-blue-glass); border-radius: 8px; }
+.local-launch-note { color: var(--muted); font-size: 14px; }
+
+html[data-design="cobalt"] :is(
+  .site-header, .header-nav, .hero-copy,
+  .editorial-heading, .workspace-heading, .planner-steps,
+  .planner-actionbar, .panel, .metric, .alternative, .rhythm-card,
+  .approach-section, .site-footer, dialog
+) {
+  background: var(--cobalt-glass);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  -webkit-backdrop-filter: blur(22px) saturate(115%);
+  backdrop-filter: blur(22px) saturate(115%);
+  box-shadow: var(--shadow);
+}
+
+html[data-design="cobalt"] .site-header {
+  margin: 16px var(--page-gutter) 12px;
+  padding-inline: 24px;
+  background: var(--glass);
+}
+
+html[data-design="cobalt"] .header-nav {
+  background: var(--cobalt-glass-strong);
+}
+
+
+html[data-design="cobalt"] .hero-copy {
+  padding: clamp(24px, 3vw, 48px);
+}
+
+html[data-design="cobalt"] :is(.hero-topline, .hero-bottom) {
+  padding: 10px 18px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+}
+
+html[data-design="cobalt"] .hero-topline { top: 8px; }
+html[data-design="cobalt"] .hero-bottom { bottom: 0; }
+
+html[data-design="cobalt"] :is(.material-plane, .parallax-orb) {
+  border-radius: 32px;
+}
+
+html[data-design="cobalt"] .material-plane {
+  background: var(--cobalt-blue-glass);
+  border: 1px solid var(--cobalt-glass-edge);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+  box-shadow: var(--float-shadow);
+}
+
+html[data-design="cobalt"] .orb-sky { opacity: .45; }
+
+html[data-design="cobalt"] .orb-paper.carpedio-emblem {
+  border-radius: 26px;
+  background: var(--cobalt-glass);
+  border: 1px solid var(--cobalt-glass-edge);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  box-shadow: var(--shadow);
+}
+
+html[data-design="cobalt"] .has-artwork > .hero-week-preview:not([hidden]) {
+  background: var(--cobalt-glass-strong);
+  border-radius: var(--radius);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+}
+
+html[data-design="cobalt"] :is(.editorial-heading, .workspace-heading) {
+  padding: 26px 30px;
+}
+
+html[data-design="cobalt"] .planner-steps { padding: 17px 22px; }
+html[data-design="cobalt"] .planner-section { border-top: 0; }
+
+html[data-design="cobalt"] .rhythm-card {
+  background: color-mix(in srgb, var(--card-one) 76%, transparent);
+}
+
+html[data-design="cobalt"] .rhythm-morning {
+  background: color-mix(in srgb, var(--card-two) 76%, transparent);
+}
+
+html[data-design="cobalt"] .rhythm-flow {
+  background: color-mix(in srgb, var(--card-three) 76%, transparent);
+}
+
+html[data-design="cobalt"] :is(.metric:first-child, .alternative[aria-pressed="true"]) {
+  background: var(--cobalt-blue-glass);
+}
+
+html[data-design="cobalt"] .calendar-panel {
+  background: var(--glass);
+}
+
+html[data-design="cobalt"] :is(.upload-zone, .course-search input, input[type="time"], .view-switch) {
+  background: var(--cobalt-soft-glass);
+  border-radius: 14px;
+}
+
+html[data-design="cobalt"] :is(.primary-button, .secondary-button, .hero-cta, .menu-toggle) {
+  border-radius: 16px;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .2);
+}
+
+html[data-design="cobalt"] :is(.primary-button, .hero-cta) {
+  background: color-mix(in srgb, var(--button) 92%, transparent);
+}
+
+html[data-design="cobalt"] :is(.primary-button, .hero-cta):hover:not(:disabled) {
+  background: color-mix(in srgb, var(--button-hover) 96%, transparent);
+}
+
+html[data-design="cobalt"] :is(.secondary-button, .menu-toggle, .icon-button, .result-status) {
+  background: var(--cobalt-soft-glass);
+}
+
+html[data-design="cobalt"] :is(.session, .agenda-session) {
+  border-radius: 12px;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: inset 0 1px 0 var(--cobalt-glass-edge), 0 3px 10px rgba(16, 46, 75, .06);
+}
+
+html[data-design="cobalt"] .session {
+  background: color-mix(in srgb, var(--event-bg) 88%, transparent);
+}
+
+html[data-design="cobalt"] .agenda-session {
+  background: color-mix(in srgb, var(--agenda-color) 88%, transparent);
+}
+
+/* Text outside cards also gets a readable surface over the deep-water area. */
+html[data-design="cobalt"] :is(
+  .results-topline, .week-insight, .alternatives-heading, .result-explanation
+) {
+  padding: 14px 18px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+}
+
+html[data-design="cobalt"] :is(.approach-section, .site-footer) {
+  margin: 24px var(--page-gutter);
+  padding-inline: 32px;
+}
+
+html[data-design="cobalt"] .site-footer {
+  background: var(--cobalt-blue-glass);
+}
+
+html[data-design="cobalt"] dialog { background: var(--cobalt-glass-strong); }
+html[data-design="cobalt"] dialog::backdrop { background: rgba(17, 35, 58, .35); }
+html[data-design="cobalt"] :is(.notice, .stale-results) {
+  border-radius: 16px;
+  background: var(--cobalt-blue-glass);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+}
+html[data-design="cobalt"] .notice.error {
+  background: color-mix(in srgb, var(--error-bg) 90%, transparent);
+}
+
+
+/* Preserve contrast when backdrop blur is unavailable. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  html[data-design="cobalt"] {
+    --cobalt-glass: var(--surface);
+    --cobalt-glass-strong: var(--surface);
+    --cobalt-soft-glass: var(--surface-soft);
+    --cobalt-blue-glass: var(--accent-soft);
+    --glass: var(--surface);
+  }
+}
+
+@media (max-width: 680px) {
+  html[data-design="cobalt"] { --radius: 20px; }
+  html[data-design="cobalt"] .site-header { margin-top: 10px; padding-inline: 12px; }
+  html[data-design="cobalt"] .header-nav { inset-inline: 0; width: 100%; }
+  html[data-design="cobalt"] .hero { padding-top: 76px; padding-bottom: 70px; }
+  html[data-design="cobalt"] .hero-copy { padding: 24px 20px; }
+  html[data-design="cobalt"] h1 { font-size: clamp(40px, 10.5vw, 66px); }
+  html[data-design="cobalt"] :is(.editorial-heading, .workspace-heading) { padding: 22px 18px; }
+  html[data-design="cobalt"] .planner-steps { padding-inline: 12px; }
+  html[data-design="cobalt"] :is(.approach-section, .site-footer) { padding-inline: 22px; }
+}
+
+@media print {
+  html[data-design="cobalt"] body::before { display: none; }
+  html[data-design="cobalt"] {
+    --cobalt-glass: #fff;
+    --cobalt-glass-strong: #fff;
+    --cobalt-blue-glass: #e7edf9;
+    --glass: #fff;
+  }
+}

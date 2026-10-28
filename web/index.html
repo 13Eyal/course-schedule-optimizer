@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="he" dir="rtl" data-design="cobalt">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta
+      name="description"
+      content="מערכת שעות שמתאימה לקצב שלך. בחירת קורסים, התאמה אישית והשוואת חלופות."
+    />
+    <title>CarpedIO — מערכת שעות בדרך שלך</title>
+    <link rel="icon" type="image/svg+xml" href="../assets/brand/favicon.svg" />
+    <script src="scripts/brand-storage.js"></script>
+    <script>
+      if (location.protocol === "file:") {
+        document.documentElement.dataset.launch = "file";
+      }
+      // Apply before first paint; storage can be unavailable in private contexts.
+      try {
+        const saved = globalThis.CarpedIOStorage?.read("carpedio-theme") ?? localStorage.getItem("carpedio-theme");
+        document.documentElement.dataset.theme = ["dark", "light"].includes(
+          saved,
+        )
+          ? saved
+          : matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light";
+      } catch {
+        document.documentElement.dataset.theme = matchMedia(
+          "(prefers-color-scheme: dark)",
+        ).matches
+          ? "dark"
+          : "light";
+      }
+    </script>
+    <link rel="stylesheet" href="styles/base.css" />
+    <link rel="stylesheet" href="styles/layout.css" />
+    <link rel="stylesheet" href="styles/planner.css" />
+    <link rel="stylesheet" href="styles/cobalt.css" />
+    <link rel="stylesheet" href="styles/brand.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Hebrew:wght@400;500&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <section class="local-launch" aria-labelledby="local-launch-title">
+      <img src="../assets/brand/carpedio-symbol.svg" width="64" height="64" alt="CarpedIO" />
+      <h1 id="local-launch-title">עוד רגע, מתחילים לתכנן.</h1>
+      <p>כדי לטעון את הקורסים ולחשב מערכות שעות, צריך לפתוח את האתר דרך קובץ ההפעלה.</p>
+      <ol>
+        <li>חזור לתיקיית הפרויקט <b dir="ltr">course-schedule-optimizer</b>.</li>
+        <li>לחץ פעמיים על <strong dir="ltr">start.bat</strong>.</li>
+      </ol>
+      <p class="local-launch-note">האתר ייפתח אוטומטית בדפדפן. אין צורך לפתוח את קובץ ה־HTML בנפרד.</p>
+    </section>
+    <a class="skip-link" href="#workspace">דילוג לתכנון המערכת</a>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="CarpedIO — עמוד הבית">
+        <span class="carpedio-symbol" aria-hidden="true"></span>
+        <span class="brand-copy"><strong class="carpedio-wordmark" dir="ltr">Carped<span>IO</span></strong><span>מערכת שעות בדרך שלך</span></span>
+      </a>
+      <nav class="header-nav" aria-label="ניווט ראשי">
+        <a href="#planner">מרחב התכנון</a>
+        <a href="grades.html">מחשבון ציונים</a>
+        <a href="#rhythms">הקצב שלך</a>
+        <a href="#approach">איך זה עובד</a>
+      </nav>
+      <div class="header-actions">
+        <button class="motion-toggle text-button" id="motion-toggle" type="button" aria-pressed="false" aria-label="עצירת אפקטי תנועה"><span aria-hidden="true">Ⅱ</span><span class="motion-label">תנועה</span></button>
+        <span class="header-divider" aria-hidden="true"></span>
+        <button
+          class="icon-button theme-toggle"
+          id="theme-toggle"
+          type="button"
+          aria-label="הפעלת מצב כהה"
+          aria-pressed="false"
+        >
+          <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M20.7 13.2A8.7 8.7 0 0 1 10.8 3.3 8.8 8.8 0 1 0 20.7 13.2Z"
+            />
+          </svg>
+          <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" />
+            <path
+              d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"
+            />
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <main class="page-shell">
+<section class="hero" aria-labelledby="page-title">
+  <div class="hero-topline"><span class="eyebrow"><span class="status-dot"></span> מערכת שעות אישית</span><span class="edition" dir="ltr">CarpedIO</span></div>
+  <div class="hero-copy">
+    <p class="hero-kicker">הקורסים שלך. בקצב שלך.</p>
+    <h1 id="page-title"><span class="title-line">כל האפשרויות.</span><span class="title-line title-accent">תמונה ברורה.</span></h1>
+    <p class="hero-description">הקורסים שלך. ההעדפות שלך.<br>מערכת שעות שמשאירה מקום לחיים.</p>
+    <a class="hero-secondary" href="grades.html">למחשבון ממוצע הציונים</a>
+    <div class="hero-actions"><a class="hero-cta" href="#planner"><span>לתכנן את השבוע שלי</span><span class="circle-arrow" aria-hidden="true">↙</span></a><a class="hero-secondary" href="#rhythms">למצוא את הקצב שלי <span aria-hidden="true">↓</span></a></div>
+  </div>
+  <div class="hero-art has-artwork">
+    <div class="hero-artwork" aria-hidden="true">
+      <div class="material-plane"></div>
+      <div class="parallax-orb">
+        <div class="orb-sky"></div>
+        <div class="orb-paper carpedio-emblem"><span class="carpedio-symbol"></span></div>
+      </div>
+      <div class="art-label">CarpedIO / זמן לתכנן</div>
+    </div>
+  </div>
+  <div class="hero-bottom"><span>נבנה סביב החיים שלך.</span><a href="#planner" class="scroll-cue"><span>מגלים את האפשרויות</span><span aria-hidden="true">↓</span></a><span dir="ltr">LESS FRICTION. MORE FLOW.</span></div>
+</section>
+
+<section class="rhythms-section" id="rhythms" aria-labelledby="rhythms-title">
+  <div class="editorial-heading reveal"><span class="eyebrow">01 / FIND YOUR RHYTHM</span><h2 id="rhythms-title">אין שבוע מושלם.<br><span>יש שבוע שמתאים לך.</span></h2><p>בוחרים נקודת פתיחה.<br>את הפרטים הקטנים מכוונים בהמשך.</p></div>
+  <div class="rhythm-grid">
+    <button class="rhythm-card rhythm-compact reveal" type="button" data-preset="compact" aria-pressed="false"><span class="rhythm-top"><span dir="ltr">01 / LESS COMMUTING</span><span class="card-arrow" aria-hidden="true">↙</span></span><span class="rhythm-art" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span class="rhythm-title">פחות נסיעות.</span><span class="rhythm-description">מרכזים את הלימודים. מפנים ימים שלמים.</span><span class="rhythm-action">בחירת הקצב שלי <span aria-hidden="true">←</span></span></button>
+    <button class="rhythm-card rhythm-morning reveal" type="button" data-preset="morning" aria-pressed="false"><span class="rhythm-top"><span dir="ltr">02 / SLOW MORNINGS</span><span class="card-arrow" aria-hidden="true">↙</span></span><span class="rhythm-art" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span class="rhythm-title">בוקר בקצב שלך.</span><span class="rhythm-description">עוד קפה אחד. מתחילים קצת יותר מאוחר.</span><span class="rhythm-action">בחירת הקצב שלי <span aria-hidden="true">←</span></span></button>
+    <button class="rhythm-card rhythm-flow reveal" type="button" data-preset="flow" aria-pressed="false"><span class="rhythm-top"><span dir="ltr">03 / IN THE FLOW</span><span class="card-arrow" aria-hidden="true">↙</span></span><span class="rhythm-art" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><span class="rhythm-title">נכנסים לרצף.</span><span class="rhythm-description">פחות חלונות. יותר זמן שעובד בשבילך.</span><span class="rhythm-action">בחירת הקצב שלי <span aria-hidden="true">←</span></span></button>
+  </div>
+</section>
+
+<section class="planner-section" id="planner" aria-labelledby="workspace-title">
+<div class="workspace-heading reveal">
+  <div><span class="eyebrow">02 / YOUR PERSONAL STUDIO</span><h2 id="workspace-title">נותנים לשבוע <span>צורה.</span></h2></div>
+  <p>בוחרים קורסים, מגדירים מה חשוב.<br>אנחנו נמצא את החיבורים.</p>
+</div>
+<nav class="planner-steps" aria-label="שלבי התכנון"><a href="#course-panel"><span>01</span> הקורסים שלך</a><a href="#preferences-form"><span>02</span> ההעדפות שלך</a><a href="#results"><span>03</span> השבוע שלך</a></nav>
+
+      <div
+        id="notice"
+        class="notice"
+        role="status"
+        aria-live="polite"
+        hidden
+      ></div>
+      <div
+        id="workspace"
+        class="workspace"
+        tabindex="-1"
+        aria-labelledby="workspace-title"
+      >
+        <aside class="sidebar" aria-label="הגדרות מערכת השעות">
+          <section class="panel course-panel" id="course-panel">
+            <div class="panel-heading">
+              <h3>הקורסים שלך</h3>
+              <span id="course-count" class="count-badge">0</span>
+            </div>
+            <p class="section-description" id="source-label">
+              טוענים את קובץ הדוגמה…
+            </p>
+            <label class="upload-zone" id="upload-zone" for="course-file">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 16V3m-4 4 4-4 4 4M4 15v5h16v-5" />
+              </svg>
+              <span
+                ><strong>העלאת קובץ קורסים</strong
+                ><small>Excel · עד 5 MB · אפשר גם לגרור לכאן</small></span
+              >
+              <input
+                class="visually-hidden"
+                id="course-file"
+                type="file"
+                accept=".xlsx"
+              />
+            </label>
+            <button class="secondary-button manual-course-trigger" id="add-course" type="button" aria-haspopup="dialog">הוספת קורס ידנית</button>
+            <div class="course-tools">
+              <button class="text-button" id="select-all" type="button">
+                בחירת הכול</button
+              ><button class="text-button" id="load-sample" type="button">
+                טעינת דוגמה
+              </button>
+            </div>
+            <div
+              id="course-list"
+              class="course-list"
+              aria-label="קורסים לבחירה"
+            ></div>
+            <div class="course-total">
+              <span>סך נקודות זכות</span><strong id="credits-total">—</strong>
+            </div>
+            <details class="file-format">
+              <summary>מה צריך להיות בקובץ?</summary>
+              <p>כל שורה מתארת מפגש בקבוצה. העמודות הנדרשות:</p>
+              <p dir="ltr">
+                CourseID, Name, Credits, Type, Group, Lecturer, Day, Start, End,
+                Mandatory, Priority
+              </p>
+              <p>
+                סוג: lecture / tutorial / lab. יום: Sunday–Thursday או
+                ראשון–חמישי. שעות: HH:MM. חובה: yes / no. עדיפות: low / medium /
+                high.
+              </p>
+              <a href="/sample.xlsx" download="courses_sample.xlsx"
+                >הורדת קובץ לדוגמה ↙</a
+              >
+            </details>
+          </section>
+
+          <form id="preferences-form" class="panel preferences-panel">
+            <fieldset id="preferences-fields">
+              <div class="panel-heading">
+                <h3>מה חשוב לך?</h3>
+                <button
+                  id="reset-preferences"
+                  class="text-button"
+                  type="button"
+                >
+                  איפוס
+                </button>
+              </div>
+              <p class="section-description" id="preset-status">כוונון קטן. שבוע שמתאים יותר.</p>
+              <div class="time-preference">
+                <label for="preferred-start">מתחילים את היום מ־</label
+                ><input
+                  id="preferred-start"
+                  name="preferred_start"
+                  type="time"
+                  value="08:30"
+                  required
+                />
+              </div>
+              <div id="weight-controls" class="weight-controls"></div>
+              <div class="range-hint">
+                <span>פחות חשוב</span><span>חשוב מאוד</span>
+              </div>
+              <div id="search-controls"></div>
+              <button id="generate" class="primary-button" type="submit">
+                <span id="generate-label">מציאת המערכת שלי</span
+                ><span class="button-arrow" aria-hidden="true">←</span>
+              </button>
+            </fieldset>
+            <button id="cancel-search" class="text-button" type="button" hidden>ביטול החיפוש</button>
+            <button id="continue-search" class="text-button" type="button" hidden>חיפוש נוסף עם יותר זמן</button>
+            <p class="privacy-note">
+              הקובץ מעובד בשרת המקומי ואינו נשמר בדיסק.
+            </p>
+          </form>
+        </aside>
+
+        <section
+          class="results" id="results" tabindex="-1"
+          aria-label="תוצאות האופטימיזציה"
+          aria-busy="false"
+        >
+          <div class="results-topline">
+            <span class="eyebrow">השבוע, בתמונה אחת</span
+            ><span id="result-status" class="result-status"
+              >ממתינים לנתונים</span
+            >
+          </div>
+          <div class="metrics" id="metrics">
+            <div class="metric">
+              <span>התאמה להעדפות</span><strong id="metric-score">—</strong
+              ><small>לפי היעדים והמשקלים שבחרת</small>
+            </div>
+            <div class="metric">
+              <span>ימי לימוד</span><strong id="metric-days">—</strong
+              ><small id="metric-free">מתוך 5 ימים בשבוע</small>
+            </div>
+            <div class="metric">
+              <span>חלונות במערכת</span><strong id="metric-gaps">—</strong
+              ><small>סך ההמתנה בין מפגשים</small>
+            </div>
+          </div>
+          <section
+            class="panel calendar-panel"
+            aria-labelledby="calendar-title"
+          >
+            <div class="calendar-toolbar">
+              <div>
+                <p class="eyebrow small">YOUR WEEK, REFINED</p>
+                <h3 id="calendar-title">מערכת שבועית</h3>
+              </div>
+              <button
+                id="export"
+                class="secondary-button"
+                type="button"
+                disabled
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 3v12m-4-4 4 4 4-4M4 16v5h16v-5" /></svg
+                >ייצוא CSV
+              </button>
+            </div>
+            <div id="empty-state" class="empty-state">
+              <span class="empty-symbol" aria-hidden="true">▦</span>
+              <h4>מקום לשבוע טוב יותר.</h4>
+              <p>בחרו קורסים והעדפות כדי למצוא את המערכת שלכם.</p>
+            </div>
+            <div
+              id="calendar-scroll"
+              class="calendar-scroll"
+              role="region"
+              aria-label="לוח שבועי; במסך קטן ניתן לגלול אופקית"
+              tabindex="0"
+              hidden
+            >
+              <p class="calendar-mobile-hint">לכל חמשת הימים, גללו את הלוח לצדדים ↔</p>
+              <div id="calendar" class="calendar"></div>
+            </div>
+            <div class="calendar-footer">
+              <span
+                ><i class="status-dot"></i>
+                <span id="calendar-caption">לוח שבועי אישי</span></span
+              ><span>ראשון — חמישי</span>
+            </div>
+          </section>
+          <section
+            class="alternatives-section"
+            aria-labelledby="alternatives-title"
+          >
+            <div class="alternatives-heading">
+              <h3 id="alternatives-title">עוד דרכים לסדר את השבוע</h3>
+              <span id="alternatives-count" class="quiet"
+                >החלופות יופיעו כאן</span
+              >
+            </div>
+            <div id="alternatives" class="alternatives"></div>
+            <button
+              id="more-results"
+              class="text-button more-results"
+              type="button"
+              hidden
+            >
+              הצגת חלופות נוספות ↓
+            </button>
+          </section>
+          <div class="schedule-kind" role="group" aria-label="סוג המערכת">
+            <button type="button" class="text-button" id="attendance-view" aria-pressed="true">הגעה בפועל</button>
+            <button type="button" class="text-button" id="registration-view" aria-pressed="false">מערכת לרישום</button>
+          </div>
+          <p class="result-explanation" id="result-explanation">
+            העדיפות שלך היא נקודת ההתחלה. אפשר לשנות את המשקלים ולגלות אפשרויות
+            נוספות.
+          </p>
+        </section>
+      </div>
+</section>
+<section class="approach-section" id="approach" aria-labelledby="approach-title">
+  <div class="approach-title reveal"><span class="eyebrow">03 / CONSIDERED, NOT COMPLICATED</span><h2 id="approach-title">מאחורי שבוע טוב,<br><span>יש מחשבה.</span></h2><button class="secondary-button" id="help-button" type="button">מבט מקרוב על התהליך <span aria-hidden="true">↗</span></button></div>
+  <div class="approach-list">
+    <article class="approach-item reveal"><span class="approach-number">01</span><div><h3>כל האפשרויות. תמונה אחת.</h3><p>המנוע משלב קבוצות לפי קשרי הרישום והזמנים הפנויים, ומוודא שתוכנית ההגעה אינה כוללת התנגשויות.</p></div></article>
+    <article class="approach-item reveal"><span class="approach-number">02</span><div><h3>ההעדפות שלך קובעות.</h3><p>חמישה משקלים מדרגים את האפשרויות: ימי לימוד, חלונות, התחלה מאוחרת, עדיפות לקבוצות ואורך היום.</p></div></article>
+    <article class="approach-item reveal"><span class="approach-number">03</span><div><h3>משווים. מרגישים. בוחרים.</h3><p>עוברים בין חלופות, רואים את ההבדל בלוח ומייצאים את המערכת שמתאימה לחיים שלך.</p></div></article>
+  </div>
+</section>
+<footer class="site-footer">
+  <div class="footer-top"><p>כל מה שצריך ללמוד.<br><span>וכל מה שרוצים לחיות.</span></p><a href="#planner" class="footer-cta" aria-label="חזרה למרחב התכנון">↖</a></div>
+  <div class="footer-wordmark" aria-hidden="true"><i class="carpedio-symbol"></i><b class="carpedio-wordmark">Carped<span>IO</span></b></div>
+  <div class="footer-bottom"><span>CarpedIO · תכנון מערכת שעות אישית</span><a href="#page-title">בחזרה למעלה ↑</a><span>זמן. בצורה אחרת.</span></div>
+</footer>
+    </main>
+
+    <dialog id="manual-course-dialog" aria-labelledby="manual-course-title" aria-describedby="manual-course-description">
+      <div class="manual-course-heading">
+        <div><h2 id="manual-course-title">הוספת קורס ידנית</h2>
+          <p id="manual-course-description">מוסיפים את פרטי הקורס, את הקבוצות ואת המפגשים של כל קבוצה.</p></div>
+        <button class="text-button" id="close-manual-course" type="button">סגירה</button>
+      </div>
+      <form id="manual-course-form">
+        <fieldset id="manual-course-fields">
+          <div class="manual-course-meta manual-fields">
+            <label>שם הקורס<input name="course_name" required maxlength="200" autocomplete="off" /></label>
+            <label>מספר קורס<input name="course_id" required maxlength="80" dir="ltr" autocomplete="off" /></label>
+            <label>נקודות זכות<input name="credits" type="number" min="0" step="any" required inputmode="decimal" /></label>
+          </div>
+          <div class="manual-section-heading"><h3>קבוצות ומפגשים</h3><button id="add-manual-group" class="secondary-button" type="button">הוספת קבוצה</button></div>
+          <p class="manual-hint">מוסיפים קבוצה נפרדת לכל הרצאה, תרגול או מעבדה שאפשר להירשם אליהם. בתוך הקבוצה מוסיפים את כל מפגשיה השבועיים.</p>
+          <div id="manual-groups"></div>
+          <p class="manual-hint">לקורס עם כמה סוגי מפגשים, משלימים את השילובים המותרים ב״יעדים, זמינות וקשרי רישום״ לאחר ההוספה.</p>
+        </fieldset>
+        <p id="manual-course-error" class="manual-error" role="alert" hidden></p>
+        <div class="manual-course-actions">
+          <p>הקורס יצורף לרשימה וייבחר לתכנון. הנתונים זמניים ואינם נשמרים לאחר רענון הדף.</p>
+          <button id="save-manual-course" class="primary-button" type="submit">הוספת הקורס לרשימה</button>
+        </div>
+      </form>
+    </dialog>
+    <dialog id="detail-dialog" aria-labelledby="dialog-title">
+      <div class="dialog-top">
+        <span class="eyebrow">CarpedIO / פרטי המפגש</span
+        ><button
+          id="close-dialog"
+          class="icon-button"
+          type="button"
+          aria-label="סגירת החלון"
+        >
+          ×
+        </button>
+      </div>
+      <h2 id="dialog-title"></h2>
+      <div id="dialog-content"></div>
+    </dialog>
+    <noscript
+      ><p class="notice">
+        יש להפעיל JavaScript בדפדפן כדי להשתמש במערכת.
+      </p></noscript
+    >
+    <script>
+      // File previews show launch instructions; the application needs its local API.
+      if (location.protocol !== "file:") {
+        const appScript = document.createElement("script");
+        appScript.type = "module";
+        appScript.src = "scripts/app.js";
+        document.body.append(appScript);
+      }
+    </script>
+  </body>
+</html>
+
