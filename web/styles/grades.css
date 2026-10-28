@@ -99,7 +99,7 @@
 .grades-page main {width:auto;margin-inline:var(--gutter)}
 .grade-header {position:sticky;top:12px;z-index:40;width:auto;height:60px;margin:12px var(--gutter) 0;padding:0 10px 0 14px;gap:24px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
 .grade-brand {align-items:center;gap:8px;font-size:inherit;color:var(--ink)}
-.grade-brand .carpedio-symbol {width:28px;height:28px}
+.grade-brand .carpedio-symbol {width:34px;height:34px}
 .grade-brand .carpedio-wordmark {font-size:22px}
 .grade-brand .brand-tagline {display:none}
 .grade-header nav {gap:4px;margin-inline-end:auto}
@@ -120,8 +120,8 @@
 .grade-stat>span {font-size:14px;color:var(--muted)}
 .grade-stat strong {margin:8px 0 2px;font:300 clamp(40px,3.8vw,56px)/1 var(--sans);letter-spacing:-.035em;text-align:start}
 .grade-stat small {font-size:13px;color:var(--faint)}
-.grade-stat-projected {background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
-.grade-stat-projected strong,.grade-stat-projected>span {color:var(--on-accent)}
+.grade-stat-projected {background:var(--field);border-color:var(--field);color:var(--on-field)}
+.grade-stat-projected strong,.grade-stat-projected>span {color:var(--on-field)}
 .grade-stat-projected small {color:var(--on-field-soft)}
 .grade-layout,.grade-analysis-grid,.grade-scenarios {gap:12px}
 .grade-analysis-grid {margin-top:12px}
