@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="styles/brand.css" />
   <script src="scripts/brand-storage.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700&family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <script>try { document.documentElement.dataset.theme = (globalThis.CarpedIOStorage?.read('carpedio-theme') ?? localStorage.getItem('carpedio-theme')) || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); } catch {}</script>
 </head>
 <body class="grades-page">
@@ -40,7 +40,7 @@
         <p class="grade-muted">סמנו אילו קורסים נכללים בממוצע. ציון 0 נכלל; פטור או קורס ללא ציון מספרי אינם נכללים.</p>
         <label class="grade-filter">חיפוש לפי שם או קוד<input id="grade-filter" type="search" placeholder="חיפוש קורס" /></label>
         <div class="grade-table-scroll"><table class="grade-table"><caption class="visually-hidden">קורסים וציונים נוכחיים</caption><thead><tr><th>בממוצע</th><th>קורס</th><th>נק״ז</th><th>ציון</th><th>פעולות</th></tr></thead><tbody id="actual-rows"></tbody></table></div>
-        <p id="actual-empty" class="grade-empty">עדיין אין ציונים. אפשר להוסיף קורס ידנית או לייבא קובץ Excel.</p>
+        <div id="actual-empty" class="grade-empty"><span>עדיין אין ציונים. אפשר להוסיף קורס ידנית או לייבא קובץ Excel.</span><button class="text-button" type="button" data-open="add-grade">הוספת הציון הראשון</button></div>
         <p id="grade-duplicates" class="grade-notice" hidden></p>
         <div class="grade-formula"><span>איך מחשבים?</span><p>סכום המכפלות של ציון × נק״ז, חלקי סך הנק״ז שנכללות בחישוב.</p><small>החישוב משתמש בערכים המלאים. העיגול הוא לתצוגה בלבד.</small></div>
       </section>
@@ -49,7 +49,7 @@
           <div class="grade-panel-heading"><h2 id="future-title">קורסים עתידיים</h2><button id="add-future" class="secondary-button" type="button">הוספת קורס עתידי</button></div>
           <p class="grade-muted">הציונים כאן הם הנחות לתכנון ואינם משנים את הציונים הקיימים.</p>
           <div class="grade-table-scroll"><table class="grade-table"><caption class="visually-hidden">קורסים בתרחיש העתידי</caption><thead><tr><th>בתרחיש</th><th>קורס</th><th>נק״ז</th><th>ציון צפוי</th><th>פעולות</th></tr></thead><tbody id="planned-rows"></tbody></table></div>
-          <p id="future-empty" class="grade-empty">הוסיפו קורס אחד או כמה קורסים כדי לבדוק את ההשפעה על הממוצע.</p>
+          <div id="future-empty" class="grade-empty"><span>הוסיפו קורס אחד או כמה קורסים כדי לבדוק את ההשפעה על הממוצע.</span><button class="text-button" type="button" data-open="add-future">הוספת קורס עתידי</button></div>
         </section>
         <section class="grade-panel grade-target-panel" aria-labelledby="target-title">
           <div class="grade-panel-heading"><h2 id="target-title">לאיזה ממוצע להגיע?</h2><label class="grade-target-label">ממוצע יעד<input id="grade-target" type="number" min="0" max="100" step="0.01" value="85" required /></label></div>
@@ -62,7 +62,7 @@
     <div class="grade-analysis-grid">
       <section class="grade-panel" aria-labelledby="impact-title">
         <h2 id="impact-title">איך הציון ישנה את הממוצע?</h2>
-        <div id="impact-empty" class="grade-empty">הוסיפו קורס עתידי כדי להזיז את הציון ולראות את ההשפעה.</div>
+        <div id="impact-empty" class="grade-empty"><span>הוסיפו קורס עתידי כדי להזיז את הציון ולראות את ההשפעה.</span><button class="text-button" type="button" data-open="add-future">הוספת קורס עתידי</button></div>
         <div id="impact-controls" hidden>
           <label>קורס לבדיקה<select id="focus-course"></select></label>
           <div class="grade-slider-label"><label for="scenario-grade">ציון צפוי</label><output id="scenario-value" for="scenario-grade"></output></div>
@@ -75,7 +75,7 @@
       </section>
       <section class="grade-panel" aria-labelledby="retake-title">
         <h2 id="retake-title">ומה אם אשפר ציון?</h2><p class="grade-muted">סימולציה על הממוצע הנוכחי, ללא הקורסים העתידיים וללא תוספת נק״ז.</p>
-        <p id="retake-empty" class="grade-empty">לאחר הוספת ציונים אפשר לבדוק שיפור בקורס קיים.</p>
+        <div id="retake-empty" class="grade-empty"><span>לאחר הוספת ציונים אפשר לבדוק שיפור בקורס קיים.</span><button class="text-button" type="button" data-open="add-grade">הוספת ציון</button></div>
         <div id="retake-controls" hidden>
           <label>קורס לשיפור<select id="retake-course"></select></label>
           <div class="grade-two-fields"><label>ציון חדש<input id="retake-grade" type="number" min="0" max="100" step="0.1" value="90" /></label>

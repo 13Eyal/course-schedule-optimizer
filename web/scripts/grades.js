@@ -75,6 +75,8 @@ function openEditor(kind, record = null) {
 }
 $('#add-grade').addEventListener('click',()=>openEditor('actual'));
 $('#add-future').addEventListener('click',()=>openEditor('planned'));
+// Empty states carry the action that fills them.
+document.querySelectorAll('[data-open]').forEach(button=>button.addEventListener('click',()=>$('#'+button.dataset.open).click()));
 $('#close-grade-editor').addEventListener('click',()=>$('#grade-editor').close());
 $('#grade-record-form').addEventListener('submit',event=>{
   event.preventDefault(); const form=event.currentTarget;
@@ -112,7 +114,10 @@ function renderRows(kind) {
     tr.append(includeCell,course,node('td',fmt(row.credits),'grade-numeric'),node('td',fmt(row.grade),'grade-numeric'),actions); body.append(tr);
   }
   const empty=$(kind==='actual' ? '#actual-empty' : '#future-empty'); empty.hidden=rows.length>0;
-  if (kind==='actual') empty.textContent=state.actual.length ? 'לא נמצאו קורסים שמתאימים לחיפוש.' : 'עדיין אין ציונים. אפשר להוסיף קורס ידנית או לייבא קובץ Excel.';
+  if (kind==='actual') {
+    empty.querySelector('span').textContent=state.actual.length ? 'לא נמצאו קורסים שמתאימים לחיפוש.' : 'עדיין אין ציונים. אפשר להוסיף קורס ידנית או לייבא קובץ Excel.';
+    empty.querySelector('button').hidden=state.actual.length>0;
+  }
 }
 function options(select, list, value) {
   const signature=JSON.stringify(list);

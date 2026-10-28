@@ -173,6 +173,18 @@ export function initSearchControls(onChange) {
         value.independent_courses.includes(c.id) || value.allowed_combinations[c.id]?.length);
     },
     revealMissing() { details.open = true; for (const section of courseSettings.children) if (section.querySelector('[data-independent]')) section.open = true; },
+    /** Names of selected courses whose group combinations are still unknown. */
+    missing(selected) {
+      const value = constraints(selected);
+      return (dataset?.details || []).filter(c => selected.has(c.id) && !c.links_known &&
+        !value.independent_courses.includes(c.id) && !value.allowed_combinations[c.id]?.length).map(c => c.name);
+    },
+    /** One answer for every unknown course: any group of one component may join any group of another. */
+    allowAll(selected) {
+      for (const input of courseSettings.querySelectorAll('[data-independent]'))
+        if (selected.has(input.dataset.independent)) input.checked = true;
+      onChange();
+    },
     resetTargets() { for (const [key, value] of Object.entries({target_days:1, target_gaps:0, target_daily_span:480, break_min:20, break_max:40, seconds:15})) fields[key].value = value; },
   };
 }

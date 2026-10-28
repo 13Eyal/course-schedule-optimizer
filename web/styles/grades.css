@@ -94,59 +94,67 @@
   .grade-import-options {grid-template-columns:1fr}.grades-page dialog {padding:18px}
 }
 
-/* Printed-booklet layer: flat paper surfaces, serif headings, cobalt only where it means something. */
+/* Studio layer: the same rail, white cards and single cobalt signal as the schedule page. */
 .grades-page {font:400 16px/1.6 var(--sans)}
-.grades-page main,.grade-header {width:auto;margin-inline:var(--gutter)}
-.grade-header {height:84px;padding:0;border:0}
-.grade-brand {align-items:center;font-size:inherit;color:var(--ink)}
-.grade-brand .brand-tagline {font-size:14px;color:var(--muted)}
-.grade-header nav {gap:4px;margin-inline-start:auto}
-.grade-header nav a {padding:8px 14px;border-radius:0;font-size:15px;font-weight:500}
-.grade-header nav a:hover {color:var(--accent)}
-.grade-header [aria-current=page] {background:var(--accent-soft);color:var(--ink)}
-.grade-intro {display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(32px,4vw,72px);align-items:end;margin:clamp(48px,6vw,96px) 0 40px}
-.grades-page h1 {font:500 var(--step-display)/1.04 var(--serif);letter-spacing:-.02em}
-.grade-intro>p {max-width:46ch;font-size:var(--step-lead);line-height:1.55;color:var(--ink)}
-.grades-page .primary-button {min-height:48px;padding:12px 24px}
-.grades-page .secondary-button {min-height:46px;font-size:15px}
-.grade-toolbar {gap:16px;margin:0 0 12px}
-.grade-toolbar .text-button {font-size:15px}
-.grade-muted {color:var(--muted);font-size:15px;line-height:1.7}
-.grade-stats {gap:8px;margin:32px 0 16px}
-.grade-stat,.grade-panel {border:0;border-radius:0;background:var(--surface);box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
-.grade-stat {padding:28px;gap:4px}
-.grade-stat strong {order:-1;margin-bottom:10px;font:500 clamp(44px,4vw,64px)/1 var(--serif);text-align:start}
-.grade-stat>span {font-size:15px;font-weight:500;color:var(--ink)}
-.grade-stat small {font-size:14px}
-.grade-stat-projected {background:var(--field);color:var(--on-field)}
-.grade-stat-projected strong,.grade-stat-projected>span {color:var(--on-field)}
+.grades-page main {width:auto;margin-inline:var(--gutter)}
+.grade-header {position:sticky;top:12px;z-index:40;width:auto;height:60px;margin:12px var(--gutter) 0;padding:0 10px 0 14px;gap:24px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.grade-brand {align-items:center;gap:8px;font-size:inherit;color:var(--ink)}
+.grade-brand .carpedio-symbol {width:28px;height:28px}
+.grade-brand .carpedio-wordmark {font-size:22px}
+.grade-brand .brand-tagline {display:none}
+.grade-header nav {gap:4px;margin-inline-end:auto}
+.grade-header nav a {padding:8px 12px;border-radius:6px;font-size:15px;font-weight:500;color:var(--muted)}
+.grade-header nav a:hover {color:var(--ink);background:var(--surface-soft)}
+.grade-header [aria-current=page] {background:var(--surface-soft);color:var(--ink)}
+.grade-intro {display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:24px clamp(32px,5vw,96px);align-items:end;margin:clamp(48px,6vw,88px) 0 28px}
+.grades-page h1 {max-width:16ch;font:300 var(--step-display)/1.02 var(--sans);letter-spacing:-.035em}
+.grade-intro>p {max-width:44ch;font-size:var(--step-lead);line-height:1.55;color:var(--muted)}
+.grade-toolbar {gap:10px;margin:0 0 8px}
+.grades-page .primary-button {min-height:46px;padding:11px 22px}
+.grades-page .secondary-button {min-height:46px;font-size:15px;cursor:pointer}
+.grade-toolbar .text-button {padding:8px 6px;font-size:15px}
+.grade-muted {margin:8px 0 14px;font-size:14px;line-height:1.6;color:var(--muted)}
+.grade-stats {gap:12px;margin:24px 0 12px}
+.grade-stat,.grade-panel {border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
+.grade-stat {padding:20px 22px;gap:2px}
+.grade-stat>span {font-size:14px;color:var(--muted)}
+.grade-stat strong {margin:8px 0 2px;font:300 clamp(40px,3.8vw,56px)/1 var(--sans);letter-spacing:-.035em;text-align:start}
+.grade-stat small {font-size:13px;color:var(--faint)}
+.grade-stat-projected {background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.grade-stat-projected strong,.grade-stat-projected>span {color:var(--on-accent)}
 .grade-stat-projected small {color:var(--on-field-soft)}
-.grade-layout,.grade-analysis-grid {gap:16px}
-.grade-analysis-grid {margin-top:16px}
-.grade-scenarios {gap:16px}
-.grade-panel {padding:32px}
-.grades-page h2 {font:500 26px/1.2 var(--serif)}
-.grades-page h3 {font:500 20px/1.3 var(--serif)}
+.grade-layout,.grade-analysis-grid,.grade-scenarios {gap:12px}
+.grade-analysis-grid {margin-top:12px}
+.grade-panel {padding:22px 24px}
+.grades-page h2 {font:500 19px/1.3 var(--sans);letter-spacing:-.01em}
+.grades-page h3 {font:500 16px/1.3 var(--sans)}
+.grade-filter {margin-bottom:10px}
 .grade-table {font-size:15px}
-.grade-table th {font-size:14px;color:var(--muted)}
+.grade-table th {padding:10px 8px;font-size:13px;font-weight:500;color:var(--faint);border-color:var(--line)}
+.grade-table td {border-color:var(--line)}
 .grade-table small {font-size:13px}
 .grade-table button {font-size:14px}
-.grade-empty {font-size:15px;background:var(--surface-soft);margin-top:8px}
-.grade-formula {padding:20px;margin-top:20px;font-size:15px;background:var(--surface-soft)}
-.grades-page label:not(.grade-check,.grade-upload) {font-size:14px}
-.grades-page input:not([type=checkbox],[type=file],[type=range]),.grades-page select {border-radius:0;background:var(--bg);font-size:16px}
-.grade-target-result {font:500 22px/1.5 var(--serif)}
-.grade-slider-label output {font:500 28px/1 var(--serif)}
+.grade-empty {display:grid;justify-items:center;gap:6px;margin-top:8px;padding:28px 16px;border:1px dashed var(--line-strong);border-radius:10px;background:none;font-size:15px;color:var(--muted)}
+.grade-empty .text-button {font-size:15px}
+.grade-formula {margin-top:16px;padding:14px 16px;border-radius:10px;background:var(--surface-soft);font-size:14px}
+.grade-formula>span {color:var(--ink)}
+.grades-page label:not(.grade-check,.grade-upload) {font-size:14px;color:var(--muted)}
+.grades-page input:not([type=checkbox],[type=file],[type=range]),.grades-page select {border:1px solid var(--line-strong);border-radius:8px;background:var(--surface);color:var(--ink);font-size:15px}
+.grades-page input:not([type=checkbox],[type=file],[type=range]):focus,.grades-page select:focus {border-color:var(--accent);outline:0;box-shadow:0 0 0 3px var(--accent-soft)}
+.grade-target-result {font:400 20px/1.5 var(--sans);letter-spacing:-.01em}
+.grade-slider-label output {font:300 30px/1 var(--sans);letter-spacing:-.03em}
 .grade-range-labels {font-size:13px}
-.grade-chart-text {font-size:13px}
-.grade-notice,.grade-error {border-radius:0;font-size:15px}
+.grade-chart-text {font-size:12px}
+.grade-notice,.grade-error {border-radius:10px;font-size:15px}
 .grade-check {font-size:15px}
-.grade-undo {border:0;border-radius:0;background:var(--footer);color:var(--on-footer);box-shadow:var(--float-shadow)}
-.grade-footer {margin-top:var(--section-space);padding:28px 0;font-size:14px}
-@media(max-width:900px) {.grade-intro {grid-template-columns:1fr;gap:20px}}
+.grade-undo {border:0;border-radius:12px;background:var(--ink);color:var(--bg);box-shadow:var(--bar-shadow)}
+.grade-footer {margin-top:var(--section-space);padding:24px 0 32px;border-top:1px solid var(--line);font-size:14px;color:var(--muted);text-align:start}
+.grades-page dialog {border-radius:16px}
+@media(max-width:900px) {.grade-intro {grid-template-columns:1fr;gap:16px}}
 @media(max-width:600px) {
-  .grade-header {height:auto;padding:16px 0}
-  .grade-stat {padding:18px}.grade-stat strong {font-size:38px}.grade-stat>span {font-size:14px}.grade-stat small {font-size:13px}
-  .grade-panel {padding:22px 18px}.grades-page h2 {font-size:24px}.grade-table {font-size:14px}
-  .grade-header nav {font-size:14px}
+  .grade-header {height:auto;margin-inline:12px;padding:8px 10px;flex-wrap:wrap;gap:6px}
+  .grade-header nav {order:3;width:100%;margin:0}
+  .grades-page main {margin-inline:16px}
+  .grade-stat {padding:16px}.grade-stat strong {font-size:36px}.grade-stat>span {font-size:14px}.grade-stat small {font-size:13px}
+  .grade-panel {padding:18px 16px}.grade-table {font-size:14px}
 }

@@ -23,7 +23,7 @@ export function initShell() {
   nav.id = 'main-navigation';
   nav.before(menu);
   // Wide screens show the links in the bar; only the compact menu hides them.
-  const compact = matchMedia('(max-width: 900px)');
+  const compact = matchMedia('(max-width: 760px)');
   nav.inert = compact.matches;
   compact.addEventListener('change', () => setMenu(false));
 

@@ -96,9 +96,39 @@ function colorize(node, index) {
 function notify(message, error = false) {
   const notice = $("#notice");
   notice.textContent = message;
+  notice.classList.remove("question");
   notice.classList.toggle("error", error);
   notice.hidden = !message;
   notice.setAttribute("role", error ? "alert" : "status");
+}
+/** Asks once whether groups of the unknown courses combine freely, instead of sending people into the settings. */
+function askLinks() {
+  const names = searchControls.missing(state.selected);
+  const notice = $("#notice");
+  const list = names.length > 2 ? names.slice(0, -1).join(", ") + " ו־" + names.at(-1) : names.join(" ו־");
+  const yes = element("button", "primary-button", "כן, כל שילוב מותר. לחשב");
+  const manual = element("button", "secondary-button", "לא, אגדיר שילובים בעצמי");
+  yes.type = manual.type = "button";
+  yes.addEventListener("click", () => {
+    searchControls.allowAll(state.selected);
+    notify("");
+    optimize(true);
+  });
+  manual.addEventListener("click", () => {
+    searchControls.revealMissing();
+    document.querySelector(".search-settings")?.scrollIntoView({ block: "start" });
+  });
+  const actions = element("div", "notice-actions");
+  actions.append(yes, manual);
+  notice.replaceChildren(
+    element("strong", "notice-title", "שאלה אחת לפני החישוב"),
+    element("p", "", `ב־${list} יש כמה סוגי מפגשים, כמו הרצאה ותרגול. אפשר להירשם לכל קבוצת הרצאה יחד עם כל קבוצת תרגול?`),
+    actions,
+  );
+  notice.classList.remove("error");
+  notice.classList.add("question");
+  notice.setAttribute("role", "status");
+  notice.hidden = false;
 }
 function busy(value, label = "מחשבים את האפשרויות…") {
   state.busy = value;
@@ -269,9 +299,7 @@ document.querySelectorAll('[data-preset]').forEach(button => {
     });
     invalidateResults();
     $('#preset-status').textContent = `הקצב שנבחר: ${preset.label}. אפשר לכוונן כל העדפה.`;
-    notify(`העדפות ״${preset.label}״ הוחלו. בחרו קורסים ולחצו על ״מציאת המערכת שלי״.`);
-    $('#planner').scrollIntoView({ behavior: document.documentElement.dataset.motion === 'off' ? 'instant' : 'smooth', block: 'start' });
-    $('#workspace').focus({ preventScroll: true });
+    notify(`העדפות ״${preset.label}״ הוחלו. לחצו על ״חישוב המערכת״ כדי לראות את השבוע.`);
   });
 });
 
@@ -293,7 +321,7 @@ async function addManualCourse(course) {
     if (!previous) source.textContent = 'קורסים בהזנה ידנית';
     else if (!source.textContent.includes('ידני')) source.textContent += ' · כולל קורסים ידניים';
     notify(`הקורס ${course.name} נוסף ונבחר לתכנון.`);
-    if (!searchControls.ready(state.selected)) searchControls.revealMissing();
+    if (!searchControls.ready(state.selected)) askLinks();
   } finally {
     busy(false);
     if (state.dataset === previous) $('#result-status').textContent = previousStatus;
@@ -337,10 +365,7 @@ async function loadDataset(file = null) {
     $("#course-file").value = "";
   }
   if (loaded && searchControls.ready(state.selected)) await optimize();
-  else if (loaded) {
-    searchControls.revealMissing();
-    notify('יש להשלים קשרי רישום בין רכיבי הקורסים לפני החיפוש.');
-  }
+  else if (loaded) askLinks();
 }
 $("#course-file").addEventListener("change", (event) => {
   if (event.target.files[0]) loadDataset(event.target.files[0]);
@@ -392,10 +417,7 @@ async function optimize(revealResults = false) {
   if (!WEIGHTS.some(([name]) => prefs[name] > 0)) {
     notify('לפחות העדפה אחת צריכה לקבל משקל גדול מאפס.', true); return;
   }
-  if (!searchControls.ready(state.selected)) {
-    searchControls.revealMissing();
-    notify('יש להשלים או לאשר קשרי רישום בין רכיבי הקורסים שנבחרו.', true); return;
-  }
+  if (!searchControls.ready(state.selected)) { askLinks(); return; }
   clearResults();
   state.active = 0; state.visible = 3;
   busy(true);

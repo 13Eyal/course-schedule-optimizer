@@ -29,7 +29,6 @@ export function initPlannerUX({ onSession, onGenerate }) {
 
   // Clear task labels replace decorative editorial subtitles.
   [['.hero-bottom>span:last-child','נתוני הקורסים נשארים בשרת המקומי'],['.editorial-heading>.eyebrow','נקודת פתיחה'],['.workspace-heading .eyebrow','מרחב התכנון'],['.approach-title .eyebrow','איך זה עובד'],['.calendar-toolbar .eyebrow','המערכת השבועית שלך']].forEach(([selector,text])=>{const el=$(selector);if(el)el.textContent=text;});
-  $('.workspace-heading>p').textContent='בוחרים קורסים והעדפות, משווים חלופות ומוצאים את השבוע שמתאים לך.';
 
   const searchBox=node('div','course-search');
   const label=node('label','','חיפוש בקורסים');label.htmlFor='course-search';
@@ -43,7 +42,7 @@ export function initPlannerUX({ onSession, onGenerate }) {
   const actioncopy=node('div','planner-actioncopy'), actiontitle=node('strong'), actiondetail=node('span');
   actioncopy.append(actiontitle,actiondetail);
   const actionbutton=node('button','primary-button','חישוב המערכת');actionbutton.type='button';actionbutton.addEventListener('click',onGenerate);
-  actionbar.append(actioncopy,actionbutton);$('.planner-steps').after(actionbar);
+  actionbar.append(actioncopy,actionbutton);$('#workspace').after(actionbar);
   const stale=node('div','stale-results');stale.hidden=true;stale.setAttribute('role','status');
   stale.append(node('strong','','הבחירה שלך עודכנה'),node('span','','הלוח מציג את החישוב הקודם. חשבו מחדש כדי לעדכן אותו.'));
   $('#results').prepend(stale);
@@ -108,9 +107,9 @@ export function initPlannerUX({ onSession, onGenerate }) {
   applyView();
   return {
     update({selected,total,busy,results,dirty}){
-      actiontitle.textContent=busy?'מחשבים את האפשרויות…':dirty?'יש שינויים שעדיין לא חושבו':results?'המערכת שלך מוכנה להשוואה':'מתחילים בבחירת קורסים';
+      actiontitle.textContent=busy?'מחשבים את האפשרויות…':dirty&&results?'הבחירה השתנתה. חשבו מחדש כדי לעדכן את הלוח':results?'המערכת שלך מוכנה. אפשר להשוות חלופות':selected?'הכול מוכן לחישוב':'בחרו לפחות קורס אחד';
       actiondetail.textContent=`${selected} מתוך ${total} קורסים נבחרו`;
-      actionbutton.textContent=busy?'מחשבים…':dirty?'עדכון המערכת':'חישוב מחדש';actionbutton.disabled=busy||!selected;
+      actionbutton.textContent=busy?'מחשבים…':results&&!dirty?'חישוב מחדש':'חישוב המערכת';actionbutton.disabled=busy||!selected;
       stale.hidden=!dirty||!results;$('#results').classList.toggle('has-stale-results',dirty&&!!results);
       const previewCaption=preview.querySelector('.hero-week-caption');if(previewCaption)previewCaption.textContent=dirty?'החישוב הקודם · ממתין לעדכון':'השבוע שמוצג בלוח';
       $('.planner-steps').querySelectorAll('a').forEach((link,i)=>{link.classList.toggle('step-complete',i===0?selected>0:i===1?selected>0&&!dirty:results>0&&!dirty);});
