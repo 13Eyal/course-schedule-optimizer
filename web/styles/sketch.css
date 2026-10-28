@@ -142,6 +142,8 @@
 :root[data-design] .approach-list { border-top: 1.5px dashed var(--sk-ink); }
 :root[data-design] .approach-item + .approach-item { border-inline-start: 1.5px dashed var(--sk-ink); }
 :root[data-design] .site-footer { border-top: 1.5px dashed var(--sk-ink); }
+/* Set down at a slight angle, like a sticker on the sketch. */
+:root[data-design] .footer-logo { transform: rotate(-8deg); }
 
 /* ---------- Margin notes, as a designer would scribble them ---------- */
 @media (min-width: 1001px) {

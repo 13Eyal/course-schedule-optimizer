@@ -487,6 +487,9 @@ html[data-launch="file"] .local-launch {
 .footer-meta a, .footer-top-link { color: var(--ink); text-decoration: underline; text-decoration-color: var(--line-strong); text-underline-offset: 4px; }
 .footer-meta a:hover, .footer-top-link:hover { text-decoration-color: var(--ink); }
 .footer-top-link { font-size: 14px; white-space: nowrap; }
+/* The logo, large, closes the page in the footer's empty corner. */
+.footer-end { display: grid; justify-items: end; gap: 14px; }
+.footer-logo { display: block; width: clamp(120px, 11vw, 168px); height: auto; aspect-ratio: 1; }
 
 /* ---------- Dialogs ---------- */
 :root[data-design] dialog {
@@ -579,6 +582,8 @@ html[data-launch="file"] .local-launch {
   .flow-horizontal { display: none; }
   .flow-vertical { display: block; max-width: 340px; margin-inline: auto; }
   :root[data-design] .site-footer { flex-direction: column; align-items: start; margin-inline: 16px; }
+  .footer-end { justify-items: start; }
+  .footer-logo { width: 104px; }
 }
 @media print {
   .menu-toggle, .celebration-canvas, .planner-actionbar { display: none !important; }
