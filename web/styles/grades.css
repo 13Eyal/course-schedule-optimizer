@@ -2,7 +2,7 @@
 .grades-page main,.grade-header {width:min(1400px,92%);margin-inline:auto}
 .grade-header {display:flex;align-items:center;justify-content:space-between;gap:20px;padding:24px 0;border-bottom:1px solid var(--line)}
 .grade-brand {display:flex;align-items:baseline;gap:12px;font-size:32px;font-weight:600;color:var(--ink)}
-.grade-brand span {font-size:12px;font-weight:400;color:var(--muted)}
+.grade-brand>span {font-size:12px;font-weight:400;color:var(--muted)}
 .grade-header nav {display:flex;gap:10px;flex-wrap:wrap}
 .grade-header nav a {padding:9px 16px;border-radius:999px;font-size:14px}
 .grade-header [aria-current=page] {background:var(--accent-soft);color:var(--accent)}
@@ -83,7 +83,7 @@
 .grade-preview .invalid-row {background:var(--error-bg)}
 #commit-import {width:100%;margin-top:16px}
 [hidden] {display:none!important}
-@media(max-width:1000px) {.grade-layout,.grade-analysis-grid {grid-template-columns:1fr}.grade-brand span {display:none}}
+@media(max-width:1000px) {.grade-layout,.grade-analysis-grid {grid-template-columns:1fr}.grade-brand>span {display:none}}
 @media(max-width:600px) {
   .grade-header {flex-wrap:wrap;gap:12px;padding:16px 0}.grade-header nav {order:3;width:100%;font-size:12px}.grade-header nav a {padding:8px 14px}
   .grade-intro {display:block;margin-top:32px}.grade-intro>p {margin-top:18px;font-size:14px}
