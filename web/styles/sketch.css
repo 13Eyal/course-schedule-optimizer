@@ -1,0 +1,168 @@
+/* Industrial sketch layer: a product designer's marker sketch over the studio layout.
+   Construction lines run past the corners, a flat grey marker shadow sits under each card,
+   headings and notes are hand lettered, and the logo colours act as marker fills. */
+:root[data-design] {
+  --sk-paper: #FBFBF8;
+  --sk-ink: #1E2224;
+  --sk-guide: #D5DADC;
+  --sk-shadow: #DCE0E2;
+  --sk-marker: rgba(20, 199, 222, .42);
+  --sk-hand: "Playpen Sans Hebrew", "Heebo", cursive;
+  --sk-over: 10px;
+  --bg: var(--sk-paper);
+  --surface: #FFFFFF;
+  --surface-soft: #F3F4F2;
+  --line: #CDD2D4;
+  --line-strong: var(--sk-ink);
+  --radius: 2px;
+  --radius-sm: 2px;
+}
+:root[data-design][data-theme="dark"] {
+  --sk-paper: #14181A;
+  --sk-ink: #DCE2E4;
+  --sk-guide: #283034;
+  --sk-shadow: #090B0C;
+  --sk-marker: rgba(20, 199, 222, .38);
+  --surface: #1B2023;
+  --surface-soft: #222829;
+  --line: #3A4246;
+}
+
+/* Paper with a few construction lines, like the start of a sketch. */
+:root[data-design] body {
+  background-color: var(--sk-paper);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='1100'%3E%3Cg stroke='%23D5DADC' stroke-width='1' fill='none'%3E%3Cpath d='M-80 120L1680 330M-80 980L1680 420M0 96H1600M930 0V1100'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center top;
+}
+:root[data-design][data-theme="dark"] body {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='1100'%3E%3Cg stroke='%23283034' stroke-width='1' fill='none'%3E%3Cpath d='M-80 120L1680 330M-80 980L1680 420M0 96H1600M930 0V1100'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* ---------- The sketched frame: lines overshoot the corners, a marker shadow sits behind ---------- */
+:root[data-design] :is(.site-header, .panel, .metric, .alternative, .hero-art > .hero-week-preview, .approach-diagram, .notice, .stale-results, .grade-header, .grade-stat, .grade-panel, dialog) {
+  position: relative; border: 0; border-radius: 0; box-shadow: 8px 8px 0 var(--sk-shadow);
+}
+:root[data-design] :is(.site-header, .panel, .metric, .alternative, .hero-art > .hero-week-preview, .approach-diagram, .notice, .stale-results, .grade-header, .grade-stat, .grade-panel)::before,
+:root[data-design] :is(.site-header, .panel, .metric, .alternative, .hero-art > .hero-week-preview, .approach-diagram, .notice, .stale-results, .grade-header, .grade-stat, .grade-panel)::after {
+  content: ""; position: absolute; pointer-events: none; z-index: 1;
+}
+:root[data-design] :is(.site-header, .panel, .metric, .alternative, .hero-art > .hero-week-preview, .approach-diagram, .notice, .stale-results, .grade-header, .grade-stat, .grade-panel)::before {
+  inset: 0 calc(var(--sk-over) * -1); border-block: 1.5px solid var(--sk-ink);
+}
+:root[data-design] :is(.site-header, .panel, .metric, .alternative, .hero-art > .hero-week-preview, .approach-diagram, .notice, .stale-results, .grade-header, .grade-stat, .grade-panel)::after {
+  inset: calc(var(--sk-over) * -1) 0; border-inline: 1.5px solid var(--sk-ink);
+}
+:root[data-design] dialog { border: 1.5px solid var(--sk-ink); box-shadow: 10px 10px 0 var(--sk-shadow); }
+:root[data-design] .calendar-panel { overflow: visible; }
+:root[data-design] .notice[hidden] { display: none; }
+@media (min-width: 1001px) {
+  /* The scrolling sidebar would clip the overshoot, so it gets room for it. */
+  :root[data-design] .sidebar { padding: 12px 14px 20px; margin: -12px -14px 0; }
+}
+
+/* ---------- Hand lettering ---------- */
+:root[data-design] :is(h1, .panel-heading h3, .results-title, .calendar-toolbar h3, .alternatives-heading h3, .approach-title h2, .approach-item h3, dialog h2, .notice-title, .empty-state h4, .agenda-day-heading h4, .grades-page h2, .grades-page h3) {
+  font-family: var(--sk-hand); font-weight: 600; letter-spacing: 0;
+}
+:root[data-design] h1 { font-size: clamp(36px, 4vw, 62px); line-height: 1.12; max-width: 17ch; }
+:root[data-design] .approach-title h2 { line-height: 1.15; }
+/* A marker swash under the key words. */
+.marker {
+  text-decoration: underline; text-decoration-color: var(--sk-marker); text-decoration-thickness: .38em;
+  text-underline-offset: -.12em; text-decoration-skip-ink: none; white-space: nowrap;
+}
+:root[data-design] .intro-steps span,
+:root[data-design] .hero-week-caption,
+:root[data-design] .footer-meta dt { font-family: var(--sk-hand); }
+:root[data-design] .intro-steps li { border-color: var(--sk-ink); border-top-style: dashed; }
+:root[data-design] .intro-steps li:last-child { border-bottom-style: dashed; }
+
+/* ---------- Controls drawn with a pen ---------- */
+:root[data-design] :is(.primary-button, .hero-cta) {
+  border: 1.6px solid var(--sk-ink); border-radius: 2px; background: var(--logo-cyan); color: #062F36;
+  font-weight: 600; box-shadow: 3px 3px 0 var(--sk-ink);
+  transition: transform .15s var(--ease), box-shadow .15s var(--ease);
+}
+:root[data-design] :is(.primary-button, .hero-cta):hover:not(:disabled) { background: #3ED3E6; transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--sk-ink); }
+:root[data-design] :is(.primary-button, .hero-cta):active:not(:disabled) { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--sk-ink); }
+:root[data-design] .secondary-button,
+:root[data-design] .icon-button,
+:root[data-design] .motion-toggle {
+  border: 1.5px solid var(--sk-ink); border-radius: 2px; background: var(--surface); color: var(--ink); box-shadow: 2px 2px 0 var(--sk-ink);
+}
+:root[data-design] :is(.secondary-button, .icon-button, .motion-toggle):hover:not(:disabled) { border-color: var(--sk-ink); background: var(--surface-soft); }
+:root[data-design] .header-nav a { font-weight: 500; color: var(--ink); border-radius: 0; }
+:root[data-design] .header-nav a:hover,
+:root[data-design] .header-nav a[aria-current] { background: none; text-decoration: underline; text-decoration-color: var(--logo-cyan); text-decoration-thickness: 3px; text-underline-offset: 6px; }
+:root[data-design] .grade-header nav a { font-weight: 500; color: var(--ink); border-radius: 0; }
+:root[data-design] .grade-header [aria-current=page] { background: none; text-decoration: underline; text-decoration-color: var(--logo-cyan); text-decoration-thickness: 3px; text-underline-offset: 6px; }
+.step-no {
+  background: transparent; color: var(--ink); border: 1.6px solid var(--sk-ink);
+  font-family: var(--sk-hand); font-weight: 600; transform: rotate(-6deg);
+}
+:root[data-design] .count-badge { border-radius: 0; background: rgba(241, 196, 15, .5); color: var(--ink); font-family: var(--sk-hand); }
+:root[data-design] .course-row,
+:root[data-design] .course-row:last-child { border: 1.5px solid var(--sk-ink); border-radius: 2px; }
+:root[data-design] .course-row:has(input:checked) { border-color: var(--sk-ink); background: var(--sk-marker); }
+:root[data-design] :is(.course-search input, input[type="time"], .search-settings input, .search-settings select),
+:root[data-design] #manual-course-form :is(input:not([type=checkbox]), select),
+:root[data-design] .grades-page :is(input:not([type=checkbox], [type=file], [type=range]), select) {
+  border: 1.5px solid var(--sk-ink); border-radius: 2px;
+}
+:root[data-design] .upload-zone { border: 1.5px dashed var(--sk-ink); border-radius: 2px; background: var(--surface); }
+:root[data-design] .preset { border: 1.5px solid var(--sk-ink); border-radius: 2px; }
+.preset[aria-pressed="true"] { background: var(--logo-cyan); color: #062F36; box-shadow: 3px 3px 0 var(--sk-ink); }
+.preset[aria-pressed="true"] small { color: #0E4650; }
+:root[data-design] input[type="range"] { background: var(--sk-ink); height: 2px; }
+:root[data-design] input[type="range"]::-webkit-slider-thumb { background: var(--logo-cyan); border: 2px solid var(--sk-ink); box-shadow: none; }
+:root[data-design] input[type="range"]::-moz-range-thumb { background: var(--logo-cyan); border: 2px solid var(--sk-ink); }
+:root[data-design] .weight-label output { border: 1.2px solid var(--sk-ink); border-radius: 2px; background: none; }
+:root[data-design] .search-settings,
+:root[data-design] :is(.course-rules, .attendance-rule) { border: 1.2px dashed var(--sk-ink); border-radius: 2px; }
+:root[data-design] .view-switch { border: 1.5px solid var(--sk-ink); border-radius: 2px; background: none; }
+:root[data-design] .view-switch button { border-radius: 0; }
+:root[data-design] .view-switch button[aria-pressed="true"] { background: var(--sk-ink); color: var(--sk-paper); }
+:root[data-design] .agenda-filters button { border: 1.5px solid var(--sk-ink); border-radius: 2px; }
+:root[data-design] .agenda-filters button[aria-pressed="true"] { background: var(--sk-ink); color: var(--sk-paper); }
+
+/* ---------- The calculate bar: a dark marker band ---------- */
+:root[data-design] .planner-actionbar { border-radius: 0; background: var(--sk-ink); color: var(--sk-paper); box-shadow: 8px 8px 0 var(--sk-shadow); }
+:root[data-design][data-theme="dark"] .planner-actionbar { background: var(--surface-soft); color: var(--ink); box-shadow: 0 0 0 1.5px var(--sk-ink), 8px 8px 0 var(--sk-shadow); }
+:root[data-design] .planner-actioncopy strong { font-family: var(--sk-hand); font-weight: 600; }
+:root[data-design] .planner-actionbar .primary-button { border-color: var(--sk-paper); box-shadow: 3px 3px 0 var(--logo-sun); }
+
+/* ---------- Week and results: blocks inked over marker fills ---------- */
+:root[data-design] .session { border-radius: 1px; box-shadow: inset 0 0 0 1.2px var(--sk-ink); }
+:root[data-design] .agenda-session { border-radius: 2px; box-shadow: inset 0 0 0 1.2px var(--sk-ink); }
+:root[data-design] .calendar-head { border-bottom: 1.5px solid var(--sk-ink); }
+:root[data-design] .metric strong,
+:root[data-design] .grade-stat strong,
+:root[data-design] .alternative-score { font-family: var(--sk-hand); font-weight: 600; letter-spacing: 0; }
+:root[data-design] .alternative[aria-pressed="true"] { box-shadow: 8px 8px 0 var(--logo-cyan); }
+:root[data-design] .hero-week-days span { border-radius: 0; }
+:root[data-design] .hero-week-days span.is-study-day { box-shadow: inset 0 0 0 1.2px var(--sk-ink); }
+:root[data-design] .empty-symbol i { border: 1.2px solid var(--sk-ink); border-radius: 0; }
+:root[data-design] .approach-diagram { background: var(--panel); }
+:root[data-design] .approach-list { border-top: 1.5px dashed var(--sk-ink); }
+:root[data-design] .approach-item + .approach-item { border-inline-start: 1.5px dashed var(--sk-ink); }
+:root[data-design] .site-footer { border-top: 1.5px dashed var(--sk-ink); }
+
+/* ---------- Margin notes, as a designer would scribble them ---------- */
+@media (min-width: 1001px) {
+  :root[data-design] .results-title::after {
+    content: "צבע = קורס"; margin-inline-start: 14px; font: 400 15px var(--sk-hand); color: var(--logo-coral); transform: rotate(-4deg);
+  }
+  :root[data-design] .intro-steps::after {
+    content: "שלושה צעדים, וזהו ↓"; display: block; margin-top: 12px; font: 400 15px var(--sk-hand); color: var(--accent); transform: rotate(-2deg);
+  }
+  :root[data-design] .preset-picker::before {
+    content: "בחירה מהירה, אפשר לכוונן אחר כך ↙"; grid-column: 1 / -1; font: 400 13px var(--sk-hand); color: var(--logo-coral);
+  }
+  }
+@media (max-width: 760px) {
+  :root[data-design] { --sk-over: 5px; }
+  :root[data-design] :is(.site-header, .panel, .metric, .alternative, .grade-stat, .grade-panel) { box-shadow: 5px 5px 0 var(--sk-shadow); }
+}
+
+.grades-page h1 .marker { color: inherit; }

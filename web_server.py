@@ -52,6 +52,7 @@ STATIC_FILES = {
     "/web/styles/layout.css": ("web/styles/layout.css", "text/css; charset=utf-8"),
     "/web/styles/planner.css": ("web/styles/planner.css", "text/css; charset=utf-8"),
     "/web/styles/cobalt.css": ("web/styles/cobalt.css", "text/css; charset=utf-8"),
+    "/web/styles/sketch.css": ("web/styles/sketch.css", "text/css; charset=utf-8"),
     "/web/scripts/app.js": ("web/scripts/app.js", "text/javascript; charset=utf-8"),
     "/web/scripts/api.js": ("web/scripts/api.js", "text/javascript; charset=utf-8"),
     "/web/scripts/search-controls.js": ("web/scripts/search-controls.js", "text/javascript; charset=utf-8"),
