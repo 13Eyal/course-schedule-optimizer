@@ -310,7 +310,13 @@ $('#export-grades').addEventListener('click',async event=>{
   } catch(error) {message(error.message,true);}
   finally {event.target.disabled=!state.actual.length&&!state.planned.length;}
 });
-function syncTheme() {$('#grades-theme').textContent=document.documentElement.dataset.theme==='dark'?'מצב בהיר':'מצב כהה';}
+function syncTheme() {
+  // Same icon button as the schedule page: the label says what a click will do.
+  const dark=document.documentElement.dataset.theme==='dark', button=$('#grades-theme');
+  button.setAttribute('aria-pressed',String(dark));
+  button.setAttribute('aria-label',dark?'הפעלת מצב בהיר':'הפעלת מצב כהה');
+  button.title=dark?'מעבר למצב בהיר':'מעבר למצב כהה';
+}
 $('#grades-theme').addEventListener('click',()=>{
   document.documentElement.dataset.theme=document.documentElement.dataset.theme==='dark'?'light':'dark';
   try {localStorage.setItem('carpedio-theme',document.documentElement.dataset.theme);}catch{}syncTheme();

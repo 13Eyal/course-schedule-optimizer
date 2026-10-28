@@ -3,16 +3,13 @@ export function initMotion() {
   const root = document.documentElement;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const finePointer = matchMedia('(hover: hover) and (pointer: fine)');
-  const toggle = document.querySelector('#motion-toggle');
   const header = document.querySelector('.site-header');
   const hero = document.querySelector('.hero');
   const art = document.querySelector('.hero-art');
-  let paused = false;
   let frame = 0;
   let tiltX = 0;
   let tiltY = 0;
   let heroVisible = true;
-  try { paused = localStorage.getItem('carpedio-motion') === 'off'; } catch { /* Optional storage. */ }
 
   function update() {
     frame = 0;
@@ -25,13 +22,9 @@ export function initMotion() {
   }
   function schedule() { if (!frame) frame = requestAnimationFrame(update); }
   function sync() {
-    const off = reduced.matches || paused;
+    // Motion follows the system's reduced-motion setting; there is no separate switch.
+    const off = reduced.matches;
     root.dataset.motion = off ? 'off' : 'on';
-    toggle.setAttribute('aria-pressed', String(off));
-    toggle.setAttribute('aria-label', off ? 'הפעלת אפקטי תנועה' : 'עצירת אפקטי תנועה');
-    toggle.title = reduced.matches ? 'תנועה מופחתת לפי הגדרות המערכת' : (off ? 'הפעלת תנועה' : 'עצירת תנועה');
-    toggle.disabled = reduced.matches;
-    toggle.querySelector('span').textContent = off ? '▷' : 'Ⅱ';
     if (off) {
       art.style.removeProperty('--art-scroll');
       art.style.removeProperty('--tilt-x');
@@ -40,11 +33,6 @@ export function initMotion() {
     }
     schedule();
   }
-  toggle.addEventListener('click', () => {
-    paused = !paused;
-    try { localStorage.setItem('carpedio-motion', paused ? 'off' : 'on'); } catch { /* Optional storage. */ }
-    sync();
-  });
   reduced.addEventListener('change', sync);
   window.addEventListener('scroll', schedule, { passive: true });
   window.addEventListener('resize', schedule, { passive: true });

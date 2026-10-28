@@ -46,6 +46,7 @@ STATIC_FILES = {
     "/web/styles/grades.css": ("web/styles/grades.css", "text/css; charset=utf-8"),
     "/web/styles/brand.css": ("web/styles/brand.css", "text/css; charset=utf-8"),
     "/web/scripts/brand-storage.js": ("web/scripts/brand-storage.js", "text/javascript; charset=utf-8"),
+    "/web/scripts/i18n.js": ("web/scripts/i18n.js", "text/javascript; charset=utf-8"),
     "/web/scripts/grades.js": ("web/scripts/grades.js", "text/javascript; charset=utf-8"),
     "/web/scripts/grade-math.js": ("web/scripts/grade-math.js", "text/javascript; charset=utf-8"),
     "/web/styles/base.css": ("web/styles/base.css", "text/css; charset=utf-8"),

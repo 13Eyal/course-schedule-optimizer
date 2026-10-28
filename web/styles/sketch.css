@@ -166,3 +166,8 @@
 }
 
 .grades-page h1 .marker { color: inherit; }
+
+/* Margin notes in English. */
+:root[lang="en"][data-design] .results-title::after { content: "colour = course"; }
+:root[lang="en"][data-design] .intro-steps::after { content: "Three steps, that's it ↓"; }
+:root[lang="en"][data-design] .preset-picker::before { content: "A quick start; fine-tune it after ↓"; }

@@ -7,6 +7,8 @@
   <link rel="stylesheet" href="styles/base.css" /><link rel="stylesheet" href="styles/cobalt.css" /><link rel="stylesheet" href="styles/grades.css" />
   <link rel="stylesheet" href="styles/brand.css" /><link rel="stylesheet" href="styles/sketch.css" />
   <script src="scripts/brand-storage.js"></script>
+  <script>try { if (localStorage.getItem('carpedio-lang') === 'en') { document.documentElement.lang = 'en'; document.documentElement.dir = 'ltr'; } } catch {}</script>
+  <script src="scripts/i18n.js" defer></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600&family=Playpen+Sans+Hebrew:wght@400;600&display=swap" rel="stylesheet" />
   <script>try { document.documentElement.dataset.theme = (globalThis.CarpedIOStorage?.read('carpedio-theme') ?? localStorage.getItem('carpedio-theme')) || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); } catch {}</script>
@@ -16,7 +18,7 @@
   <header class="grade-header">
     <a class="grade-brand" href="index.html" aria-label="CarpedIO — עמוד הבית"><i class="carpedio-symbol" aria-hidden="true"></i><b class="carpedio-wordmark" dir="ltr">Carped<span>IO</span></b><span class="brand-tagline">תכנון הלימודים שלך</span></a>
     <nav aria-label="ניווט ראשי"><a href="index.html#planner">מערכת שעות</a><a href="grades.html" aria-current="page">מחשבון ציונים</a></nav>
-    <button class="secondary-button" id="grades-theme" type="button">החלפת מצב תצוגה</button>
+    <div class="header-actions"><button class="icon-button lang-toggle" id="lang-toggle" type="button">EN</button><button class="icon-button theme-toggle" id="grades-theme" type="button" aria-label="הפעלת מצב כהה" aria-pressed="false"><svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.7 13.2A8.7 8.7 0 0 1 10.8 3.3 8.8 8.8 0 1 0 20.7 13.2Z" /></svg><svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5" /></svg></button></div>
   </header>
   <main id="grade-workspace">
     <div class="grade-intro"><h1>מחשבון ממוצע <span class="marker">לפי נק״ז.</span></h1>

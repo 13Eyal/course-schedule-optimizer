@@ -20,7 +20,6 @@ import("./motion.js")
   .then(({ initMotion }) => initMotion())
   .catch((error) => {
     console.warn("Optional motion layer unavailable", error);
-    document.querySelector('#motion-toggle').hidden = true;
   });
 
 const $ = (selector) => document.querySelector(selector);
@@ -318,8 +317,10 @@ async function addManualCourse(course) {
     $('#course-search').value = '';
     renderCourses();
     const source = $('#source-label');
+    // A flag, not the label text, since the label may be shown translated.
     if (!previous) source.textContent = 'קורסים בהזנה ידנית';
-    else if (!source.textContent.includes('ידני')) source.textContent += ' · כולל קורסים ידניים';
+    else if (!source.dataset.manual) source.textContent += ' · כולל קורסים ידניים';
+    source.dataset.manual = 'true';
     notify(`הקורס ${course.name} נוסף ונבחר לתכנון.`);
     if (!searchControls.ready(state.selected)) askLinks();
   } finally {
@@ -350,6 +351,7 @@ async function loadDataset(file = null) {
     $("#source-label").textContent = file
       ? file.name
       : "נתוני דוגמה · courses_sample.xlsx";
+    delete $("#source-label").dataset.manual;
     loaded = true;
   } catch (error) {
     notify(error.message, true);
@@ -712,7 +714,7 @@ $("#export").addEventListener("click", () => {
   const schedule = state.results[state.active];
   if (!schedule || state.dirty || state.busy) return;
   const url = URL.createObjectURL(
-    new Blob([toCSV({...schedule, sessions:state.view === 'registration' ? schedule.registration_sessions : schedule.sessions})], { type: "text/csv;charset=utf-8;" }),
+    new Blob([toCSV({...schedule, sessions:state.view === 'registration' ? schedule.registration_sessions : schedule.sessions}, document.documentElement.lang === 'en' ? 'en' : 'he')], { type: "text/csv;charset=utf-8;" }),
   );
   const link = element("a");
   link.href = url;

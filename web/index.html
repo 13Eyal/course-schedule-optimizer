@@ -11,6 +11,8 @@
     <title>CarpedIO — מערכת שעות בדרך שלך</title>
     <link rel="icon" type="image/svg+xml" href="../assets/brand/favicon.svg" />
     <script src="scripts/brand-storage.js"></script>
+    <script>try { if (localStorage.getItem('carpedio-lang') === 'en') { document.documentElement.lang = 'en'; document.documentElement.dir = 'ltr'; } } catch {}</script>
+    <script src="scripts/i18n.js" defer></script>
     <script>
       if (location.protocol === "file:") {
         document.documentElement.dataset.launch = "file";
@@ -66,8 +68,7 @@
         <a href="#approach">איך זה עובד</a>
       </nav>
       <div class="header-actions">
-        <button class="motion-toggle text-button" id="motion-toggle" type="button" aria-pressed="false" aria-label="עצירת אפקטי תנועה"><span aria-hidden="true">Ⅱ</span><span class="motion-label">תנועה</span></button>
-        <span class="header-divider" aria-hidden="true"></span>
+        <button class="icon-button lang-toggle" id="lang-toggle" type="button">EN</button>
         <button
           class="icon-button theme-toggle"
           id="theme-toggle"
