@@ -1,185 +1,116 @@
-# CarpedIO — Course Schedule Optimizer
+# CarpedIO – Course Schedule Optimizer
 
-**CarpedIO** משלב את הביטוי *carpe diem* עם I/O: תכנון הזמן והלימודים דרך הנתונים שלך.
+CarpedIO builds clash-free weekly university timetables. You load the course offering from Excel (or add
+courses by hand), say what matters to you, such as fewer days on campus, a later start or no gaps, and
+CarpedIO searches the combinations of lecture, tutorial and lab groups and ranks the best weeks.
 
-מערכת שעות אישית בעברית וב־RTL, עם ממשק HTML/CSS/JavaScript ומנוע אופטימיזציה ב־Python.
-האתר משתמש בעיצוב אחד: **סטודיו שקט: רקע אפור בהיר, כרטיסים לבנים, גופן Heebo וצבעי הלוגו (טורקיז, שמש ואלמוג)**.
-הוא תומך במצב בהיר וכהה ובמסכים צרים. אין בורר עיצובים.
+The interface is Hebrew-first (RTL), with an English switch, light and dark themes, and a credit-weighted
+GPA calculator on a second page.
 
-לשינויים בעיצוב: [Cheat Sheet בעברית — איפה משנים כל אזור במסכים](docs/DESIGN_CHEATSHEET_HE.md).
-כולל מפת קבצים ורכיבים, צבעים וגופנים, התאמות לנייד ודוגמאות עריכה.
+[תיעוד בעברית (Hebrew README)](README.he.md)
 
-## הרצה מקומית
+![CarpedIO timetable view: preference match, study days, gaps, the recommended week and ranked alternatives](docs/screenshots/planner.png)
 
-ב־Windows, לחיצה כפולה על **start.bat** בתיקיית הפרויקט מפעילה את השרת ברקע
-ופותחת את האתר בדפדפן. הפעלה נוספת פותחת מחדש את אותו שרת, בלי לאבד את הנתונים
-הזמניים שנטענו אליו. נבחר פורט פנוי בטווח 8000–8009.
+## Features
 
-קובץ ההפעלה מחפש Python בסביבת `.venv`, ב־PATH ובסביבת Python המקומית של Codex.
-הוא בודק שהתלויות מותקנות ואינו מתקין תוכנות אוטומטית. לוגים נשמרים ב־`.runtime/`.
-פתיחת `web/index.html` ישירות מציגה הוראות הפעלה מעוצבות; החישוב עצמו דורש את השרת.
+- **Course input:** import an XLSX file or add courses by hand. Courses can have lectures, tutorials and labs,
+  and each group can meet several times a week.
+- **Preferences:** five weighted goals plus three presets (fewer trips, easy mornings, in the flow), a preferred
+  start time, blocked times, mandatory attendance and full groups.
+- **Ranked results:** up to 60 alternatives by default, each with its score, study days, gaps and weekly hours.
+  Switch between a week board and a day-by-day view, open any session for details, and export to CSV.
+- **Responsive search:** searches run as background jobs that report partial results and can be cancelled
+  or extended with a bigger budget.
+- **GPA calculator:** credit-weighted average, Excel import with column mapping, what-if simulations for future
+  courses, the grade needed to reach a target, and XLSX export.
+- **Interface:** Hebrew/English switch on the same page, light and dark modes, reduced-motion support and a
+  layout that works on narrow screens.
 
-להרצה ידנית:
+## How the search engine works
 
-נדרש Python 3.10 ומעלה:
+- **Bitmask encoding.** The week has 14 fixed daily slots over 5 days, so a whole week is a 70-bit mask and a
+  clash check is a single bitwise AND. Input whose times do not fit the slots is not rounded; it switches to
+  an exact minute-level encoding (1,440 bits per day).
+- **Constraint search.** Each course component (lecture, tutorial or lab) is a variable and its groups are the
+  values, so the full product of groups is never generated up front. The search uses arc consistency, picks
+  the most constrained component first (MRV) and prunes branches with safe cost bounds.
+- **Top-K results.** The best weeks are kept in a heap. Scores come from fixed targets and weights, so a week's
+  score does not depend on which other weeks were found.
+- **Bounded work.** Time, work-unit and cache budgets keep every search bounded. The interface tells apart a
+  proven best result, a partial result after the budget ran out, and a proof that no valid timetable exists.
 
-```powershell
+More detail (in Hebrew): [docs/BITMASK_ENGINE.md](docs/BITMASK_ENGINE.md).
+
+## Architecture
+
+```text
+web/ (HTML, CSS, vanilla JavaScript)
+  │  JSON over HTTP
+  ▼
+web_server.py   ThreadingHTTPServer, allowlisted static paths, background search jobs
+  │
+  ▼
+src/            Excel parsing (pandas, openpyxl), models, bitmask encoding, search, scoring
+```
+
+| Path | Role |
+| --- | --- |
+| `web_server.py` | Local HTTP server and JSON API; runs searches in background threads with progress and cancellation |
+| `src/bitmasks.py` | Slot grid and session and week bitmask encoding |
+| `src/search_model.py` | Immutable search snapshots, limits, cancellation and a bounded preparation cache |
+| `src/search.py` | Exact top-K search with arc consistency, MRV and cost bounds |
+| `src/scoring.py` | Target-based scoring of a week |
+| `src/course_parser.py`, `src/data_loader.py` | Excel parsing and input validation |
+| `src/grades_io.py` | XLSX import and export for the GPA calculator |
+| `src/solver.py` | Small exhaustive reference solver used to check the main search |
+| `web/scripts/` | UI state, API client, planner views, GPA math and the Hebrew/English layer |
+| `tests/` | 41 Python tests (unittest) and 27 JavaScript tests (Node.js test runner) |
+
+## Running locally
+
+Requires Python 3.10 or later.
+
+```bash
 python -m pip install -r requirements.txt
 python -B web_server.py
 ```
 
-פותחים [את האתר המקומי](http://127.0.0.1:8000). אין צורך ב־Node או בשלב בנייה כדי להשתמש באתר.
-יש לפתוח דרך השרת; פתיחת קובץ HTML ישירות אינה מפעילה את ה־API.
-לשינוי הפורט: `python -B web_server.py --port 8080`.
-לאחר שינוי `web_server.py` יש להפעיל מחדש את השרת. שינוי HTML/CSS/JavaScript דורש רענון בדפדפן.
+Then open <http://127.0.0.1:8000>. Use `--port 8080` to pick another port. On Windows you can also
+double-click `start.bat`, which finds Python, starts the server in the background and opens the browser.
 
-## מבנה הפרויקט
+The server listens on the local machine only and is not meant for public deployment. Uploaded files are
+kept in memory and are not written to disk.
 
-```text
-web_server.py            שרת HTTP מקומי ו־API
-start.bat                פתיחת האתר בלחיצה כפולה ב־Windows
-scripts/start.ps1        איתור Python והפעלת השרת המקומי ברקע
-main.py                  הרצת דוגמאות ובדיקות דירוג מהטרמינל
-requirements.txt         תלויות Python
-web/
-  index.html             ממשק מערכת השעות
-  grades.html            מחשבון ממוצע ציונים וסימולציות
-  styles/
-    base.css             יסודות, רכיבים ופלטות בהיר/כהה
-    grades.css           פריסה, טבלאות, גרף וחלוניות מחשבון הציונים
-    brand.css            סימן C עם I/O והשם CarpedIO
-    layout.css           פריסת הקובלט ותפריט
-    planner.css          רכיבי תכנון, סדר יום ומיתוג
-    cobalt.css           שכבת העיצוב: טוקנים, טיפוגרפיה, פריסה ורכיבי התכנון
-  scripts/
-    app.js               מצב הממשק, אירועים ורינדור
-    api.js               API, פריסת חפיפות וייצוא CSV
-    brand-storage.js     העברת ציונים והעדפות ממפתחות שמירה קודמים
-    manual-course.js     טופס הוספת קורס, קבוצות ומפגשים
-    grades.js            הזנת ציונים, מיפוי Excel ושמירה בדפדפן
-    grade-math.js        חישובי ממוצע, ממוצע יעד ושיפור ציון
-    planner.js           חיפוש קורסים, תצוגות וסיכומי שבוע
-    shell.js             תפריט ואפקטים חזותיים
-    motion.js            תנועה לפי הגדרת "תנועה מופחתת" של המערכת
-    i18n.js              מעבר בין עברית לאנגלית באותו עמוד
-    effects.js           אפקט ציון מושלם
-src/                     מודלים, קריאת נתונים, חיפוש ודירוג
-assets/brand/            סמל CarpedIO ו־favicon
-assets/design/           תמונת רקע הים
-data/courses_sample.xlsx נתוני הדוגמה
-tests/                  בדיקות Python ו־JavaScript
-docs/                   אפיון, סקירת קוד, עיצוב ותיעוד הניקוי
-artifacts/cobalt-glass/  צילומי העיצוב הנוכחי
-```
+## Tests
 
-`web_server.py` מגיש רק נתיבים ברשימת הרשאה מפורשת. קובצי מקור של המנוע, מסמכים
-ונתוני משתמש אינם נחשפים כקבצים סטטיים.
-כתובת השורש מפנה אל `/web/index.html`, כדי שהנתיבים היחסיים לעיצוב ולתמונות יעבדו.
-
-## שימוש
-
-המיתוג הפעיל, מזהה השרת ושמות הייצוא משתמשים ב־CarpedIO. מפתחות שמירה
-קודמים נקראים רק לצורך העברה אוטומטית, באותה כתובת שרת, בלי לאבד ציונים או
-העדפות. ערך שכבר נשמר תחת השם החדש מקבל קדימות; אם ההעתקה נכשלת, הנתון
-הקודם נשאר זמין ולא נמחק. גיבויים וצילומי בדיקות היסטוריים אינם חלק מהממשק הפעיל.
-
-האתר טוען את קובץ הדוגמה. בקורס מרובה רכיבים יש להגדיר שילובי רישום מותרים,
-או לאשר במפורש שכל שילוב מותר, לפני החיפוש. אפשר להעלות XLSX,
-לבחור קורסים, לכוון חמש העדפות ויעדים ולחשב מחדש. לחיצה על חלופה מעדכנת את הלוח;
-לחיצה על מפגש פותחת פרטים. ניתן לעבור בין לוח שבועי לסדר יום ולייצא CSV.
-
-להזנה בלי Excel, לוחצים **הוספת קורס ידנית** באזור ״הקורסים שלך״. מזינים שם,
-מספר קורס ונקודות זכות, מוסיפים קבוצות לפי סוג ולכל קבוצה את מפגשיה השבועיים.
-בחירת השעות משתמשת ב־14 המשבצות החוקיות של המנוע. אפשר להגדיר עדיפות,
-קבוצה מלאה, נוכחות חובה וחלק שבועי. הקורס מתווסף לרשימה הקיימת ונבחר לתכנון;
-בחירות וכללי הגעה קיימים נשמרים. מספר קורס שכבר קיים נדחה ללא החלפת נתונים.
-סגירת הטופס שומרת את הטיוטה עד פתיחתו מחדש באותו דף. זו הזנה זמנית:
-רענון הדף אינו משחזר את הקורסים הידניים.
-
-צבעי הקורסים נשמרים בשתי התצוגות. מצב בהיר/כהה, העדפת תנועה ובחירת תצוגת הלוח
-נשמרים בדפדפן. הקורסים והמשקלים אינם נשמרים לאחר רענון.
-פרמטרי עיצוב ישנים בכתובת אינם משנים את עיצוב לבן וקובלט.
-
-## מחשבון ציונים
-
-קישור **מחשבון ציונים** פותח את `/web/grades.html`. הנתונים נפרדים ממערכת השעות:
-שם קורס, קוד אופציונלי, נק״ז וציון בסולם 0–100. הממוצע הוא סכום ציון × נק״ז,
-חלקי סך הנק״ז של השורות המסומנות. ציון 0 נכלל; פטור, ציון חסר ונק״ז 0 אינם
-תורמים לממוצע. אפשר להוסיף, לערוך, להסיר, להחריג מהחישוב ולבטל את השינוי האחרון.
-
-קובץ XLSX נפרד נקרא בשרת המקומי ואינו נשמר בו. בוחרים גיליון, שורת כותרות
-ומיפוי עמודות (שמות בעברית ובאנגלית מזוהים אוטומטית), ובודקים את השורות לפני
-הייבוא. שורה שגויה לא נעלמת בשקט: מתקנים את המיפוי או מבטלים את בחירתה.
-אפשר לצרף לרשימה או להחליף אותה. נוסחאות נקראות לפי ערכים שכבר נשמרו ב־Excel;
-נוסחה ללא ערך שמור תופיע כערך חסר. אין חישוב מחדש של נוסחאות קובץ המקור.
-
-הסימולציה תומכת בכמה קורסים עתידיים, ממוצע יעד, גרף השפעת ציון בקורס נבחר,
-ממוצע מרבי אפשרי וחישוב ציון דרוש כאשר שאר הציונים הצפויים נשארים קבועים.
-שיפור ציון בקורס קיים מחושב בנפרד, ללא תוספת נק״ז, לפי החלפת הציון או הגבוה
-מבין שני הציונים. הכלל אינו נקבע אוטומטית לפי מוסד הלימודים.
-
-רשומות הציונים, התרחיש והיעד נשמרים ב־localStorage בדפדפן באותה כתובת שרת
-(כולל הפורט), עם מזהה נפרד לכל רשומה. אין עדיין מסד נתונים או סנכרון בין
-מכשירים. ייצוא XLSX יוצר גיליון ציונים וגיליון נפרד לתרחיש; אפשר לייבא כל
-גיליון ליעד המתאים. יעד הממוצע עצמו נשמר בדפדפן ואינו חלק מהייצוא.
-קודי קורס כפולים אינם מאוחדים אוטומטית: מוצגת הודעה ויש לבחור אילו ניסיונות
-נכללים. מגבלות: 5 MB לקובץ, עד 25 MB לאחר פתיחה, 20 גיליונות, 60 עמודות,
-וכ־5,000 שורות. כל קורס מקבל 0–1,000 נק״ז; לקורס עתידי נדרשות נק״ז חיוביות.
-
-## מבנה Excel
-
-כל שורה מתארת מפגש בקבוצה. הכותרות הנדרשות:
-
-`CourseID, Name, Credits, Type, Group, Lecturer, Day, Start, End, Mandatory, Priority`
-
-- `Type`: lecture, tutorial או lab.
-- `Day`: Sunday–Thursday או ראשון–חמישי.
-- `Start` / `End`: שעות באותו יום בפורמט HH:MM.
-- `Mandatory`: yes/no, true/false או כן/לא.
-- `Priority`: low/medium/high.
-- כמה שורות באותה קבוצה מייצגות כמה מפגשים שלה.
-- שם ונקודות זכות אחידים לכל מזהה קורס; מרצה ועדיפות אחידים לכל קבוצה.
-
-## המנוע ומגבלותיו
-
-כל החיפוש והדירוג נעשים ב־Python, עם מפגשים מקודדים ומסכות שבועיות. בקלט התואם
-ל־14 המשבצות החוקיות משתמשים במסכה של 70 ביטים; לקלט הישן נשמר מסלול מדויק
-ברמת הדקה. הגעה מתוכננת לכל המפגשים, גם מפגשי רשות. אפשר להגדיר זמנים חסומים,
-ויתור מפורש על מפגש והחלפות מאושרות. החיפוש מבחין בין רישום להגעה בפועל.
-
-הציון מבוסס על יעדים ומשקלים קבועים, בלי תלות בחלופות האחרות. המנוע מסנן אפשרויות,
-בוחר את הרכיב המוגבל ביותר, מפיץ אילוצים ושומר את התוצאות המובילות בערימה.
-החיפוש פועל ברקע, מציג תוצאות ביניים וניתן לביטול. הממשק מבחין בין מיטב מוכח,
-תוצאה חלקית והוכחה שאין פתרון. ספירה מדויקת של כל המערכות היא אפשרות נפרדת.
-הלוח שבועי ואינו משויך לתאריכי סמסטר.
-
-השרת מאזין למחשב המקומי בלבד ואינו מיועד לפריסה ציבורית. העלאות נשמרות בזיכרון:
-עד 16 מערכי נתונים ולכל היותר שעתיים. מגבלות: 5 MB לקובץ, 25 MB לאחר פתיחת XLSX,
-40 קורסים, 5,000 קבוצות ו־20,000 מפגשים. מגבלת מכפלת הצירופים הוסרה.
-ברירת המחדל היא עד 60 חלופות, 15 שניות ו־500,000 יחידות עבודה לחיפוש,
-עם תקציבים מוגבלים להכנה ולמטמונים. אפשר לבקש חיפוש נוסף עם יותר זמן.
-
-פרטי הקידוד, הדירוג, המגבלות וה־API מתועדים ב־[מנוע מסכות הביטים](docs/BITMASK_ENGINE.md).
-
-## בדיקות
-
-```powershell
+```bash
 python -B -m unittest discover -s tests -p "test_*.py" -v
 node --test tests/*.test.mjs
 ```
 
-Node נדרש רק לבדיקות JavaScript. `english.test.mjs` בודק ייצוא CSV באנגלית
-באמצעות פונקציה משותפת; הוא אינו מפעיל ממשק אנגלי או עיצוב נוסף.
-`python -B main.py` מריץ גם תרחישי דירוג לדוגמה מהטרמינל.
+Node.js is only needed for the JavaScript tests.
 
-## מסמכי עבודה
+## Excel format
 
-- [החלטות ומשימות המוצר](docs/PROJECT_TASKS.md).
-- [סקירת הקוד ההיסטורית](docs/CODEBASE_REVIEW_HE.md).
-- [עיצוב ומקורות](docs/DESIGN.md).
-- [תיעוד ניקוי הקבצים שאושר ובוצע](docs/CLEANUP_REVIEW.md).
-- [מנוע מסכות הביטים והבדיקות](docs/BITMASK_ENGINE.md).
+Each row is one weekly session of a group. Required columns:
 
-הארגון והניקוי הושלמו: 57 הקבצים ברשימה נמחקו באישור מפורש של המשתמש,
-לרבות הממשקים והעיצובים הקודמים. תלות Streamlit הוסרה; נשמרו המנוע, הבדיקות,
-נתוני הדוגמה, נכסי המותג ועיצוב הלבן והקובלט עם הזכוכית ורקע הים.
+`CourseID, Name, Credits, Type, Group, Lecturer, Day, Start, End, Mandatory, Priority`
+
+- `Type`: `lecture`, `tutorial` or `lab`
+- `Day`: `Sunday` to `Thursday` (Hebrew day names also work)
+- `Start` / `End`: `HH:MM` on the same day
+- `Mandatory`: yes/no, true/false or כן/לא
+- `Priority`: `low`, `medium` or `high`
+
+A sample file is in [`data/courses_sample.xlsx`](data/courses_sample.xlsx).
+
+## Limits
+
+- Files up to 5 MB (25 MB after unpacking), up to 40 courses, 5,000 groups and 20,000 sessions.
+- Default search budget: 60 alternatives, 15 seconds and 500,000 work units. A longer search can be requested.
+- The server keeps up to 16 uploaded datasets in memory, for up to two hours each.
+
+## Author
+
+Eyal Hirsch, Software Engineering student at Braude College of Engineering.
+[LinkedIn](https://www.linkedin.com/in/hirsch-eyal/)
